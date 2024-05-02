@@ -2,6 +2,7 @@ package com.example.diplomprojectsite.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "product")
+@NoArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +28,16 @@ public class Product {
     private Integer weight;
 
     private String description;
+
+    public Product(String name, Integer price, String img, Double rating, Integer weight, String description, Category category) {
+        this.name = name;
+        this.price = price;
+        this.img = img;
+        this.rating = rating;
+        this.weight = weight;
+        this.description = description;
+        this.category = category;
+    }
 
     @ManyToOne
     @JoinColumn(name = "category_id")

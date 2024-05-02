@@ -11,6 +11,8 @@ create table users
     bonus      int default (0)
 );
 
+insert into users (email, password, role, first_name) VALUES ('alex','alex','user','alex');
+
 
 create table category
 (
@@ -18,11 +20,21 @@ create table category
     name varchar(255)       not null
 );
 
+INSERT INTO category (name) VALUES
+                                ('Завтраки'),
+                                ('Обеды'),
+                                ('Ужины'),
+                                ('Напитки'),
+                                ('Десерты');
+
+
 create table tag
 (
     id   serial primary key not null,
     name varchar(255)       not null
 );
+
+insert into tag (name) values ('Хит'), ('Новинка');
 
 create table product
 (
@@ -36,12 +48,22 @@ create table product
     description text
 );
 
+INSERT INTO product (category_id, name, price, img, rating, weight, description) VALUES
+                                                                                     (1, 'Омлет', 250, 'omlet.jpg', 4.5, 200, 'Сочный омлет с травами и сыром.'),
+                                                                                     (2, 'Паста карбонара', 350, 'carbonara.jpg', 4.8, 300, 'Итальянская паста с беконом и сливочным соусом.'),
+                                                                                     (3, 'Стейк из говядины', 600, 'steak.jpg', 4.9, 400, 'Нежный стейк, подается с овощами и картошкой.'),
+                                                                                     (4, 'Мохито', 150, 'mojito.jpg', 4.7, NULL, 'Освежающий коктейль с мятой и лаймом.'),
+                                                                                     (5, 'Тирамису', 200, 'tiramisu.jpg', 4.6, 150, 'Классический итальянский десерт на основе маскарпоне и кофе.');
+
+
 create table product_tag
 (
     id         serial primary key          not null,
     tag_id     int references tag (id)     not null,
     product_id int references product (id) not null
 );
+
+insert into product_tag (tag_id, product_id) VALUES (1,1),(2,1);
 
 create table restaurant
 (
