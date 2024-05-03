@@ -1,0 +1,32 @@
+.signIn{
+  &-container{
+    width: 450px;
+    margin: 100px auto;
+  }
+  &-title{
+    font-weight: 700;
+    font-size: 34px;
+    color: var(--dark);
+    margin-bottom: 15px;
+  }
+  &-top-text{
+    margin-bottom: 30px;
+    &-new{
+      font-weight: 400;
+      font-size: 20px;
+      color: var(--dark);
+      margin-right: 15px;
+    }
+    &-create{
+      font-weight: 400;
+      font-size: 20px;
+      color: var(--orange);
+      cursor: pointer;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+
+}
+
