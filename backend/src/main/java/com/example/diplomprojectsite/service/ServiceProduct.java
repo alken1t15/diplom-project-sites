@@ -119,4 +119,25 @@ public class ServiceProduct {
     public Product productById(Long idProduct) {
         return repositoryProduct.getById(idProduct);
     }
+
+    public ServiceFavoriteProduct getServiceFavoriteProduct() {
+        return serviceFavoriteProduct;
+    }
+
+    public List<ProductDTO> getProductByCategory(Long idCategory) {
+        List<Product> products = repositoryProduct.findByCategoryId(idCategory);
+        if (products==null){
+            return null;
+        }
+        List<ProductDTO> productDTOs = new ArrayList<>();
+        for (Product product : products){
+            byte[] file = getFile(product.getImg());
+            ProductDTO productDTO = modelMapper.map(product, ProductDTO.class);
+            boolean isFavorite = serviceFavoriteProduct.isFavoriteProduct(product.getId());
+            productDTO.setImg(file);
+            productDTO.setIsFavorite(isFavorite);
+            productDTOs.add(productDTO);
+        }
+        return productDTOs;
+    }
 }
