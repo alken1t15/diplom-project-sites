@@ -22,11 +22,35 @@
       font-size: 20px;
       color: var(--orange);
       cursor: pointer;
-      &:hover{
-        text-decoration: underline;
-      }
+    }
+  }
+  &-bot{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-forgot{
+      font-size: 20px;
+      color: var(--orange);
     }
   }
 
+}
+.switcher{
+  display: flex;
+  align-items: center;
+  &__text{
+    font-size: 20px;
+    color: #bdbdbd;
+    background-color: transparent;
+    border: none;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: .3s;
+    &-active{
+      color: var(--orange);
+      transition: .3s;
+    }
+  }
 }
 

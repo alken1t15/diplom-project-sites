@@ -6,28 +6,23 @@ interface BlueButtonProps{
     link?: number | string;
     name: string;
     onClick?: (email: string, password: string) => void;
-    data?: {
-        email: string;
-        password: string;
-    }
-    active?: boolean;
+    isActive?: boolean;
     style?: React.CSSProperties;
 }
 
 const Button: React.FC<BlueButtonProps> = ({link,
                                                    name,
-                                                   data,
                                                    onClick,
                                                    style,
-                                                   active}) => {
+                                               isActive}) => {
     let [linkValue, setLinkValue] = useState<number | string | undefined>(link);
     let [nameValue, setNameValue] = useState<string>(name);
-    let [isActive, setIsActive] = useState<boolean | undefined>(undefined);
+    let [active, setIsActive] = useState<boolean | undefined>(false);
     useEffect(()=>{
         setLinkValue(link);
         setNameValue(name);
-        setIsActive(active);
-    }, [link, name, active, onClick])
+        setIsActive(isActive);
+    }, [link, name, isActive, onClick])
 
     return (
         <>
@@ -52,10 +47,9 @@ const Button: React.FC<BlueButtonProps> = ({link,
                     onClick ?
                     <button
                         style={style}
-                        className={`standard-btn`}
+                        className={`standard-btn ${active ? 'standard-btn-active' : ''}`}
                         onClick={(e)=>{
                             e.preventDefault();
-                            onClick(data ? data.email : '', data ? data.password : '')
                         }}
                     >
                         {name}

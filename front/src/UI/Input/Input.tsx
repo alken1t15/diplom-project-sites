@@ -6,7 +6,7 @@ const eyeOpen =  require('../../assets/images/eyeOpen.svg').default
 
 interface InputProps {
     placeholder: string;
-    onChange: (value: string) => void;
+    onChangeF: (value: string) => void;
     type: string;
     styles?: CSSProperties;
     email?: boolean;
@@ -15,10 +15,11 @@ interface InputProps {
     length?: number
 }
 
-const Input: React.FC<InputProps> = ({ placeholder,onChange, type , length,styles, email, phone, password}) => {
+const Input: React.FC<InputProps> = ({ placeholder,onChangeF, type , length,styles, email, phone, password}) => {
     const [value, setValue] = useState('');
     const [hiddenValue, setHiddenValue] = useState('');
-    const [isActive, setIsActive] = useState(false)
+    const [isActive, setIsActive] = useState(false);
+    let[to, set] = useState('')
 
     const isEmailOrPhoneFilled = (): boolean => {
         if (email && !value.includes('@')) {
@@ -59,17 +60,22 @@ const Input: React.FC<InputProps> = ({ placeholder,onChange, type , length,style
                 let val = value.split('')
                 val.push(lastChar)
                 setValue(val.join(''))
+                onChangeF(val.join(''))
             }
             else if(value.length > e.target.value.length){
                 let val = value.split('')
                 val.pop()
                 setValue(val.join(''))
+                onChangeF(val.join(''))
             }
+
         }
         else {
 
             setValue(e.target.value)
+            onChangeF(e.target.value)
         }
+
     }
 
 
@@ -88,10 +94,11 @@ const Input: React.FC<InputProps> = ({ placeholder,onChange, type , length,style
                         onChange={(e) => inputChange(e)}
                         maxLength={length}
                     />
-                    <button className={`eye`} onClick={setActive}>
+                    {value.length !==0 ?      <button className={`eye`} onClick={setActive}>
                         {isActive ? <img src={eyeOpen} className={'eye-img fade-in'}/> : <img src={eye} className={'eye-img fade-in'}/>}
 
-                    </button>
+                    </button> : ''}
+
                 </div>
 
                 :
