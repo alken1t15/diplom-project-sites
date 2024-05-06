@@ -17,4 +17,7 @@ public class ServiceUser {
     }
 
 
+    public Users getUserById(Long id) {
+        return repositoryUsers.findById(id).orElseThrow();
+    }
 }

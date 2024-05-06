@@ -75,6 +75,12 @@ create table restaurant
     img        varchar(255)
 );
 
+INSERT INTO restaurant (place, date_start, date_end, phone, img)
+VALUES
+    ('Ресторан "У Реки"', '09:00:00', '22:00:00', '+7 (123) 456-7890', '2.jpg'),
+    ('Кафе "Солнечное настроение"', '08:00:00', '20:00:00', '+7 (234) 567-8901', '2.jpg'),
+    ('Пиццерия "Вкусная Пицца"', '11:00:00', '23:00:00', '+7 (345) 678-9012', '2.jpg');
+
 create table history_bonus
 (
     id       serial primary key not null,

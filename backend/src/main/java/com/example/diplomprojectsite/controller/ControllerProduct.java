@@ -8,6 +8,7 @@ import com.example.diplomprojectsite.entity.Users;
 import com.example.diplomprojectsite.service.ServiceCategory;
 import com.example.diplomprojectsite.service.ServiceFavoriteProduct;
 import com.example.diplomprojectsite.service.ServiceProduct;
+import com.example.diplomprojectsite.service.ServiceUser;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import org.springframework.http.HttpStatus;
@@ -26,31 +27,53 @@ public class ControllerProduct {
     private final ServiceProduct serviceProduct;
     private final ServiceCategory serviceCategory;
     private final ServiceFavoriteProduct serviceFavoriteProduct;
+    private final ServiceUser serviceUser;
 
 
+    //Получение всех товаров и категорий для главной страницы || Получение товаров по категории
     @GetMapping("/")
-    public Object getMainPage() {
+    public ResponseEntity getMainPage(@RequestParam(required = false) Long idCategory) {
+        Users user = serviceUser.getUserById(1L);
         List<CategoryDTO> categories = serviceCategory.getAllCategory();
-        List<ProductDTO> products = serviceProduct.getAllProduct();
-
-        return null;
+        List<ProductDTO> products;
+        if (idCategory == null) {
+            products = serviceProduct.getAllProduct();
+        } else {
+            products = serviceProduct.getProductByCategory(idCategory);
+        }
+        if (products == null) {
+            return new ResponseEntity("Такой категории нету", HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity(new ProductMainDTO(categories, products, user.getBonus()), HttpStatus.OK);
+        }
     }
 
+    // Получение определенного товара
     @GetMapping("/{id}")
     public Object getProductById(@Validated @NonNull @PathVariable Long id) {
         ProductOneDTO product = serviceProduct.getProductById(id);
         return Objects.requireNonNullElseGet(product, () -> new ResponseEntity<>("Нету такого товара с таким id", HttpStatus.BAD_REQUEST));
     }
 
+    // Добавление нового товара
     @PostMapping("/add")
     private ResponseEntity addNewProduct(@Validated ProductAddDTO productAddDTO, BindingResult bindingResult) {
         return serviceProduct.addNewProduct(productAddDTO, bindingResult);
     }
 
     // Добавление в любимые
-    @PostMapping("/favorite/add")
-    private ResponseEntity addFavoriteProduct(Long idProduct){
+    @GetMapping("/favorite/add")
+    private ResponseEntity addFavoriteProduct(@RequestParam Long idProduct) {
         return serviceFavoriteProduct.addNewFavoriteProduct(idProduct);
+    }
+
+    // Удаление из любимых
+    @GetMapping("/favorite/delete")
+    private ResponseEntity deleteFavoriteProduct(@RequestParam Long idProduct) {
+        return serviceFavoriteProduct.deleteNewFavoriteProduct(idProduct);
+    }
+
+    public record ProductMainDTO(List<CategoryDTO> categories, List<ProductDTO> products, Integer bonus) {
     }
 
 }
