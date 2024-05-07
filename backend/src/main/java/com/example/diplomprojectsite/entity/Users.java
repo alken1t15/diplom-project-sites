@@ -24,6 +24,8 @@ public class Users {
     @Column(name = "first_name")
     private String firstName;
 
+    private String jwt;
+
     private Integer bonus;
     @OneToMany(mappedBy = "user")
     private List<HistoryBonus> historyBonus;
