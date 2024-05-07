@@ -1,6 +1,6 @@
-import React, {CSSProperties, FC, useState} from 'react';
+import React, {CSSProperties, FC, useEffect, useState} from 'react';
+
 import './Input.scss';
-import {logOut} from "../../Http/User";
 const eye =  require('../../assets/images/eye.slash.svg').default
 const eyeOpen =  require('../../assets/images/eyeOpen.svg').default
 
@@ -12,14 +12,19 @@ interface InputProps {
     email?: boolean;
     phone?: boolean;
     password?: boolean;
-    length?: number
+    length?: number;
+    error?: boolean | undefined;
 }
 
-const Input: React.FC<InputProps> = ({ placeholder,onChangeF, type , length,styles, email, phone, password}) => {
-    const [value, setValue] = useState('');
-    const [hiddenValue, setHiddenValue] = useState('');
-    const [isActive, setIsActive] = useState(false);
-    let[to, set] = useState('')
+const Input: React.FC<InputProps> = ({ placeholder,onChangeF, type , error, length,styles, email, phone, password}) => {
+    let [value, setValue] = useState('');
+    let [hiddenValue, setHiddenValue] = useState('');
+    let [isActive, setIsActive] = useState(false);
+    let[dataErr, setDataErr] = useState(error)
+
+    useEffect(()=>{
+        setDataErr(error)
+    }, [error])
 
     const isEmailOrPhoneFilled = (): boolean => {
         if (email && !value.includes('@')) {
@@ -70,6 +75,11 @@ const Input: React.FC<InputProps> = ({ placeholder,onChangeF, type , length,styl
             }
 
         }
+        else if(type === 'date'){
+            console.log(e.target.value.replace(/\//g, '.'))
+            setValue(e.target.value.replace(/\//g, '.'))
+            onChangeF(e.target.value)
+        }
         else {
 
             setValue(e.target.value)
@@ -85,11 +95,11 @@ const Input: React.FC<InputProps> = ({ placeholder,onChangeF, type , length,styl
 
     return (
         <div className={`input-container`} style={styles}>
-            <label className={'placeholder-text'}>{placeholder}</label>
+            <label className={`placeholder-text ${error ? 'error-text' : ''}`}>{error ? 'Пароли не совпадают' : placeholder}</label>
             {type === 'password' ?
                 <div className={'input-with-eye'}>
                     <input
-                        className={`input input-password`}
+                        className={`input input-password ${dataErr ? 'error' : ''}`}
                         value={isActive ? value : value.replace(/./g, "*")}
                         onChange={(e) => inputChange(e)}
                         maxLength={length}

@@ -63,3 +63,19 @@
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
 }
+
+.error{
+  border: 1px solid red;
+  &-text{
+    color: red;
+  }
+}
+
+.react-datepicker-wrapper{
+  width: 100%;
+  margin-top: 5px;
+}
+.date-label{
+  display: block;
+  margin-top: 15px;
+}
