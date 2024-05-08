@@ -8,6 +8,7 @@ create table users
     password   varchar(255)       not null,
     role       varchar(255)       not null,
     first_name varchar(255),
+    jwt varchar(255),
     bonus      int default (0)
 );
 
