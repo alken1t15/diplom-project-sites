@@ -8,11 +8,11 @@ create table users
     password   varchar(255)       not null,
     role       varchar(255)       not null,
     first_name varchar(255),
-    jwt varchar(255),
+    jwt text,
     bonus      int default (0)
 );
 
-insert into users (email, password, role, first_name) VALUES ('alex','alex','user','alex');
+insert into users (email, password, role, first_name) VALUES ('alex','$2a$12$mmvg.Lv/Xhi4n1R0sEjC0OXkLN.kmWVVzwx5TNamS4fqaMKXTZcTW','user','alex');
 
 
 create table category

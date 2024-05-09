@@ -33,7 +33,7 @@ public class ControllerProduct {
     //Получение всех товаров и категорий для главной страницы || Получение товаров по категории
     @GetMapping("/")
     public ResponseEntity getMainPage(@RequestParam(required = false) Long idCategory) {
-        Users user = serviceUser.getUserById(1L);
+        Users user = serviceUser.getUser();
         List<CategoryDTO> categories = serviceCategory.getAllCategory();
         List<ProductDTO> products;
         if (idCategory == null) {

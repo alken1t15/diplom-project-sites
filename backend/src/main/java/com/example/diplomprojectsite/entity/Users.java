@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "users")
+@NoArgsConstructor
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +36,11 @@ public class Users {
     private List<Orders> orders;
     @OneToMany(mappedBy = "user")
     private List<FavoriteProduct> favoriteProducts;
+
+    public Users(String email, String password, String role, String firstName) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.firstName = firstName;
+    }
 }

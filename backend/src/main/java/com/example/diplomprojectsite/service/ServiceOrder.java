@@ -50,7 +50,7 @@ public class ServiceOrder {
             }
             return new ResponseEntity(errors, HttpStatus.BAD_REQUEST);
         }
-        Users user = serviceUser.getUserById(1L);
+        Users user = serviceUser.getUser();
         Product product = repositoryProduct.findById(order.getProductId()).orElse(null);
         if (product == null) {
             return new ResponseEntity("Такого товара нету", HttpStatus.BAD_REQUEST);
@@ -63,7 +63,7 @@ public class ServiceOrder {
 
     //Получение всех товаров с корзины
     public ResponseEntity getAllOrder() {
-        Users user = serviceUser.getUserById(1L);
+        Users user = serviceUser.getUser();
         List<Orders> orders = repositoryOrders.findByUserId(user.getId());
         List<OrderDTO> orderDTOs = new ArrayList<>();
         long total = 0;
