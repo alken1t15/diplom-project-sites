@@ -1,8 +1,8 @@
 import React, {CSSProperties, FC, useEffect, useState} from 'react';
 
 import './Input.scss';
-const eye =  require('../../assets/images/eye.slash.svg').default
-const eyeOpen =  require('../../assets/images/eyeOpen.svg').default
+const eye =  require('../../../assets/images/eye.slash.svg').default
+const eyeOpen =  require('../../../assets/images/eyeOpen.svg').default
 
 interface InputProps {
     placeholder: string;
