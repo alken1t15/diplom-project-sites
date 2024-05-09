@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './SignIn.scss'
-import Input from "../../UI/Input/Input";
-import Switch from "../../UI/Switch/Switch";
-import Button from "../../UI/Button/Button";
+import Input from "../../Components/UI/Input/Input";
+import Switch from "../../Components/UI/Switch/Switch";
+import Button from "../../Components/UI/Button/Button";
 import {Link} from "react-router-dom";
 import {SIGN_UP_ROUTE} from "../../Utils/Routes";
 import {logOut} from "../../Http/User";

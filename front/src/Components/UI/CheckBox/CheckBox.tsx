@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './CheckBox.scss'
 
-const check = require('../../assets/images/Check.svg').default
+const check = require('../../../assets/images/Check.svg').default
 interface ICheckBox{
     change: (value: boolean) => void;
 }

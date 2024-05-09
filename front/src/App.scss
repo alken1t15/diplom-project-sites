@@ -189,8 +189,7 @@ body{
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #8383FF;
-    border-radius: 20px;
+    background-color: var(--dark-orange);
 
   }
 }
