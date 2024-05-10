@@ -8,11 +8,12 @@ create table users
     password   varchar(255)       not null,
     role       varchar(255)       not null,
     first_name varchar(255),
+    born_date date not null ,
     jwt text,
     bonus      int default (0)
 );
 
-insert into users (email, password, role, first_name) VALUES ('alex','$2a$12$mmvg.Lv/Xhi4n1R0sEjC0OXkLN.kmWVVzwx5TNamS4fqaMKXTZcTW','user','alex');
+insert into users (email, password, role, first_name,born_date) VALUES ('alex','$2a$12$mmvg.Lv/Xhi4n1R0sEjC0OXkLN.kmWVVzwx5TNamS4fqaMKXTZcTW','user','alex','12.04.2004');
 
 
 create table category
@@ -50,11 +51,11 @@ create table product
 );
 
 INSERT INTO product (category_id, name, price, img, rating, weight, description) VALUES
-                                                                                     (1, 'Омлет', 250, 'omlet.jpg', 4.5, 200, 'Сочный омлет с травами и сыром.'),
-                                                                                     (2, 'Паста карбонара', 350, 'carbonara.jpg', 4.8, 300, 'Итальянская паста с беконом и сливочным соусом.'),
-                                                                                     (3, 'Стейк из говядины', 600, 'steak.jpg', 4.9, 400, 'Нежный стейк, подается с овощами и картошкой.'),
-                                                                                     (4, 'Мохито', 150, 'mojito.jpg', 4.7, NULL, 'Освежающий коктейль с мятой и лаймом.'),
-                                                                                     (5, 'Тирамису', 200, 'tiramisu.jpg', 4.6, 150, 'Классический итальянский десерт на основе маскарпоне и кофе.');
+                                                                                     (1, 'Омлет', 250, '1.jpg', 4.5, 200, 'Сочный омлет с травами и сыром.'),
+                                                                                     (2, 'Паста карбонара', 350, '1.jpg', 4.8, 300, 'Итальянская паста с беконом и сливочным соусом.'),
+                                                                                     (3, 'Стейк из говядины', 600, '1.jpg', 4.9, 400, 'Нежный стейк, подается с овощами и картошкой.'),
+                                                                                     (4, 'Мохито', 150, '1.jpg', 4.7, NULL, 'Освежающий коктейль с мятой и лаймом.'),
+                                                                                     (5, 'Тирамису', 200, '1.jpg', 4.6, 150, 'Классический итальянский десерт на основе маскарпоне и кофе.');
 
 
 create table product_tag

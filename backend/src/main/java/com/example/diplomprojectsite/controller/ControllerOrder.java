@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/order")
 @AllArgsConstructor
+@CrossOrigin
 public class ControllerOrder{
     private final ServiceOrder serviceOrder;
 

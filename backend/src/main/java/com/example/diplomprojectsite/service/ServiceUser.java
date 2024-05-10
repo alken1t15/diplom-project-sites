@@ -43,7 +43,7 @@ public class ServiceUser {
             return new ResponseEntity(errors, HttpStatus.BAD_REQUEST);
         }
         String newPassword = passwordEncoder.encode(user.getPassword());
-        repositoryUsers.save(new Users(user.getEmail(),newPassword,user.getRole(),user.getFirstName()));
+        repositoryUsers.save(new Users(user.getEmail(),newPassword,user.getRole(),user.getFirstName(),user.getBornDate()));
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

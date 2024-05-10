@@ -23,6 +23,7 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/product")
 @AllArgsConstructor
+@CrossOrigin
 public class ControllerProduct {
     private final ServiceProduct serviceProduct;
     private final ServiceCategory serviceCategory;

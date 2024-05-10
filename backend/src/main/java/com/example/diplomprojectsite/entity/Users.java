@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -36,11 +37,14 @@ public class Users {
     private List<Orders> orders;
     @OneToMany(mappedBy = "user")
     private List<FavoriteProduct> favoriteProducts;
+    @Column(name = "born_date")
+    private LocalDate bornDate;
 
-    public Users(String email, String password, String role, String firstName) {
+    public Users(String email, String password, String role, String firstName,LocalDate bornDate) {
         this.email = email;
         this.password = password;
         this.role = role;
         this.firstName = firstName;
+        this.bornDate = bornDate;
     }
 }
