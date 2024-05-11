@@ -184,6 +184,8 @@ const MainPage: React.FC = () => {
                                     }}>+</button>
                                 </div>
 
+
+
                                 <button className={'add-to-cart-btn'} onClick={(e)=>{
                                     e.stopPropagation();
                                     addToCart(curItem.id)

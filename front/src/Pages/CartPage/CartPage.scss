@@ -1,0 +1,32 @@
+.cart-items-box{
+  display: flex;
+  flex-direction: column;
+}
+
+.cart__title{
+  margin-top: 50px;
+  display: block;
+  width: 100%;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 110%;
+  letter-spacing: -0.02em;
+  color: #414141;
+  margin-bottom: 30px;
+}
+
+.button-total{
+  margin-top: 50px;
+  width: 100%;
+  display: block;
+  border-radius: 20px;
+  padding: 14px 40px;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 129%;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  letter-spacing: -0.02em;
+  background-color: #b6532b;
+}

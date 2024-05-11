@@ -2,6 +2,7 @@ import React from 'react';
 import './App.scss';
 import {Route, Routes} from "react-router-dom";
 import {
+    CART_PAGE_ROUTE, CONTACTS_PAGE_ROUTE,
     MAIN_PAGES_ROUTE, SHOP_PAGE_ROUTE,
     SIGN_IN_ROUTE, SIGN_UP_ROUTE, START_PAGE_ROUTE,
 } from "./Utils/Routes";
@@ -10,6 +11,8 @@ import SignUp from "./Pages/SignUp/SignUp";
 import StartPage from "./Pages/StartPage/StartPage";
 import MainPage from "./Pages/MainPage/MainPage";
 import Header from "./Components/Header/Header";
+import CartPage from "./Pages/CartPage/CartPage";
+import ContactsPage from "./Pages/ContactsPage/ContactsPage";
 
 function App() {
   return (
@@ -22,6 +25,8 @@ function App() {
             <Route path={START_PAGE_ROUTE} index element={<StartPage/>} />
             <Route path={MAIN_PAGES_ROUTE} element={<Header/>}>
                 <Route path={SHOP_PAGE_ROUTE} index element={<MainPage/>} />
+                <Route path={CART_PAGE_ROUTE} element={<CartPage/>} />
+                <Route path={CONTACTS_PAGE_ROUTE} element={<ContactsPage/>} />
             </Route>
 
 

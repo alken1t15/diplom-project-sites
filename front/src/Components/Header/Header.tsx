@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import './Header.scss';
 import {
@@ -15,6 +15,7 @@ import {ReactComponent as contactImg} from "../../assets/images/ping.svg";
 import {ReactComponent as profileImg} from "../../assets/images/profile.svg";
 import {ReactComponent as favImg} from "../../assets/images/fav.svg";
 import {Link, Outlet} from "react-router-dom";
+import item from "../Item/Item";
 
 const logoImg = require('../../assets/images/Logo.svg').default;
 const bonusImg = require('../../assets/images/bonus.png');
@@ -55,6 +56,17 @@ const Header: React.FC = () => {
 
     ]);
     let[bonus, setBonus] = useState(0)
+
+    useEffect(()=>{
+        let newArr = items.map((el, index)=>{
+            el.active = el.link === window.location.href.split('3000')[1];
+            return el
+        })
+
+        setItems(newArr)
+
+
+    }, [])
     return (
        <div>
            <header>
@@ -65,13 +77,22 @@ const Header: React.FC = () => {
                    <div className="header-right">
                        <nav className="navbar">
                            {items.map((el, index)=>(
-                               <Link to={el.link} className={`navbar-item`} key={index}>
-                                   {React.createElement(el.img, {
-                                       className: `navbar-item__img
+                               <button key={index} style={{display: 'inline-block', background: "transparent", border: 'none'}} onClick={(e)=>{
+                                   let newArr = items.map((el, index)=>{
+                                       el.active = el.link === window.location.href.split('3000')[1];
+                                       return el
+                                   })
+
+                                   setItems(newArr)
+                               }}>
+                                   <Link to={el.link} className={`navbar-item`} key={index}>
+                                       {React.createElement(el.img, {
+                                           className: `navbar-item__img
                                     ${el.active ? 'navbar-item__img-active' : ''}`
-                                   })}
-                                   <p className={`navbar-item__text ${el.active ? 'navbar-item__text-active' : ''}`}>{el.name}</p>
-                               </Link>
+                                       })}
+                                       <p className={`navbar-item__text ${el.active ? 'navbar-item__text-active' : ''}`}>{el.name}</p>
+                                   </Link>
+                               </button>
                            ))}
                        </nav>
                        <div className="bonus">
