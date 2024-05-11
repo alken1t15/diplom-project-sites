@@ -25,7 +25,7 @@ public class ServiceFavoriteProduct {
 
     public ResponseEntity addNewFavoriteProduct(Long idProduct) {
 //        Users user = serviceUser.getUser();
-        Users user = serviceUser.getUserById(1L);
+        Users user = serviceUser.getUser();
         Product product = repositoryProduct.findById(idProduct).orElse(null);
         if (product == null) {
             return new ResponseEntity("Такого товара нету", HttpStatus.BAD_REQUEST);
@@ -36,7 +36,7 @@ public class ServiceFavoriteProduct {
 
     public ResponseEntity deleteNewFavoriteProduct(Long idProduct) {
         //        Users user = serviceUser.getUser();
-        Users user = serviceUser.getUserById(1L);
+        Users user = serviceUser.getUser();
         repositoryFavoriteProduct.removeByUserIdAndProductId(user.getId(), idProduct);
         return new ResponseEntity(HttpStatus.OK);
     }
