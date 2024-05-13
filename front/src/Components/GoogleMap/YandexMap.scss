@@ -1,0 +1,35 @@
+.info-block{
+  display: flex;
+  align-items: center;
+  &-l{
+    width: 187px;
+    height: 115px;
+    margin-right: 25px;
+  }
+  &-r{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: #414141;
+    & > .line{
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      & > span{
+        font-weight: 500;
+        font-size: 12px;
+        letter-spacing: 0.02em;
+        color: #414141;
+      }
+      & > img{
+        margin-right: 10px;
+      }
+      &:first-child{
+        margin-top: 0;
+      }
+    }
+  }
+}
