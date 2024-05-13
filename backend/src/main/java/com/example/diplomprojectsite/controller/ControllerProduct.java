@@ -45,14 +45,16 @@ public class ControllerProduct {
         if (products == null) {
             return new ResponseEntity("Такой категории нету", HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity(new ProductMainDTO(categories, products, user.getBonus()), HttpStatus.OK);
+            return new ResponseEntity(new ProductMainDTO(categories, products, user.getBonus(),user.getOrders().size()), HttpStatus.OK);
         }
     }
 
     // Получение определенного товара
     @GetMapping("/{id}")
     public Object getProductById(@Validated @NonNull @PathVariable Long id) {
+        Users user = serviceUser.getUser();
         ProductOneDTO product = serviceProduct.getProductById(id);
+        product.setCountOrder(user.getOrders().size());
         return Objects.requireNonNullElseGet(product, () -> new ResponseEntity<>("Нету такого товара с таким id", HttpStatus.BAD_REQUEST));
     }
 
@@ -74,7 +76,7 @@ public class ControllerProduct {
         return serviceFavoriteProduct.deleteNewFavoriteProduct(idProduct);
     }
 
-    public record ProductMainDTO(List<CategoryDTO> categories, List<ProductDTO> products, Integer bonus) {
+    public record ProductMainDTO(List<CategoryDTO> categories, List<ProductDTO> products, Integer bonus,Integer countOrder) {
     }
 
 }

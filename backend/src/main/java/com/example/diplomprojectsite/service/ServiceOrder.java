@@ -55,8 +55,17 @@ public class ServiceOrder {
         if (product == null) {
             return new ResponseEntity("Такого товара нету", HttpStatus.BAD_REQUEST);
         }
-        int totalPrice = order.getCount() * product.getPrice();
-        repositoryOrders.save(new Orders(order.getCount(), totalPrice, product, user));
+        Orders orders = repositoryOrders.findByUserIdAndProductId(user.getId(), product.getId()).orElse(null);
+        if (orders==null) {
+            int totalPrice = order.getCount() * product.getPrice();
+            repositoryOrders.save(new Orders(order.getCount(), totalPrice, product, user));
+        }
+        else {
+            int totalPrice = orders.getCount()+order.getCount() * product.getPrice();
+            orders.setCount(orders.getCount()+order.getCount());
+            orders.setTotalPrice(totalPrice);
+            repositoryOrders.save(orders);
+        }
         return new ResponseEntity(HttpStatus.OK);
     }
 
