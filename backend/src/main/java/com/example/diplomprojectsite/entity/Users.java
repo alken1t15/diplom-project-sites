@@ -39,6 +39,8 @@ public class Users {
     private List<FavoriteProduct> favoriteProducts;
     @OneToMany(mappedBy = "user")
     private List<AddressUser> addressUsers;
+    @OneToMany(mappedBy = "user")
+    private List<Cart> carts;
     @Column(name = "born_date")
     private LocalDate bornDate;
 

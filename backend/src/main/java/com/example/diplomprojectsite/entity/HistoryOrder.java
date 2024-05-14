@@ -24,4 +24,21 @@ public class HistoryOrder {
     @ManyToOne
     @JoinColumn(name = "users_id")
     private Users user;
+
+    @Column(name = "order_id")
+    private Long orderId;
+
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private AddressUser addressUser;
+
+    private Boolean active;
+
+    private String comment;
+    @Column(name = "time_order")
+    private String timeOrder;
 }

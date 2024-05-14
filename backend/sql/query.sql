@@ -32,7 +32,7 @@ create table cart
 (
     id       serial primary key not null,
     user_id  int references users (id),
-    number   int                not null,
+    number   varchar                not null,
     date     varchar(5)         not null,
     security int                not null
 );
@@ -125,9 +125,18 @@ create table history_order
     id          serial primary key not null,
     product_id  int references product (id),
     users_id    int8 references users (id),
+    cart_id int references cart (id),
+    address_id int references cart(id),
+    order_id int not null,
     count       int                not null default (1),
-    total_price int                not null
+    total_price int                not null,
+    active boolean default false not null,
+    comment varchar(255),
+    time_order  varchar(255) not null
 );
+
+insert into history_order (product_id, users_id, cart_id, address_id, order_id, count, total_price, active, comment, time_order) VALUES
+                                                                                                                                     (1,1,1,1,4234,2,500,true,'hfghfghf','gfdgdfgdf');
 
 
 create table orders
