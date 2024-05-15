@@ -2,12 +2,16 @@ package com.example.diplomprojectsite.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "address_user")
 @Getter
 @Setter
+@NoArgsConstructor
 public class AddressUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +32,9 @@ public class AddressUser {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
+
+    @OneToMany(mappedBy = "addressUser")
+    private List<HistoryOrder> historyOrders;
 
     public AddressUser(String street, Integer entrance, Integer number, Integer floor, Integer flat, String comment, Users user) {
         this.street = street;
