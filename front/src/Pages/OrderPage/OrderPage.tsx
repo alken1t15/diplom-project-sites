@@ -5,6 +5,7 @@ import './OrderPage.scss';
 import Input from "../../Components/UI/Input/Input";
 import {Link} from "react-router-dom";
 import {FINISHED_PAGE_ROUTE} from "../../Utils/Routes";
+import Switch from "../../Components/UI/Switch/Switch";
 const imgSvg = require('../../assets/images/chevron.backward.svg').default;
 const visaImg = require('../../assets/images/Visa.png');
 
@@ -77,6 +78,10 @@ const OrderPage: React.FC = () => {
 
     let[bonus, setBonus] = useState(false)
     let[total, setTotal] = useState(2000)
+
+    function updateBonus(value: boolean){
+        setBonus(value)
+    }
 
     function handleInputChange(event: any) {
             const inputValue = event.target.value;
@@ -474,6 +479,14 @@ const OrderPage: React.FC = () => {
                    </div>
                </div>
 
+
+                <div className="switcher order-switcher">
+                    <Switch onchange={updateBonus} active={bonus}/>
+                    <button className={`switcher__text ${bonus ? 'switcher__text-active' : ''}`}
+                            onClick={(e)=>{setBonus(!bonus)}}
+                    >Использовать бонусы</button>
+                </div>
+                <br/>
                 <div className="total-box">
                     <p className="total-box__text"><span>Сумма заказа</span> <span>{total} ₸</span></p>
                     <p className="total-box__text"><span>Начислим бонусов</span> <span>{total * 0.05} ₸</span></p>
