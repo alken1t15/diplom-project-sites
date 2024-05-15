@@ -1,0 +1,120 @@
+.profile{
+  &-block{
+    width: 100%;
+    &-r{
+      width: 600px;
+      margin-left: 100px;
+    }
+  }
+  &-bottom{
+    display: flex;
+    flex-direction: column;
+  }
+  &-person-block {
+    width: 100%;
+    display: flex;
+
+  }
+  &-title{
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 0.01em;
+    color: #414141;
+    margin-bottom: 25px;
+  }
+  &-btn{
+    border: 1px solid #f2ede5;
+    border-radius: 20px;
+    width: 390px;
+    padding: 20px 15px;
+    display: flex;
+    align-items: center;
+    background: #f6f6f4;
+    cursor: pointer;
+    & > img{
+      margin-right: 15px;
+    }
+    & > span{
+      font-weight: 600;
+      font-size: 18px;
+      color: #414141;
+    }
+
+  }
+  &-history{
+    width: 100%;
+  }
+}
+
+.added-info-item-profile{
+  margin-top: 20px;
+}
+
+.history-block{
+  display: flex;
+  width: 59%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.history-item{
+  margin-top: 15px;
+  text-align: center;
+  padding: 20px 20px;
+  border: 1px solid #eee5dc;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #f7f6f5;
+  width: 400px;
+  &__id{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
+    text-align: center;
+    color: var(--dark-orange);
+    margin-bottom: 5px;
+  }
+  &__date, &__address{
+    font-weight: 400;
+    font-size: 15px;
+    text-align: center;
+    color: #414141;
+    margin-bottom: 5px;
+  }
+  &__item{
+    width: 100%;
+    display: flex;
+    margin-top: 15px;
+    align-items: center;
+    &:first-child{
+      margin-top: 0;
+    }
+    & > &-l > img{
+      width: 115px;
+      height: 77px;
+    }
+    &-r{
+      font-weight: 400;
+      font-size: 15px;
+      color: #414141;
+      width: 40%;
+      text-align: left;
+      margin-left: 20px;
+    }
+  }
+  &-bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+    &__text{
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 110%;
+      letter-spacing: -0.02em;
+      color: #b6532b;
+    }
+  }
+}

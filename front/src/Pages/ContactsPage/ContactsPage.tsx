@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import './ContactsPage.scss'
-import YandexMap from "../../Components/GoogleMap/YandexMap";
+import YandexMap from "../../Components/YandexMap/YandexMap";
 import Slider from "../../Components/Slider/Slider";
 
 const place1 = require('../../assets/images/pl1.png');
