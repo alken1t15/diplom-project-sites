@@ -1,5 +1,6 @@
 package com.example.diplomprojectsite.controller;
 
+import com.example.diplomprojectsite.dto.HistoryOrderAddDTO;
 import com.example.diplomprojectsite.dto.HistoryOrderIsActiveDTO;
 import com.example.diplomprojectsite.service.ServiceHistoryOrder;
 import lombok.AllArgsConstructor;
@@ -18,5 +19,10 @@ public class ControllerHistoryOrder {
     @PostMapping("/")
     public ResponseEntity getAllHistoryOrder(@Validated @RequestBody HistoryOrderIsActiveDTO historyOrder, BindingResult bindingResult){
         return serviceHistoryOrder.getAllHistoryOrder(historyOrder,bindingResult);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity addNewHistoryOrder(@Validated @RequestBody HistoryOrderAddDTO historyOrder,BindingResult bindingResult){
+        return serviceHistoryOrder.addNewHistoryOrder(historyOrder,bindingResult);
     }
 }

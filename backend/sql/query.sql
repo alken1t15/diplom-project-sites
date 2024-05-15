@@ -148,6 +148,11 @@ create table orders
     total_price int                not null
 );
 
+insert into orders (product_id, users_id, count, total_price) VALUES
+    (1,1,2,500);
+insert into orders (product_id, users_id, count, total_price) VALUES
+    (2,1,3,1000);
+
 create table favorite_product
 (
     id         serial primary key not null,

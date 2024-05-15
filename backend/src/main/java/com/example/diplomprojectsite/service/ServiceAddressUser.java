@@ -53,4 +53,8 @@ public class ServiceAddressUser {
         }
         return new ResponseEntity( HttpStatus.OK);
     }
+
+    public AddressUser getById(Long idAddress) {
+        return repositoryAddressUser.findById(idAddress).orElseThrow();
+    }
 }
