@@ -52,4 +52,8 @@ public class ServiceCart {
         repositoryCart.save(new Cart(cart.getNumber(),cart.getDate(),cart.getSecurity(),user));
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    public Cart getById(Long idCart) {
+        return repositoryCart.findById(idCart).orElseThrow();
+    }
 }

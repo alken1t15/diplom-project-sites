@@ -2,6 +2,8 @@ package com.example.diplomprojectsite.service;
 
 import com.example.diplomprojectsite.dto.OrderAddDTO;
 import com.example.diplomprojectsite.dto.OrderDTO;
+import com.example.diplomprojectsite.dto.OrderEditDTO;
+import com.example.diplomprojectsite.entity.HistoryOrder;
 import com.example.diplomprojectsite.entity.Orders;
 import com.example.diplomprojectsite.entity.Product;
 import com.example.diplomprojectsite.entity.Users;
@@ -87,6 +89,46 @@ public class ServiceOrder {
             orderDTOs.add(new OrderDTO(o.getId(), o.getProduct().getName(), img, o.getCount(),o.getTotalPrice()));
         }
         return new ResponseEntity(new OrderReturn(orderDTOs,total),HttpStatus.OK);
+    }
+
+    public ResponseEntity editCountOrder(OrderEditDTO orderEdit, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<String> errors = new ArrayList<>();
+            for (FieldError fieldError : bindingResult.getFieldErrors()) {
+                String field = fieldError.getField();
+                String nameError = fieldError.getDefaultMessage();
+                errors.add(String.format("Поле %s ошибка: %s", field, nameError));
+            }
+            return new ResponseEntity(errors, HttpStatus.BAD_REQUEST);
+        }
+        Orders order = repositoryOrders.getReferenceById(orderEdit.getId());
+        Product product = order.getProduct();
+        int price = product.getPrice();
+        if (orderEdit.getStatus().equals("+")){
+            order.setCount(order.getCount()+1);
+            order.setTotalPrice(price*order.getCount());
+            repositoryOrders.save(order);
+        }
+        else {
+            int count = order.getCount();
+            if (count-1!=0){
+                order.setCount(order.getCount()-1);
+                order.setTotalPrice(price*order.getCount());
+                repositoryOrders.save(order);
+            }
+            else {
+                repositoryOrders.delete(order);
+            }
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    public Orders getById(Long id) {
+        return repositoryOrders.findById(id).orElseThrow();
+    }
+
+    public void delete(Orders order) {
+        repositoryOrders.delete(order);
     }
 
     public record OrderReturn(List<OrderDTO> orderDTOs,Long total){}
