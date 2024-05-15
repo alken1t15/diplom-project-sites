@@ -8,6 +8,10 @@ const place1 = require('../../assets/images/pl1.png');
 const place2 = require('../../assets/images/pl2.png');
 const place3 = require('../../assets/images/pl3.png');
 const place4 = require('../../assets/images/pl4.png');
+const soc1 = require('../../assets/images/whatsapp.svg').default;
+const soc2 = require('../../assets/images/instagram.svg').default;
+const soc3 = require('../../assets/images/tiktok.svg').default;
+const soc4 = require('../../assets/images/youtube.svg').default;
 const svg1 = require('../../assets/images/Icon (1).png');
 const svg2 = require('../../assets/images/Icon (2).png');
 const svg3 = require('../../assets/images/Icon (3).png');
@@ -99,11 +103,26 @@ const ContactsPage: React.FC = () => {
                                 </div>
                             ))}
                         </div>
-                        <div className="contact-items-container-r"></div>
+
+
 
                     </div>
 
                 </>}
+                <div className="contact-items-container-bot">
+                    <a target='_blank' href='#' className="contact-items-container-bot__button">
+                        <img src={soc1} alt="whatsapp image"/>
+                    </a>
+                    <a target='_blank' href='#' className="contact-items-container-bot__button">
+                        <img src={soc2} alt="instagram image"/>
+                    </a>
+                    <a target='_blank' href='#' className="contact-items-container-bot__button">
+                        <img src={soc3} alt="tiktok image"/>
+                    </a>
+                    <a target='_blank' href='#' className="contact-items-container-bot__button">
+                        <img src={soc4} alt="youtube image"/>
+                    </a>
+                </div>
 
 
             </div>

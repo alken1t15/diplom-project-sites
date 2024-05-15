@@ -70,7 +70,7 @@ const YandexMap: React.FC = () => {
             <Map
                 defaultState={{ center: [51.153362, 71.419449], zoom: 10 }}
                 width="100%"
-                height="65vh"
+                height="60vh"
             >
                 {pins.map((pin, index) => (
                     <Placemark

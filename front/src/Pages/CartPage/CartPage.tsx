@@ -4,6 +4,8 @@ import React, {useEffect, useState} from 'react';
 import './CartPage.scss';
 import CartItem from "../../Components/CartItem/CartItem";
 import item from "../../Components/Item/Item";
+import {Link} from "react-router-dom";
+import {ORDER_PAGE_ROUTE} from "../../Utils/Routes";
 
 const img = require('../../assets/images/cookie4.png');
 const CartPage: React.FC = () => {
@@ -69,7 +71,7 @@ const CartPage: React.FC = () => {
                   {items.map((el, index)=>(
                       <CartItem onChange={updateCount} id={el.id} count={el.count} name={el.name} img={el.img} price={el.price} key={index}/>
                   ))}
-                  <div className="button-total">Оформить заказ на {total} ₸</div>
+                  <Link to={ORDER_PAGE_ROUTE} className="button-total">Оформить заказ на {total} ₸</Link>
               </div>
 
            </div>
