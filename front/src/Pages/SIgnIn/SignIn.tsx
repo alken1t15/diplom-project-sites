@@ -3,16 +3,17 @@ import './SignIn.scss'
 import Input from "../../Components/UI/Input/Input";
 import Switch from "../../Components/UI/Switch/Switch";
 import Button from "../../Components/UI/Button/Button";
-import {Link} from "react-router-dom";
-import {SIGN_UP_ROUTE} from "../../Utils/Routes";
-import {logOut} from "../../Http/User";
+import {Link, useNavigate} from "react-router-dom";
+import {MAIN_PAGES_ROUTE, SHOP_PAGE_ROUTE, SIGN_UP_ROUTE} from "../../Utils/Routes";
+import {login, logOut} from "../../Http/User";
 
 const SignIn: React.FC = () => {
 
     let[active, setIsActive] = useState(false);
-    let[emailOrNumber, setEmailOrNumber] = useState('')
-    let[password, setPassword] = useState('')
-    let[remember, setRemember] = useState(false)
+    let[emailOrNumber, setEmailOrNumber] = useState('');
+    let[password, setPassword] = useState('');
+    let[remember, setRemember] = useState(false);
+    let navigator = useNavigate();
 
     function setEmailOrNum(value: string){
         setEmailOrNumber(value)
@@ -27,7 +28,7 @@ const SignIn: React.FC = () => {
     }
 
     useEffect(()=>{
-        if(password != ' ' && emailOrNumber !== ' ' && emailOrNumber.length >= 8 && password.length >= 8 ){
+        if(password != ' ' && emailOrNumber !== ' ' && emailOrNumber.length >= 2 && password.length >= 2 ){
             setIsActive(true)
         }
     }, [password, emailOrNumber])
@@ -51,9 +52,19 @@ const SignIn: React.FC = () => {
                 </div>
                 <p className="signIn-bot-forgot">Забыли пароль?</p>
             </div>
-            <Button isActive={active} onClick={(e)=>{
+            <button className={`standard-btn ${active ? 'standard-btn-active' : ''}`} style={{marginTop: 30}} onClick={(e)=>{
+                login(emailOrNumber, password).then((response)=>{
+                    if(remember){
+                        localStorage.setItem('token', response.data['jwt-token']);
+                    }
+                    else{
+                        sessionStorage.setItem('token', response.data['jwt-token']);
+                    }
+                    navigator(SHOP_PAGE_ROUTE)
 
-            }} name={'Войти'} style={{marginTop: 30}}/>
+                })
+            }} >Войти</button>
+
         </div>
     );
 };

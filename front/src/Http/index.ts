@@ -9,8 +9,13 @@ const $api = axios.create({
 $api.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
+        const tokenSession = sessionStorage.getItem('token');
         if(token){
             config.headers.Authorization = `Bearer ${token}`;
+            return config;
+        }
+        else if(tokenSession){
+            config.headers.Authorization = `Bearer ${tokenSession}`;
             return config;
         }
         config.headers.Authorization = `Bearer 333`;
