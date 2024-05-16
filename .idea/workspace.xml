@@ -5,10 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d64ec88d-126f-4e97-88f8-36d2286e10da" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/DiplomProjectSiteApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/DiplomProjectSiteApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/security/JWTFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/security/JWTFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/Http/Address.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/Http/Card.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/Http/Cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/Http/Favorite.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/Http/Order.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/Http/Shop.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/Pages/FavPage/FavPage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/Pages/FavPage/FavPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Http/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/Http/User.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/MainPage/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/Pages/MainPage/MainPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/ProfilePage/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/Pages/ProfilePage/ProfilePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/SIgnIn/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/Pages/SIgnIn/SignIn.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,35 +47,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/maksi/WebstormProjects/diplom-project-sites&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;SCSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\maksi\\WebstormProjects\\diplom-project-sites\\front\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/maksi/WebstormProjects/diplom-project-sites/front/src/Http",
+    "list.type.of.created.stylesheet": "SCSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\maksi\\WebstormProjects\\diplom-project-sites\\front\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\maksi\WebstormProjects\diplom-project-sites\front\src\assets\images" />
+      <recent name="C:\Users\maksi\WebstormProjects\diplom-project-sites\front\src\Http" />
       <recent name="C:\Users\maksi\WebstormProjects\diplom-project-sites\front\src\Pages" />
+      <recent name="C:\Users\maksi\WebstormProjects\diplom-project-sites\front\src\assets\images" />
       <recent name="C:\Users\maksi\WebstormProjects\diplom-project-sites\front\src\assets\fonts" />
       <recent name="C:\Users\maksi\WebstormProjects\diplom-project-sites\front" />
     </key>
@@ -111,6 +122,7 @@
       <workItem from="1715857279280" duration="262000" />
       <workItem from="1715857600520" duration="1617000" />
       <workItem from="1715860241707" duration="603000" />
+      <workItem from="1715861380817" duration="5233000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-import './MainPage.scss';
+import './FavPage.scss';
 import Item from "../../Components/Item/Item";
 import {ReactComponent as imgFav} from "../../assets/images/itemFav.svg";
 import Button from "../../Components/UI/Button/Button";
@@ -9,7 +9,7 @@ const search = require('../../assets/images/magnifyingglass.svg').default;
 const img1 = require('../../assets/images/image 8.png');
 const img8 = require('../../assets/images/image 9.png');
 const star = require('../../assets/images/star.svg').default;
-const MainPage: React.FC = () => {
+const FavPage: React.FC = () => {
     let[searchActive, setSearchActive] = useState(false);
     let[category, setCategory] = useState([
         {
@@ -75,7 +75,6 @@ const MainPage: React.FC = () => {
     }
 
     function addToCart(index: number){
-        console.log(index)
         setActive(false)
     }
 
@@ -206,4 +205,4 @@ const MainPage: React.FC = () => {
     );
 };
 
-export default MainPage;
+export default FavPage;

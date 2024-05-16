@@ -1,4 +1,6 @@
 import {$api} from './index';
+import {SIGN_IN_ROUTE} from "../Utils/Routes";
+
 
 export const login = async (login: string, password: string) => {
     let res = await $api.post(`login/jwt`, {"login": login, "password": password});
@@ -17,9 +19,8 @@ export const signUp = async (email: string, phone: string, name: string, db: str
     return res;
 };
 
-export const logOut = async () => {
-    let res = await $api.post(`logOut/jwt`);
+export const logOut = () => {
     localStorage.setItem('token', '');
     sessionStorage.setItem('token', '');
-    return res;
+    window.location.href = SIGN_IN_ROUTE;
 };

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 import './ProfilePage.scss'
+import {logOut} from "../../Http/User";
 
 const imgSvg = require('../../assets/images/chevron.backward.svg').default;
 const visaImg = require('../../assets/images/Visa.png');
@@ -486,7 +487,7 @@ const ProfilePage: React.FC = () => {
             </div>
             <div className="profile-bottom">
                 <button className="profile-btn" onClick={(e)=>{
-
+                    logOut()
                 }}>
                     <img src={logOutImg} alt=""/><span>Выйти</span>
                 </button>

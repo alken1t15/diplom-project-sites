@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 import {Route, Routes} from "react-router-dom";
 import {
-    CART_PAGE_ROUTE, CONTACTS_PAGE_ROUTE, FINISHED_PAGE_ROUTE,
+    CART_PAGE_ROUTE, CONTACTS_PAGE_ROUTE, FAVOURITES_PAGE_ROUTE, FINISHED_PAGE_ROUTE,
     MAIN_PAGES_ROUTE, ORDER_PAGE_ROUTE, PROFILE_PAGE_ROUTE, SHOP_PAGE_ROUTE,
     SIGN_IN_ROUTE, SIGN_UP_ROUTE, START_PAGE_ROUTE,
 } from "./Utils/Routes";
@@ -16,6 +16,7 @@ import ContactsPage from "./Pages/ContactsPage/ContactsPage";
 import OrderPage from "./Pages/OrderPage/OrderPage";
 import FinishedPage from "./Pages/FinishedPage/FinishedPage";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
+import FavPage from "./Pages/FavPage/FavPage";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
                 <Route path={ORDER_PAGE_ROUTE} element={<OrderPage/>} />
                 <Route path={FINISHED_PAGE_ROUTE} element={<FinishedPage/>} />
                 <Route path={PROFILE_PAGE_ROUTE} element={<ProfilePage/>} />
+                <Route path={FAVOURITES_PAGE_ROUTE} element={<FavPage/>} />
             </Route>
 
 
