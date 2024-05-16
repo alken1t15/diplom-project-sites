@@ -23,6 +23,5 @@ public class UsersAddDTO {
     @NotEmpty
     private String firstName;
     @NotNull
-    @NotEmpty
     private LocalDate bornDate;
 }

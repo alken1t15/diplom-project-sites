@@ -55,9 +55,9 @@ public class ControllerUser {
         Authentication token = UsernamePasswordAuthenticationToken.unauthenticated(loginAuth.getLogin(), loginAuth.getPassword());
         Authentication authenticationResponse = this.authenticationManager.authenticate(token);
         Users user = repositoryUser.findByEmail(loginAuth.getLogin()).orElseThrow();
-//        if (!StringUtils.isBlank(user.getJwt())){
-//            throw new BadCredentialsException("Токен уже был получен ранее");
-//        }
+        if (!StringUtils.isBlank(user.getJwt())){
+            throw new BadCredentialsException("Токен уже был получен ранее");
+        }
         logger.info(String.format("Пользователь который хочет получить jwt токен: %s", authenticationResponse));
         String jwt = jwtUtil.generateToken(loginAuth.getLogin(), loginAuth.getPassword());
         user.setJwt(jwt);
