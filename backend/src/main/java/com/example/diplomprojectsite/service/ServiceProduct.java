@@ -4,10 +4,7 @@ import com.example.diplomprojectsite.dto.ProductAddDTO;
 import com.example.diplomprojectsite.dto.ProductDTO;
 import com.example.diplomprojectsite.dto.ProductOneDTO;
 import com.example.diplomprojectsite.dto.TagDTO;
-import com.example.diplomprojectsite.entity.Category;
-import com.example.diplomprojectsite.entity.Product;
-import com.example.diplomprojectsite.entity.Tag;
-import com.example.diplomprojectsite.entity.Users;
+import com.example.diplomprojectsite.entity.*;
 import com.example.diplomprojectsite.repository.RepositoryProduct;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -18,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -34,13 +30,15 @@ public class ServiceProduct {
     private final ModelMapper modelMapper;
     private final ServiceFavoriteProduct serviceFavoriteProduct;
     private final ServiceCategory serviceCategory;
+    private final ServiceUser serviceUser;
 
     @Autowired
-    public ServiceProduct(RepositoryProduct repositoryProduct, ModelMapper modelMapper, ServiceFavoriteProduct serviceFavoriteProduct, ServiceCategory serviceCategory) {
+    public ServiceProduct(RepositoryProduct repositoryProduct, ModelMapper modelMapper, ServiceFavoriteProduct serviceFavoriteProduct, ServiceCategory serviceCategory, ServiceUser serviceUser) {
         this.repositoryProduct = repositoryProduct;
         this.modelMapper = modelMapper;
         this.serviceFavoriteProduct = serviceFavoriteProduct;
         this.serviceCategory = serviceCategory;
+        this.serviceUser = serviceUser;
     }
 
     @Value("${path.file}")
@@ -94,10 +92,10 @@ public class ServiceProduct {
     public ResponseEntity addNewProduct(ProductAddDTO productAddDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<String> errors = new ArrayList<>();
-            for (FieldError fieldError :bindingResult.getFieldErrors()){
+            for (FieldError fieldError : bindingResult.getFieldErrors()) {
                 String nameField = fieldError.getField();
                 String errorMessage = fieldError.getDefaultMessage();
-                errors.add(String.format("Поле: %s ошибка: %s",nameField,errorMessage));
+                errors.add(String.format("Поле: %s ошибка: %s", nameField, errorMessage));
             }
             return new ResponseEntity(errors, HttpStatus.BAD_REQUEST);
         }
@@ -126,11 +124,11 @@ public class ServiceProduct {
 
     public List<ProductDTO> getProductByCategory(Long idCategory) {
         List<Product> products = repositoryProduct.findByCategoryId(idCategory);
-        if (products==null){
+        if (products == null) {
             return null;
         }
         List<ProductDTO> productDTOs = new ArrayList<>();
-        for (Product product : products){
+        for (Product product : products) {
             byte[] file = getFile(product.getImg());
             ProductDTO productDTO = modelMapper.map(product, ProductDTO.class);
             boolean isFavorite = serviceFavoriteProduct.isFavoriteProduct(product.getId());
@@ -139,5 +137,25 @@ public class ServiceProduct {
             productDTOs.add(productDTO);
         }
         return productDTOs;
+    }
+
+    public ResponseEntity getAllFavoriteProduct() {
+        Users user = serviceUser.getUser();
+        List<FavoriteProduct> favoriteProducts = user.getFavoriteProducts();
+        if (favoriteProducts.isEmpty()) {
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            List<ProductDTO> productDTOs = new ArrayList<>();
+            for (FavoriteProduct f : favoriteProducts) {
+                Product product = f.getProduct();
+                ProductDTO productDTO = modelMapper.map(product, ProductDTO.class);
+                byte[] file = getFile(product.getImg());
+                boolean isFavorite = serviceFavoriteProduct.isFavoriteProduct(product.getId());
+                productDTO.setImg(file);
+                productDTO.setIsFavorite(isFavorite);
+                productDTOs.add(productDTO);
+            }
+            return new ResponseEntity(productDTOs, HttpStatus.OK);
+        }
     }
 }
