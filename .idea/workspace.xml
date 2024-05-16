@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d64ec88d-126f-4e97-88f8-36d2286e10da" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/DiplomProjectSiteApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/DiplomProjectSiteApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/security/JWTFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/security/JWTFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript JSX File" />
+        <option value="SCSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2fxFAqsHUcc6OkhFuU7XcnSiC9h" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/maksi/WebstormProjects/diplom-project-sites&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;SCSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\maksi\\WebstormProjects\\diplom-project-sites\\front\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\maksi\WebstormProjects\diplom-project-sites\front\src\assets\images" />
+      <recent name="C:\Users\maksi\WebstormProjects\diplom-project-sites\front\src\Pages" />
+      <recent name="C:\Users\maksi\WebstormProjects\diplom-project-sites\front\src\assets\fonts" />
+      <recent name="C:\Users\maksi\WebstormProjects\diplom-project-sites\front" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\maksi\WebstormProjects\diplom-project-sites\front\src\Components\UI" />
+      <recent name="C:\Users\maksi\WebstormProjects\diplom-project-sites\front\src\Components" />
+      <recent name="C:\Users\maksi\WebstormProjects\diplom-project-sites\front\src\Pages\MainPage" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/front/package.json" />
+      <command value="start" />
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d64ec88d-126f-4e97-88f8-36d2286e10da" name="Changes" comment="" />
+      <created>1714734681504</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1714734681504</updated>
+      <workItem from="1714734682769" duration="17981000" />
+      <workItem from="1714901672146" duration="7000" />
+      <workItem from="1714935130924" duration="823000" />
+      <workItem from="1714998058377" duration="4500000" />
+      <workItem from="1715014218969" duration="73000" />
+      <workItem from="1715064854338" duration="9328000" />
+      <workItem from="1715238688457" duration="2846000" />
+      <workItem from="1715247652503" duration="12532000" />
+      <workItem from="1715364461292" duration="854000" />
+      <workItem from="1715420035377" duration="10189000" />
+      <workItem from="1715453332343" duration="1586000" />
+      <workItem from="1715596926103" duration="5513000" />
+      <workItem from="1715776391657" duration="26587000" />
+      <workItem from="1715853912005" duration="693000" />
+      <workItem from="1715856335314" duration="328000" />
+      <workItem from="1715856679581" duration="552000" />
+      <workItem from="1715857279280" duration="262000" />
+      <workItem from="1715857600520" duration="1617000" />
+      <workItem from="1715860241707" duration="603000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>
