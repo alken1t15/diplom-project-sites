@@ -76,6 +76,11 @@ public class ControllerProduct {
         return serviceFavoriteProduct.deleteNewFavoriteProduct(idProduct);
     }
 
+    @GetMapping("/favorite/")
+    public ResponseEntity getAllFavoriteProduct(){
+        return serviceProduct.getAllFavoriteProduct();
+    }
+
     public record ProductMainDTO(List<CategoryDTO> categories, List<ProductDTO> products, Integer bonus,Integer countOrder) {
     }
 

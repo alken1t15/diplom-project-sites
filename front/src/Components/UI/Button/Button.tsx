@@ -50,6 +50,7 @@ const Button: React.FC<BlueButtonProps> = ({link,
                         className={`standard-btn ${active ? 'standard-btn-active' : ''}`}
                         onClick={(e)=>{
                             e.preventDefault();
+                            e.stopPropagation();
                         }}
                     >
                         {name}

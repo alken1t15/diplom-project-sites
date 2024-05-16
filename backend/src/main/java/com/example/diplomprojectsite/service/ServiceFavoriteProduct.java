@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ServiceFavoriteProduct {
@@ -24,7 +26,6 @@ public class ServiceFavoriteProduct {
     }
 
     public ResponseEntity addNewFavoriteProduct(Long idProduct) {
-//        Users user = serviceUser.getUser();
         Users user = serviceUser.getUser();
         Product product = repositoryProduct.findById(idProduct).orElse(null);
         if (product == null) {
@@ -35,9 +36,9 @@ public class ServiceFavoriteProduct {
     }
 
     public ResponseEntity deleteNewFavoriteProduct(Long idProduct) {
-        //        Users user = serviceUser.getUser();
         Users user = serviceUser.getUser();
         repositoryFavoriteProduct.removeByUserIdAndProductId(user.getId(), idProduct);
         return new ResponseEntity(HttpStatus.OK);
     }
+
 }

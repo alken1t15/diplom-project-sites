@@ -103,15 +103,6 @@ public class JWTFilter extends OncePerRequestFilter {
                 }
             }
         } else {
-            String url = request.getRequestURL().toString();
-            if (url.equals("http://localhost:8080/login/jwt")) {
-                if (request.getMethod().equals("OPTIONS")) {
-                    response.setStatus(HttpServletResponse.SC_OK);
-                } else {
-                    filterChain.doFilter(request, response);
-                }
-                return;
-            }
             if (request.getMethod().equals("OPTIONS")) {
                 response.setStatus(HttpServletResponse.SC_OK);
             } else {

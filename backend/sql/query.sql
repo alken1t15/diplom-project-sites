@@ -159,3 +159,8 @@ create table favorite_product
     product_id int references product (id),
     users_id   int references users (id)
 );
+
+insert into favorite_product (product_id, users_id) values
+                                                        (1,1),
+                                                        (2,1),
+                                                        (3,1);

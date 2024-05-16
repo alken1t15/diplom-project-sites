@@ -5,7 +5,7 @@ import Switch from "../../Components/UI/Switch/Switch";
 import Button from "../../Components/UI/Button/Button";
 import {Link} from "react-router-dom";
 import {SIGN_UP_ROUTE} from "../../Utils/Routes";
-import {logOut} from "../../Http/User";
+import {login, logOut} from "../../Http/User";
 
 const SignIn: React.FC = () => {
 
@@ -27,7 +27,7 @@ const SignIn: React.FC = () => {
     }
 
     useEffect(()=>{
-        if(password != ' ' && emailOrNumber !== ' ' && emailOrNumber.length >= 8 && password.length >= 8 ){
+        if(password != ' ' && emailOrNumber !== ' ' && emailOrNumber.length >= 2 && password.length >= 2 ){
             setIsActive(true)
         }
     }, [password, emailOrNumber])
@@ -51,9 +51,12 @@ const SignIn: React.FC = () => {
                 </div>
                 <p className="signIn-bot-forgot">Забыли пароль?</p>
             </div>
-            <Button isActive={active} onClick={(e)=>{
+            <button className={`standard-btn ${active ? 'standard-btn-active' : ''}`} style={{marginTop: 30}} onClick={(e)=>{
+                login(emailOrNumber, password).then((response)=>(data: any)=>{
+                    console.log(data)
+                })
+            }} >Войти</button>
 
-            }} name={'Войти'} style={{marginTop: 30}}/>
         </div>
     );
 };
