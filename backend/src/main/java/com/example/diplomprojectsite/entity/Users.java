@@ -29,6 +29,7 @@ public class Users {
     private String jwt;
 
     private Integer bonus;
+    private String phone;
     @OneToMany(mappedBy = "user")
     private List<HistoryBonus> historyBonus;
     @OneToMany(mappedBy = "user")

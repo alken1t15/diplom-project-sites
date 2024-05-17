@@ -24,4 +24,6 @@ public class UsersAddDTO {
     private String firstName;
     @NotNull
     private LocalDate bornDate;
+    @NotNull
+    private String phone;
 }

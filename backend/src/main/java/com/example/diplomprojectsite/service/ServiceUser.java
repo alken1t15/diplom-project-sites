@@ -1,9 +1,11 @@
 package com.example.diplomprojectsite.service;
 
+import com.example.diplomprojectsite.dto.UserDTO;
 import com.example.diplomprojectsite.dto.UsersAddDTO;
 import com.example.diplomprojectsite.entity.Users;
 import com.example.diplomprojectsite.repository.RepositoryUsers;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContext;
@@ -21,6 +23,7 @@ import java.util.List;
 public class ServiceUser {
     private final RepositoryUsers repositoryUsers;
     private final PasswordEncoder passwordEncoder;
+    private final ModelMapper modelMapper;
 
     public Users getUser() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
@@ -45,5 +48,10 @@ public class ServiceUser {
         String newPassword = passwordEncoder.encode(user.getPassword());
         repositoryUsers.save(new Users(user.getEmail(),newPassword,user.getRole(),user.getFirstName(),user.getBornDate()));
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    public ResponseEntity getAlreadyUser() {
+        Users user = getUser();
+        return new ResponseEntity(modelMapper.map(user, UserDTO.class),HttpStatus.OK);
     }
 }
