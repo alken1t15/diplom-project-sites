@@ -83,5 +83,9 @@ public class ControllerUser {
     public ResponseEntity errorAuthentication(BadCredentialsException ex) {
         return new ResponseEntity(ex.getMessage(), HttpStatus.UNAUTHORIZED);
     }
+    @GetMapping("/remove")
+    public ResponseEntity removeUser(){
+        return serviceUser.removeUser();
+    }
 
 }

@@ -54,4 +54,10 @@ public class ServiceUser {
         Users user = getUser();
         return new ResponseEntity(modelMapper.map(user, UserDTO.class),HttpStatus.OK);
     }
+
+    public ResponseEntity removeUser() {
+        Users user = getUser();
+        repositoryUsers.delete(user);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
