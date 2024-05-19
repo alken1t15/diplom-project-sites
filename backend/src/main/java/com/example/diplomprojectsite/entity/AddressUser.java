@@ -34,7 +34,7 @@ public class AddressUser {
     private Users user;
 
     @OneToMany(mappedBy = "addressUser")
-    private List<HistoryOrder> historyOrders;
+    private List<UsersHistoryOrder> historyOrders;
 
     public AddressUser(String street, Integer entrance, Integer number, Integer floor, Integer flat, String comment, Users user) {
         this.street = street;

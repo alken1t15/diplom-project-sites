@@ -30,17 +30,17 @@ public class Users {
 
     private Integer bonus;
     private String phone;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<HistoryBonus> historyBonus;
-    @OneToMany(mappedBy = "user")
-    private List<HistoryOrder> historyOrders;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<UsersHistoryOrder> historyOrders;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Orders> orders;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<FavoriteProduct> favoriteProducts;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<AddressUser> addressUsers;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Cart> carts;
     @Column(name = "born_date")
     private LocalDate bornDate;
@@ -51,5 +51,13 @@ public class Users {
         this.role = role;
         this.firstName = firstName;
         this.bornDate = bornDate;
+    }
+
+    public Users(String password, String role, String firstName,LocalDate bornDate,String phone) {
+        this.password = password;
+        this.role = role;
+        this.firstName = firstName;
+        this.bornDate = bornDate;
+        this.phone = phone;
     }
 }

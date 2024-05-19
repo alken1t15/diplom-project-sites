@@ -10,4 +10,9 @@ public interface RepositoryProduct extends JpaRepository<Product,Long> {
 
     @Query("select p from Product p where p.category.id=?1")
     List<Product> findByCategoryId(Long id);
+
+    @Query("select p from  Product p where LOWER(REPLACE(REPLACE(p.name, ' ', ''), '\\t', '')) LIKE LOWER(CONCAT('%', ?1, '%')) and p.category.id = ?2")
+    List<Product> findByNameAndIdCategory(String name, Long id);
+
+    List<Product> findByNameLikeIgnoreCase(String name);
 }

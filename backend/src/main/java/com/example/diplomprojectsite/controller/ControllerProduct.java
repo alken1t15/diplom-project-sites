@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,29 +34,22 @@ public class ControllerProduct {
 
     //Получение всех товаров и категорий для главной страницы || Получение товаров по категории
     @GetMapping("/")
-    public ResponseEntity getMainPage(@RequestParam(required = false) Long idCategory) {
-        Users user = serviceUser.getUser();
-        List<CategoryDTO> categories = serviceCategory.getAllCategory();
-        List<ProductDTO> products;
-        if (idCategory == null) {
-            products = serviceProduct.getAllProduct();
-        } else {
-            products = serviceProduct.getProductByCategory(idCategory);
-        }
-        if (products == null) {
-            return new ResponseEntity("Такой категории нету", HttpStatus.BAD_REQUEST);
-        } else {
-            return new ResponseEntity(new ProductMainDTO(categories, products, user.getBonus(),user.getOrders().size()), HttpStatus.OK);
-        }
+    public ResponseEntity getMainPage(@RequestParam(required = false) Long idCategory,@RequestParam(required = false) String name) {
+        return serviceProduct.getAllProductAndCategory(idCategory,name);
     }
 
     // Получение определенного товара
     @GetMapping("/{id}")
-    public Object getProductById(@Validated @NonNull @PathVariable Long id) {
+    public ResponseEntity getProductById(@Validated @NonNull @PathVariable Long id) {
         Users user = serviceUser.getUser();
         ProductOneDTO product = serviceProduct.getProductById(id);
         product.setCountOrder(user.getOrders().size());
-        return Objects.requireNonNullElseGet(product, () -> new ResponseEntity<>("Нету такого товара с таким id", HttpStatus.BAD_REQUEST));
+        if (product==null){
+            return new ResponseEntity<>("Нету такого товара с таким id", HttpStatus.BAD_REQUEST);
+        }
+        else {
+            return   new ResponseEntity<>(product, HttpStatus.OK);
+        }
     }
 
     // Добавление нового товара

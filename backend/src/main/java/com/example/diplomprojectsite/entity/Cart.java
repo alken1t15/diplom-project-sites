@@ -27,7 +27,7 @@ public class Cart {
     private Users user;
 
     @OneToMany(mappedBy = "cart")
-    private List<HistoryOrder> historyOrder;
+    private List<UsersHistoryOrder> historyOrder;
 
     public Cart(String number, String date, Integer security, Users user) {
         this.number = number;

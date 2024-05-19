@@ -3,8 +3,10 @@ package com.example.diplomprojectsite.service;
 import com.example.diplomprojectsite.dto.HistoryOrderAddDTO;
 import com.example.diplomprojectsite.dto.HistoryOrderDTO;
 import com.example.diplomprojectsite.dto.HistoryOrderIsActiveDTO;
+import com.example.diplomprojectsite.dto.UsersHistoryOrderDTO;
 import com.example.diplomprojectsite.entity.*;
 import com.example.diplomprojectsite.repository.RepositoryHistoryOrder;
+import com.example.diplomprojectsite.repository.RepositoryUsersHistoryOrder;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.PageRequest;
@@ -28,6 +30,7 @@ public class ServiceHistoryOrder {
     private final ServiceOrder serviceOrder;
     private final ServiceCart serviceCart;
     private final ServiceAddressUser serviceAddressUser;
+    private final RepositoryUsersHistoryOrder repositoryUsersHistoryOrder;
 
     public ResponseEntity getAllHistoryOrder(HistoryOrderIsActiveDTO historyOrder, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -40,19 +43,21 @@ public class ServiceHistoryOrder {
             return new ResponseEntity(errors, HttpStatus.BAD_REQUEST);
         }
         Users user = serviceUser.getUser();
-        List<HistoryOrder> historyOrders = repositoryHistoryOrder.findByUserIdAndStatus(user.getId(),historyOrder.getIsActive());
-        if (!historyOrders.isEmpty()){
-            List<HistoryOrderDTO> historyOrderDTOs = new ArrayList<>();
-            for (HistoryOrder h : historyOrders){
-                HistoryOrderDTO historyOrderDTO = modelMapper.map(h, HistoryOrderDTO.class);
-                Product product = serviceProduct.productById(historyOrderDTO.getProduct().getId());
-                historyOrderDTO.getProduct().setImg(serviceProduct.getFile(product.getImg()));
-                historyOrderDTOs.add(historyOrderDTO);
+        List<UsersHistoryOrder> usersHistoryOrders = repositoryUsersHistoryOrder.findByUserIdAndStatus(user.getId(), historyOrder.getIsActive());
+        if (!usersHistoryOrders.isEmpty()) {
+            List<UsersHistoryOrderDTO> usersHistoryOrderDTOs = new ArrayList<>();
+
+            for (UsersHistoryOrder h : usersHistoryOrders) {
+                UsersHistoryOrderDTO historyOrderDTO = modelMapper.map(h,UsersHistoryOrderDTO.class);
+                usersHistoryOrderDTOs.add(historyOrderDTO);
+//                HistoryOrderDTO historyOrderDTO = modelMapper.map(h, HistoryOrderDTO.class);
+//                Product product = serviceProduct.productById(historyOrderDTO.getProduct().getId());
+//                historyOrderDTO.getProduct().setImg(serviceProduct.getFile(product.getImg()));
+//                historyOrderDTOs.add(historyOrderDTO);
             }
-            return new ResponseEntity(historyOrderDTOs,HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity(null,HttpStatus.OK);
+            return new ResponseEntity(usersHistoryOrderDTOs, HttpStatus.OK);
+        } else {
+            return new ResponseEntity(null, HttpStatus.OK);
         }
     }
 
@@ -69,27 +74,43 @@ public class ServiceHistoryOrder {
         Users user = serviceUser.getUser();
         Random random = new Random();
         long randomNumber;
-        while (true){
-             randomNumber = random.nextInt(100000) + 1;
-            HistoryOrder historyOrder2 = repositoryHistoryOrder.findByOrderId(randomNumber).orElse(null);
-            if (historyOrder2==null){
+        while (true) {
+            randomNumber = random.nextInt(100000) + 1;
+            UsersHistoryOrder usersHistoryOrder = repositoryUsersHistoryOrder.findByOrderId(randomNumber).orElse(null);
+            if (usersHistoryOrder == null) {
                 break;
             }
         }
         Cart cart = serviceCart.getById(historyOrder.getIdCart());
         AddressUser addressUser = serviceAddressUser.getById(historyOrder.getIdAddress());
-        for (Long id: historyOrder.getIdOrders()){
+        UsersHistoryOrder usersHistoryOrder;
+        long total=0;
+        if (historyOrder.getComment() != null) {
+            usersHistoryOrder = repositoryUsersHistoryOrder.save(new UsersHistoryOrder(user, cart, addressUser, true, historyOrder.getComment(), historyOrder.getTimeOrder(), randomNumber));
+        } else {
+            usersHistoryOrder = repositoryUsersHistoryOrder.save(new UsersHistoryOrder(user, cart, addressUser, true, historyOrder.getTimeOrder(), randomNumber));
+        }
+        for (Long id : historyOrder.getIdOrders()) {
             Orders order = serviceOrder.getById(id);
-            HistoryOrder historyOrder1;
-            if (historyOrder.getComment()!=null) {
-                 historyOrder1 = new HistoryOrder(order.getCount(), order.getTotalPrice(), order.getProduct(), user, randomNumber, cart, addressUser, true, historyOrder.getComment(), historyOrder.getTimeOrder());
-            }
-            else {
-                historyOrder1 = new HistoryOrder(order.getCount(), order.getTotalPrice(), order.getProduct(), user, randomNumber, cart, addressUser, true, historyOrder.getTimeOrder());
-            }
-            repositoryHistoryOrder.save(historyOrder1);
+            repositoryHistoryOrder.save(new HistoryOrder(order.getCount(),order.getTotalPrice(),order.getProduct(),usersHistoryOrder));
+            total+=order.getTotalPrice();
             serviceOrder.delete(order);
         }
+        int bonusAdd = (int) (total * 0.05);
+        if (historyOrder.getBonus()){
+            if (total>user.getBonus()){
+                total= total-user.getBonus();
+                user.setBonus(0);
+            }else {
+                long bonus = user.getBonus()- total;
+                user.setBonus((int) bonus);
+                total = 0;
+            }
+        }
+        user.setBonus(user.getBonus()+bonusAdd);
+        serviceUser.saveUser(user);
+        usersHistoryOrder.setTotal(total);
+        repositoryUsersHistoryOrder.save(usersHistoryOrder);
         return new ResponseEntity(HttpStatus.OK);
     }
 }

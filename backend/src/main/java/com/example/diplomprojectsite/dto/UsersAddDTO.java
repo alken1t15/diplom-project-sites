@@ -10,8 +10,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class UsersAddDTO {
-    @NotNull
-    @NotEmpty
     private String email;
     @NotNull
     @NotEmpty
@@ -24,6 +22,5 @@ public class UsersAddDTO {
     private String firstName;
     @NotNull
     private LocalDate bornDate;
-    @NotNull
     private String phone;
 }
