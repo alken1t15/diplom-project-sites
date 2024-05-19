@@ -5,20 +5,371 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d64ec88d-126f-4e97-88f8-36d2286e10da" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/front/src/Http/Address.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/Http/Card.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/Http/Cart.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/Http/Favorite.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/Http/Order.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/Http/Shop.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/Pages/FavPage/FavPage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/Pages/FavPage/FavPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/dto/UserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/logo192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/logo512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/App.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/CartItem/CartItem.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/CartItem/CartItem.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/Header/Header.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/Header/Header.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/Item/Item.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/Item/Item.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/Slider/Slider.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/Slider/Slider.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/UI/Button/Button.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/UI/Button/Button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/UI/CheckBox/CheckBox.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/UI/CheckBox/CheckBox.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/UI/Input/Input.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/UI/Input/Input.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/UI/Switch/Switch.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/UI/Switch/Switch.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/YandexMap/YandexMap.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/YandexMap/YandexMap.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Http/Address.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Http/Card.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Http/Cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Http/Favorite.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Http/Order.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Http/Shop.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Http/User.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Http/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/CartPage/CartPage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/CartPage/CartPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/ContactsPage/ContactsPage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/ContactsPage/ContactsPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/FavPage/FavPage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/FavPage/FavPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/FinishedPage/FinishedPage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/FinishedPage/FinishedPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/MainPage/MainPage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/MainPage/MainPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/OrderPage/OrderPage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/OrderPage/OrderPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/ProfilePage/ProfilePage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/ProfilePage/ProfilePage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/SIgnIn/SignIn.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/SIgnIn/SignIn.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/SignUp/SignUp.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/SignUp/SignUp.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/StartPage/StartPage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Pages/StartPage/StartPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Utils/Routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Bold.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Bold.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Bold.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Bold.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-BoldItalic.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-BoldItalic.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-BoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-BoldItalic.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-BoldItalic.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Heavy.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Heavy.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Heavy.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Heavy.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Heavy.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-HeavyItalic.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-HeavyItalic.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-HeavyItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-HeavyItalic.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-HeavyItalic.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Light.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Light.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Light.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Light.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-LightItalic.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-LightItalic.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-LightItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-LightItalic.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-LightItalic.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Medium.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Medium.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Medium.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Medium.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Medium.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-MediumItalic.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-MediumItalic.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-MediumItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-MediumItalic.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-MediumItalic.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Regular.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Regular.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-RegularItalic.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-RegularItalic.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-RegularItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-RegularItalic.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-RegularItalic.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Semibold.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Semibold.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Semibold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Semibold.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-Semibold.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-SemiboldItalic.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-SemiboldItalic.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-SemiboldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-SemiboldItalic.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/fonts/SF/SFProText-SemiboldItalic.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/Check.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/Group 16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/Icon (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/Icon (1).svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/Icon (2).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/Icon (2).svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/Icon (3).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/Icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/Icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/Logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/Order-Delivered--Streamline-Djakarta.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/StartPage1.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/StartPage2.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/StartPage3.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/Visa.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/bonus.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/bonusImg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/cart.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/chevron.backward.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/cookie.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/cookie4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/cookie5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/cookie6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/cookies1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/cookies2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/cookies3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/dessert3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/dessert5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/desserts1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/desserts2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/desserts4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/desserts6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/desserts7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/emptyCart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/eye.slash.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/eyeOpen.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/fav.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/image 8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/image 9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/instagram.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/itemFav.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/logout-04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/magnifyingglass.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/ping.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/pl1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/pl2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/pl3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/pl4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/profile.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/star.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/tiktok.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/trash-01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/whatsapp.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/youtube.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/index.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/react-app-env.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d5175c39-d80e-4f53-ad02-923db4b086fe.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/d5175c39-d80e-4f53-ad02-923db4b086fe.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/Http/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/Http/User.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/Pages/MainPage/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/Pages/MainPage/MainPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/Pages/ProfilePage/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/Pages/ProfilePage/ProfilePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/Pages/SIgnIn/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/Pages/SIgnIn/SignIn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/sql/query.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/sql/query.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/controller/ControllerUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/dto/LoginAuth.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/dto/LoginAuth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/dto/UsersAddDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/dto/UsersAddDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/entity/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/entity/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/service/ServiceUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/diplomprojectsite/service/ServiceUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/App.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/App.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/CartItem/CartItem.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/CartItem/CartItem.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/Header/Header.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/Header/Header.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/Item/Item.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/Item/Item.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/Slider/Slider.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/Slider/Slider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/UI/Button/Button.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/UI/Button/Button.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/UI/CheckBox/CheckBox.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/UI/CheckBox/CheckBox.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/UI/Input/Input.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/UI/Input/Input.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/UI/Switch/Switch.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/UI/Switch/Switch.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/YandexMap/YandexMap.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Components/YandexMap/YandexMap.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Http/Address.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Http/Card.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Http/Cart.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Http/Favorite.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Http/Order.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Http/Shop.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Http/User.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Http/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/CartPage/CartPage.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/CartPage/CartPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/ContactsPage/ContactsPage.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/ContactsPage/ContactsPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/FavPage/FavPage.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/FavPage/FavPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/FinishedPage/FinishedPage.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/FinishedPage/FinishedPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/MainPage/MainPage.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/MainPage/MainPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/OrderPage/OrderPage.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/OrderPage/OrderPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/ProfilePage/ProfilePage.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/ProfilePage/ProfilePage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/SIgnIn/SignIn.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/SIgnIn/SignIn.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/SignUp/SignUp.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/SignUp/SignUp.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/StartPage/StartPage.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Pages/StartPage/StartPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Utils/Routes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Bold.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Bold.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Bold.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Bold.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-BoldItalic.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-BoldItalic.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-BoldItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-BoldItalic.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-BoldItalic.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Heavy.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Heavy.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Heavy.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Heavy.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Heavy.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-HeavyItalic.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-HeavyItalic.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-HeavyItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-HeavyItalic.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-HeavyItalic.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Light.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Light.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Light.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Light.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Light.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-LightItalic.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-LightItalic.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-LightItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-LightItalic.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-LightItalic.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Medium.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Medium.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Medium.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Medium.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-MediumItalic.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-MediumItalic.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-MediumItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-MediumItalic.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-MediumItalic.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Regular.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Regular.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-RegularItalic.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-RegularItalic.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-RegularItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-RegularItalic.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-RegularItalic.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Semibold.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Semibold.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Semibold.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-Semibold.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-SemiboldItalic.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-SemiboldItalic.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-SemiboldItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-SemiboldItalic.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/fonts/SF/SFProText-SemiboldItalic.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/Check.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/Group 16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/Icon (1).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/Icon (1).svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/Icon (2).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/Icon (2).svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/Icon (3).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/Icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/Icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/Logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/Order-Delivered--Streamline-Djakarta.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/StartPage1.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/StartPage2.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/StartPage3.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/Visa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/bonus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/bonusImg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/cart.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/chevron.backward.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/cookie.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/cookie4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/cookie5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/cookie6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/cookies1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/cookies2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/cookies3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/dessert3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/dessert5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/desserts1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/desserts2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/desserts4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/desserts6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/desserts7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/emptyCart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/eye.slash.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/eyeOpen.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/fav.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/image 8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/image 9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/instagram.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/itemFav.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/logout-04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/magnifyingglass.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/ping.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/pl1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/pl2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/pl3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/pl4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/profile.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/star.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/tiktok.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/trash-01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/whatsapp.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/assets/images/youtube.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/index.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/react-app-env.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/tsconfig.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +406,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/maksi/WebstormProjects/diplom-project-sites/front/src/Http",
+    "last_opened_file_path": "C:/Users/maksi/WebstormProjects/diplom-project-sites",
     "list.type.of.created.stylesheet": "SCSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -88,7 +439,7 @@
   </component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/front/package.json" />
+      <package-json value="$PROJECT_DIR$/frontend/package.json" />
       <command value="start" />
       <node-interpreter value="project" />
       <envs />
@@ -122,7 +473,16 @@
       <workItem from="1715857279280" duration="262000" />
       <workItem from="1715857600520" duration="1617000" />
       <workItem from="1715860241707" duration="603000" />
-      <workItem from="1715861380817" duration="5233000" />
+      <workItem from="1715861380817" duration="5531000" />
+      <workItem from="1715869455988" duration="868000" />
+      <workItem from="1715877910090" duration="1109000" />
+      <workItem from="1715879605818" duration="640000" />
+      <workItem from="1715971565564" duration="1335000" />
+      <workItem from="1716029516256" duration="3807000" />
+      <workItem from="1716034055707" duration="709000" />
+      <workItem from="1716110825732" duration="598000" />
+      <workItem from="1716111844559" duration="100000" />
+      <workItem from="1716111962982" duration="27000" />
     </task>
     <servers />
   </component>

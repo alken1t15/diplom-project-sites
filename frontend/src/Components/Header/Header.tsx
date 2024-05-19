@@ -16,6 +16,7 @@ import {ReactComponent as profileImg} from "../../assets/images/profile.svg";
 import {ReactComponent as favImg} from "../../assets/images/fav.svg";
 import {Link, Outlet} from "react-router-dom";
 import item from "../Item/Item";
+import {getShopItems} from "../../Http/Shop";
 
 const logoImg = require('../../assets/images/Logo.svg').default;
 const bonusImg = require('../../assets/images/bonus.png');
@@ -56,6 +57,15 @@ const Header: React.FC = () => {
 
     ]);
     let[bonus, setBonus] = useState(0)
+    let[cartCount, setCartCount] = useState(0)
+
+    function getHeaderItems(){
+        getShopItems('', '').then(response=>{
+            setBonus(response.data.bonus)
+            setCartCount(response.data.countOrder)
+
+        })
+    }
 
     useEffect(()=>{
         let newArr = items.map((el, index)=>{
@@ -64,6 +74,17 @@ const Header: React.FC = () => {
         })
 
         setItems(newArr)
+        getHeaderItems()
+
+
+
+        let interval = setInterval(()=>{
+            getHeaderItems()
+        }, 5000)
+
+        return () => {
+            clearInterval(interval);
+        };
 
 
     }, [])
@@ -88,8 +109,15 @@ const Header: React.FC = () => {
                                    <Link to={el.link} className={`navbar-item`} key={index}>
                                        {React.createElement(el.img, {
                                            className: `navbar-item__img
-                                    ${el.active ? 'navbar-item__img-active' : ''}`
+                                    ${el.active ? 'navbar-item__img-active' : ''}
+                                 
+                                    `
                                        })}
+                                       {index === 3 && cartCount > 0 ?
+                                           <div className={`cart-count ${el.active ? 'cart-count-a' : ''}`}>
+                                               {cartCount}
+                                           </div>
+                                           : ''}
                                        <p className={`navbar-item__text ${el.active ? 'navbar-item__text-active' : ''}`}>{el.name}</p>
                                    </Link>
                                </button>

@@ -50,7 +50,6 @@ const SignIn: React.FC = () => {
                             onClick={(e)=>{setRemember(!remember)}}
                     >Запомнить меня</button>
                 </div>
-                <p className="signIn-bot-forgot">Забыли пароль?</p>
             </div>
             <button className={`standard-btn ${active ? 'standard-btn-active' : ''}`} style={{marginTop: 30}} onClick={(e)=>{
                 login(emailOrNumber, password).then((response)=>{

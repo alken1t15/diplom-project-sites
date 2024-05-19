@@ -5,6 +5,7 @@ create table users
 (
     id         serial primary key not null,
     email      varchar(255)       not null unique,
+    phone varchar(255)  unique,
     password   varchar(255)       not null,
     role       varchar(255)       not null,
     first_name varchar(255),

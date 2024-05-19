@@ -26,6 +26,7 @@ header{
   display: flex;
   align-items: center;
   &-item{
+    position: relative;
     margin-right: 51px;
     display: flex;
     flex-direction: column;
@@ -89,4 +90,23 @@ header{
 .header-right{
   display: flex;
 
+}
+
+.cart-count{
+  position: absolute;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  right: 0;
+  top: -5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background-color: #8E8E93;
+  transition: .3s;
+  &-a{
+    background-color: var(--dark-orange);
+    transition: .3s;
+  }
 }

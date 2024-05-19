@@ -2,7 +2,7 @@ import {$api} from './index';
 
 
 
-export const getShopItems = async (idCategory: number, name: string) => {
+export const getShopItems = async (idCategory: string, name: string) => {
     let res;
     if(idCategory && name){
         res = await $api.get(`product/?idCategory=${idCategory}&name=${name}`);

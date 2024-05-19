@@ -24,8 +24,14 @@ const Item: React.FC<IItem> = (props) => {
         setIsFav(props.isFav)
         setName(props.name)
         setPrice(props.price)
-        setImg(props.img)
         setIndex(props.index)
+        console.log(props.img)
+        // const url = URL.createObjectURL(props.img);
+        // setImg(url);
+
+        // return () => {
+        //     URL.revokeObjectURL(url);
+        // };
     }, [props])
 
     return (

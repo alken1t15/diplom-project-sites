@@ -13,4 +13,5 @@ public class LoginAuth {
     private String login;
     private String password;
     private LocalDate date;
+    private String phone;
 }

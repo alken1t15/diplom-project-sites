@@ -13,39 +13,42 @@ const MainPage: React.FC = () => {
     let[searchActive, setSearchActive] = useState(false);
     let[category, setCategory] = useState([
         {
+          id: 1,
           name: 'Печенье',
           active: true,
         },
         {
+            id: 2,
             name: 'Пироги',
             active: false,
         },
         {
+            id: 3,
             name: 'Пирожное',
             active: false,
         },
     ]);
     let[items, setItems] = useState([
         {
-            isFav: true,
+            isFavorite: true,
             name: 'Шоколадный чизкейк',
             price: '500',
             img: img1
         },
         {
-            isFav: false,
+            isFavorite: false,
             name: 'Шоколад и орехи',
             price: '500',
             img: img1
         },
         {
-            isFav: false,
+            isFavorite: false,
             name: 'Корица и крем-чиз',
             price: '500',
             img: img1
         },
         {
-            isFav: false,
+            isFavorite: false,
             name: 'Красный бархат',
             price: '500',
             img: img1
@@ -66,7 +69,7 @@ const MainPage: React.FC = () => {
     function setFavourite(index: number){
         let newArr = [...items].map((el, ind)=>{
             if(ind === index){
-                el.isFav = !el.isFav;
+                el.isFavorite = !el.isFavorite;
             }
             return el;
         })
@@ -90,7 +93,7 @@ const MainPage: React.FC = () => {
             text: 'Печенье с миндальными слайсами и начинкой из ванильного крема',
             description: 'Состав: мука, сахар, соль, вода, яйцо куриное, дрожжи, масло сливочное, шоколад молочный, сливки 33%',
             img: img8,
-            isFav: true,
+            isFavorite: true,
             count: 1,
 
         })
@@ -98,9 +101,19 @@ const MainPage: React.FC = () => {
     }
 
     useEffect(()=>{
-        // getShopItems().then(response=>{
-        //     console.log(response.data)
-        // })
+        getShopItems('', '').then(response=>{
+            // console.log(response.data)
+
+            let categoryArr = response.data.categories.map((el: any, index: any)=>{
+                el.active = false
+                return el
+            })
+            setCategory(categoryArr);
+
+            setItems(response.data.products)
+
+
+        })
     }, [])
 
 
@@ -127,7 +140,7 @@ const MainPage: React.FC = () => {
                     <div style={{cursor: "pointer"}} onClick={(e)=>{
                         checkMore(index)
                     }} key={index}>
-                        <Item addToCartF={addToCart} onClick={setFavourite} isFav={el.isFav} name={el.name} price={el.price} img={el.img} index={index}/>
+                        <Item addToCartF={addToCart} onClick={setFavourite} isFav={el.isFavorite} name={el.name} price={el.price} img={el.img} index={index}/>
                     </div>
                 ))}
 
@@ -154,7 +167,7 @@ const MainPage: React.FC = () => {
                                     }}>
                                         {React.createElement(imgFav, {
                                             className: `item-bot-fav__img
-                                    ${curItem.isFav ? 'item-bot-fav__img-a' : ''}`
+                                    ${curItem.isFavorite ? 'item-bot-fav__img-a' : ''}`
                                         })}
                                     </button>
                                 </div>
