@@ -4,8 +4,8 @@
 create table users
 (
     id         serial primary key not null,
-    email      varchar(255)       not null unique,
-    phone varchar(255)  unique,
+    email      varchar(255) unique,
+    phone      varchar(255) unique,
     password   varchar(255)       not null,
     role       varchar(255)       not null,
     first_name varchar(255),
@@ -33,12 +33,13 @@ create table cart
 (
     id       serial primary key not null,
     user_id  int references users (id),
-    number   varchar                not null,
+    number   varchar            not null,
     date     varchar(5)         not null,
     security int                not null
 );
 
-insert into cart (user_id, number, date, security) VALUES (1,1111111111111111,'11/11',111);
+insert into cart (user_id, number, date, security)
+VALUES (1, 1111111111111111, '11/11', 111);
 
 insert into address_user(user_id, street, entrance, number, floor, flat)
 VALUES (1, 'Бауржан Момышулы 15', '8', '155', '8', '155');
@@ -121,23 +122,34 @@ create table history_bonus
     bonus    int                not null
 );
 
+create table users_history_order
+(
+    id       serial primary key not null,
+    users_id int8 references users (id),
+    cart_id     int references cart (id),
+    address_id  int references cart (id),
+    total    int                not null,
+    order_id    int                not null,
+    active      boolean                     default false not null,
+    comment     varchar(255),
+    time_order  varchar(255)       not null
+);
+
+insert into users_history_order (users_id, cart_id, address_id, total, order_id, active, comment, time_order) VALUES
+                                                                                                                  (1,1,1,500,40000,true,'fsdfsd','fsdfsdfs');
+
 create table history_order
 (
     id          serial primary key not null,
     product_id  int references product (id),
-    users_id    int8 references users (id),
-    cart_id int references cart (id),
-    address_id int references cart(id),
-    order_id int not null,
+    users_history_order_id    int8 references users_history_order (id),
     count       int                not null default (1),
-    total_price int                not null,
-    active boolean default false not null,
-    comment varchar(255),
-    time_order  varchar(255) not null
+    total_price int                not null
 );
 
-insert into history_order (product_id, users_id, cart_id, address_id, order_id, count, total_price, active, comment, time_order) VALUES
-                                                                                                                                     (1,1,1,1,4234,2,500,true,'hfghfghf','gfdgdfgdf');
+insert into history_order (product_id, users_history_order_id, count, total_price) VALUES
+                                                                                       (1,1,4,500),
+                                                                                       (2,1,3,1000);
 
 
 create table orders
@@ -149,10 +161,10 @@ create table orders
     total_price int                not null
 );
 
-insert into orders (product_id, users_id, count, total_price) VALUES
-    (1,1,2,500);
-insert into orders (product_id, users_id, count, total_price) VALUES
-    (2,1,3,1000);
+insert into orders (product_id, users_id, count, total_price)
+VALUES (1, 1, 2, 500);
+insert into orders (product_id, users_id, count, total_price)
+VALUES (2, 1, 3, 1000);
 
 create table favorite_product
 (
@@ -161,7 +173,7 @@ create table favorite_product
     users_id   int references users (id)
 );
 
-insert into favorite_product (product_id, users_id) values
-                                                        (1,1),
-                                                        (2,1),
-                                                        (3,1);
+insert into favorite_product (product_id, users_id)
+values (1, 1),
+       (2, 1),
+       (3, 1);

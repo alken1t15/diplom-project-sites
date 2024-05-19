@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,8 +29,12 @@ public class JWTFilter extends OncePerRequestFilter {
     @Autowired
     private JWTUtil jwtUtil;
     private Logger logger = LoggerFactory.getLogger(JWTFilter.class);
+    @Qualifier("authenticationManager")
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private  AuthenticationManager authenticationManager;
+    @Autowired
+    @Qualifier("authenticationManagerPhone")
+    private  AuthenticationManager authenticationManagerPhone;
     @Autowired
     private RepositoryUsers repositoryUser;
 
@@ -46,7 +51,6 @@ public class JWTFilter extends OncePerRequestFilter {
                 String token = headerAuth.substring(7);
                 logger.info(String.format("JWT который был получен: %s", token));
                 LoginAuth loginAuth = jwtUtil.validateTokenAndRetrieveSubject(token);
-
                 if (loginAuth == null) {
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     response.getWriter().write("Не правильный JWT токен");
@@ -54,13 +58,29 @@ public class JWTFilter extends OncePerRequestFilter {
                     return;
                 }
                 String login = loginAuth.getLogin();
+                String phone = loginAuth.getPhone();
                 String password = loginAuth.getPassword();
                 LocalDate date = loginAuth.getDate();
-                logger.info(String.format("Данные полученные из JWT: логин: %s пароль: %s", login, password));
-                Authentication authentication = new UsernamePasswordAuthenticationToken(login, password);
-                Authentication authenticationUser = authenticationManager.authenticate(authentication);
+                Authentication authentication;
+                Authentication authenticationUser;
+                if (login!=null){
+                    logger.info(String.format("Данные полученные из JWT: почта: %s пароль: %s", login, password));
+                    authentication = new UsernamePasswordAuthenticationToken(login, password);
+                     authenticationUser = authenticationManager.authenticate(authentication);
+                }
+                else {
+                    logger.info(String.format("Данные полученные из JWT: телефон: %s пароль: %s", phone, password));
+                    authentication = new UsernamePasswordAuthenticationToken(phone, password);
+                     authenticationUser = authenticationManagerPhone.authenticate(authentication);
+                }
                 if (authenticationUser.isAuthenticated()) {
-                    Users user = repositoryUser.findByEmail(login).orElseThrow();
+                    Users user;
+                    if (login!=null){
+                        user = repositoryUser.findByEmail(login).orElseThrow();
+                    }
+                    else {
+                        user = repositoryUser.findByPhone(phone).orElseThrow();
+                    }
                     if (user.getJwt() == null) {
                         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                         response.getWriter().write("Не правильный JWT токен");

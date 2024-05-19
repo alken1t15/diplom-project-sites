@@ -20,4 +20,6 @@ public class HistoryOrderAddDTO {
     @NotNull
     @NotEmpty
     private String timeOrder;
+    @NotNull
+    private Boolean bonus;
 }

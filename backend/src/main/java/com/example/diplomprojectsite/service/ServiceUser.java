@@ -46,12 +46,30 @@ public class ServiceUser {
             return new ResponseEntity(errors, HttpStatus.BAD_REQUEST);
         }
         String newPassword = passwordEncoder.encode(user.getPassword());
-        repositoryUsers.save(new Users(user.getEmail(),newPassword,user.getRole(),user.getFirstName(),user.getBornDate()));
+        if (user.getEmail()==null && user.getPhone()==null){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        else if (user.getEmail()==null){
+            repositoryUsers.save(new Users(newPassword,user.getRole(),user.getFirstName(),user.getBornDate(),user.getPhone()));
+        }
+        else {
+            repositoryUsers.save(new Users(user.getEmail(),newPassword,user.getRole(),user.getFirstName(),user.getBornDate()));
+        }
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     public ResponseEntity getAlreadyUser() {
         Users user = getUser();
         return new ResponseEntity(modelMapper.map(user, UserDTO.class),HttpStatus.OK);
+    }
+
+    public ResponseEntity removeUser() {
+        Users user = getUser();
+        repositoryUsers.delete(user);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    public void saveUser(Users user) {
+        repositoryUsers.save(user);
     }
 }

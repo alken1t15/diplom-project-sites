@@ -17,10 +17,4 @@ public class HistoryOrderDTO {
     private Integer count;
     private Integer totalPrice;
     private ProductDTO product;
-    private Long orderId;
-    private CartDTO cart;
-    private AddressUserDTO addressUser;
-    private Boolean active;
-    private String comment;
-    private String timeOrder;
 }

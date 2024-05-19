@@ -1,9 +1,7 @@
 package com.example.diplomprojectsite.service;
 
-import com.example.diplomprojectsite.dto.ProductAddDTO;
-import com.example.diplomprojectsite.dto.ProductDTO;
-import com.example.diplomprojectsite.dto.ProductOneDTO;
-import com.example.diplomprojectsite.dto.TagDTO;
+import com.example.diplomprojectsite.controller.ControllerProduct;
+import com.example.diplomprojectsite.dto.*;
 import com.example.diplomprojectsite.entity.*;
 import com.example.diplomprojectsite.repository.RepositoryProduct;
 import lombok.AllArgsConstructor;
@@ -45,9 +43,8 @@ public class ServiceProduct {
     private String pathSave;
 
 
-    public List<ProductDTO> getAllProduct() {
+    public List<ProductDTO> getAllProduct(List<Product> products) {
         List<ProductDTO> productDTOs = new ArrayList<>();
-        List<Product> products = repositoryProduct.findAll();
         for (Product product : products) {
             ProductDTO productDTO = modelMapper.map(product, ProductDTO.class);
             byte[] file = getFile(product.getImg());
@@ -157,5 +154,25 @@ public class ServiceProduct {
             }
             return new ResponseEntity(productDTOs, HttpStatus.OK);
         }
+    }
+
+    public ResponseEntity getAllProductAndCategory(Long idCategory, String name) {
+        Users user = serviceUser.getUser();
+        List<CategoryDTO> categories = serviceCategory.getAllCategory();
+        List<ProductDTO> products;
+        if (idCategory!=null && name !=null){
+            products = getAllProduct(repositoryProduct.findByNameAndIdCategory(name,idCategory));
+
+        }
+        else if(name != null){
+            products = getAllProduct(repositoryProduct.findByNameLikeIgnoreCase(name));
+        }
+        else if (idCategory != null){
+            products = getProductByCategory(idCategory);
+        }
+        else {
+            products = getAllProduct(repositoryProduct.findAll());
+        }
+        return new ResponseEntity(new ControllerProduct.ProductMainDTO(categories, products, user.getBonus(),user.getOrders().size()),HttpStatus.OK);
     }
 }

@@ -22,50 +22,14 @@ public class HistoryOrder {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-
     @ManyToOne
-    @JoinColumn(name = "users_id")
-    private Users user;
+    @JoinColumn(name = "users_history_order_id")
+    private UsersHistoryOrder usersHistoryOrder;
 
-    @Column(name = "order_id")
-    private Long orderId;
-
-    @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
-
-    @ManyToOne
-    @JoinColumn(name = "address_id")
-    private AddressUser addressUser;
-
-    private Boolean active;
-
-    private String comment;
-    @Column(name = "time_order")
-    private String timeOrder;
-
-    public HistoryOrder(Integer count, Integer totalPrice, Product product, Users user, Long orderId, Cart cart, AddressUser addressUser, Boolean active, String comment, String timeOrder) {
+    public HistoryOrder(Integer count, Integer totalPrice, Product product, UsersHistoryOrder usersHistoryOrder) {
         this.count = count;
         this.totalPrice = totalPrice;
         this.product = product;
-        this.user = user;
-        this.orderId = orderId;
-        this.cart = cart;
-        this.addressUser = addressUser;
-        this.active = active;
-        this.comment = comment;
-        this.timeOrder = timeOrder;
-    }
-
-    public HistoryOrder(Integer count, Integer totalPrice, Product product, Users user, Long orderId, Cart cart, AddressUser addressUser, Boolean active, String timeOrder) {
-        this.count = count;
-        this.totalPrice = totalPrice;
-        this.product = product;
-        this.user = user;
-        this.orderId = orderId;
-        this.cart = cart;
-        this.addressUser = addressUser;
-        this.active = active;
-        this.timeOrder = timeOrder;
+        this.usersHistoryOrder = usersHistoryOrder;
     }
 }

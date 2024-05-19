@@ -30,6 +30,21 @@ public class JWTUtil {
                 .withClaim("login", login)
                 .withClaim("password", password)
                 .withClaim("date", localDate.toString())
+                .withClaim("phone", "")
+                .withIssuedAt(new Date())
+                .withIssuer("YOUR APPLICATION/PROJECT/COMPANY NAME")
+                .sign(Algorithm.HMAC256(secret));
+    }
+
+    public String generateTokenPhone(String phone, String password) throws IllegalArgumentException, JWTCreationException {
+        LocalDate localDate = LocalDate.now();
+        localDate = localDate.plusDays(jtwTime);
+        return JWT.create()
+                .withSubject("User Details")
+                .withClaim("login", "")
+                .withClaim("password", password)
+                .withClaim("date", localDate.toString())
+                .withClaim("phone", phone)
                 .withIssuedAt(new Date())
                 .withIssuer("YOUR APPLICATION/PROJECT/COMPANY NAME")
                 .sign(Algorithm.HMAC256(secret));
@@ -45,7 +60,7 @@ public class JWTUtil {
             String temp = jwt.getClaim("date").toString().replace("\"", "");
             LocalDate localDate = LocalDate.parse(temp);
 
-            return new LoginAuth(jwt.getClaim("login").asString(), jwt.getClaim("password").asString(), localDate);
+            return new LoginAuth(jwt.getClaim("login").asString(), jwt.getClaim("password").asString(), localDate,jwt.getClaim("phone").asString());
         } catch (JWTDecodeException e) {
             return null;
         }
