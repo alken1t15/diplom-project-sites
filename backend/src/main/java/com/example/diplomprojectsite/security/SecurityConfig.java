@@ -30,8 +30,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable()).addFilterBefore(filter, AuthorizationFilter.class)
-                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, "/login/jwt")
-                        .permitAll().anyRequest().authenticated()).cors((cors) -> cors.configurationSource(corsConfigurationSource()))
+                .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers(HttpMethod.POST, "/login/jwt").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/login/add").permitAll()
+                        .anyRequest().authenticated()).cors((cors) -> cors.configurationSource(corsConfigurationSource()))
                 .build();
     }
 
