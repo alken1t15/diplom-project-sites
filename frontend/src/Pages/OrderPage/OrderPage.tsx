@@ -3,11 +3,13 @@ import React, {useEffect, useState} from 'react';
 
 import './OrderPage.scss';
 import Input from "../../Components/UI/Input/Input";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {FINISHED_PAGE_ROUTE} from "../../Utils/Routes";
 import Switch from "../../Components/UI/Switch/Switch";
 import {addCards, getCards} from "../../Http/Card";
-import {addNewAddress, getAddresses} from '../../Http/Address';
+import {addNewUserAddress, getAddresses} from '../../Http/Address';
+import {getCartItems} from "../../Http/Cart";
+import {addOrder} from "../../Http/Order";
 const imgSvg = require('../../assets/images/chevron.backward.svg').default;
 const visaImg = require('../../assets/images/Visa.png');
 
@@ -62,6 +64,8 @@ const OrderPage: React.FC = () => {
 
     let[bonus, setBonus] = useState(false)
     let[total, setTotal] = useState(2000)
+
+    let navigator = useNavigate()
 
     function updateBonus(value: boolean){
         setBonus(value)
@@ -138,6 +142,12 @@ const OrderPage: React.FC = () => {
 
             })
 
+        getCartItems().then((response)=>{
+            setTotal(response.data.total)
+        }).catch((error)=>{
+
+        })
+
         getAddresses().then((response)=>{
             let newArr = response.data.map((el: any, index: any)=>{
                 let newObj = {
@@ -152,10 +162,7 @@ const OrderPage: React.FC = () => {
                 return newObj;
             })
             setActiveAddress(newArr)
-        }).catch((error)=>{
-
-
-        })
+        }).catch((error)=>{})
 
         activeAddress.forEach((el, index)=>{
             if(el.active){
@@ -289,7 +296,8 @@ const OrderPage: React.FC = () => {
                                        setVisBlockWithAddress(true)
                                    }}>
                                        {visBlockWithAddress ?
-                                           <div className={`list-box ${activeAddress.length > 1 ? 'list-box-u' : ''}`}>
+                                           <div className={`list-box ${activeAddress.length > 1 ? 'list-box-u' : ''}`}
+                                           >
                                                {activeAddress.map((el,index)=>(
                                                    <div className={`person-info-block person-info-block-u`} key={index}
                                                         onClick={(e)=>{
@@ -299,9 +307,7 @@ const OrderPage: React.FC = () => {
                                                                 return el1;
                                                             })
                                                             setActiveAddress(newArr)
-                                                            addNewAddress().then((response)=>{
 
-                                                            })
                                                             setVisBlockWithAddress(false)
 
 
@@ -328,14 +334,14 @@ const OrderPage: React.FC = () => {
                                                        {el.apart  + ', ' +  el.pod + ', ' + el.floor + ', Домофон: ' + el.number}
                                                    </p>
                                                </div>
-                                               <div className="person-info-block-r">
-                                                   {!visBlockWithAddress ? <button className={`person-info-block-r-btn`} onClick={(e)=>{
-                                                       e.stopPropagation();
-                                                       setAddressActive(true)
-                                                   }}>
-                                                       <img src={imgSvg}/>
-                                                   </button> : ''}
-                                               </div>
+                                               {/*<div className="person-info-block-r">*/}
+                                               {/*    {!visBlockWithAddress ? <button className={`person-info-block-r-btn`} onClick={(e)=>{*/}
+                                               {/*        e.stopPropagation();*/}
+                                               {/*        setAddressActive(true)*/}
+                                               {/*    }}>*/}
+                                               {/*        <img src={imgSvg}/>*/}
+                                               {/*    </button> : ''}*/}
+                                               {/*</div>*/}
                                            </div>
                                        ))}
 
@@ -383,6 +389,26 @@ const OrderPage: React.FC = () => {
                                                    setBtnAddActive(false);
                                                    setAddressActive(false);
                                                    setAddNewAddress(false)
+                                                   addNewUserAddress(addr, apart, pod, floor, number).then((response)=>{
+                                                       getAddresses().then((response)=>{
+                                                           let newArr = response.data.map((el: any, index: any)=>{
+                                                               let newObj = {
+                                                                   id: el.id,
+                                                                   active: index === 0,
+                                                                   addr: el.street,
+                                                                   apart: el.flat,
+                                                                   pod: el.entrance,
+                                                                   floor: el.floor,
+                                                                   number: el.number,
+                                                               }
+                                                               return newObj;
+                                                           })
+                                                           setActiveAddress(newArr)
+                                                       }).catch((error)=>{})
+                                                   })
+                                                       .catch((error)=>{
+
+                                                       })
                                                }}>
                                                    Добавить
                                                </button>
@@ -412,7 +438,7 @@ const OrderPage: React.FC = () => {
                            setVisBlockWithCard(true)
                        }}>
                            {visBlockWithCard ?
-                               <div className={`list-box ${activeCard.length > 1 ? 'list-box-u' : ''}`}>
+                               <div className={`list-box ${activeCard.length > 1 ? 'list-box-u' : ''}`} style={{bottom: -(activeCard.length * 75)}}>
                                    {activeCard.map((el,index)=>(
                                        <div className={`person-info-block person-info-block-u`} key={index}
                                             onClick={(e)=>{
@@ -421,6 +447,8 @@ const OrderPage: React.FC = () => {
                                                     el1.active = el1.id === el.id
                                                     return el1;
                                                 })
+
+
                                                 setActiveCard(newArr)
                                                 setVisBlockWithCard(false)
 
@@ -538,9 +566,29 @@ const OrderPage: React.FC = () => {
                     <p className="total-box__text"><span>Начислим бонусов</span> <span>{total * 0.05} ₸</span></p>
                     <p className="total-box__text"><span>Доставка</span> <span>Бесплатно</span></p>
                     <p className="total-box__text total-box__text-t"><span>Всего</span> <span>{total} ₸</span></p>
-                    <Link to={FINISHED_PAGE_ROUTE} className="create-order">
+                    <button onClick={(e)=>{
+                        let idAddress = 0;
+                        let idCard = 0;
+                        activeAddress.forEach((el, index)=>{
+                            if(el.active){
+                                idAddress = el.id
+                            }
+                        })
+                        activeCard.forEach((el, index)=>{
+                            if(el.active){
+                                idCard = el.id
+                            }
+                        })
+                        addOrder(idAddress, idCard, comment, String(selectedOption), bonus).then((response)=>{
+                            navigator(FINISHED_PAGE_ROUTE)
+                        }).catch((error)=>{
+
+                        })
+
+                    }} className="create-order">
+
                         Оформить заказ
-                    </Link>
+                    </button>
                 </div>
 
             </div>

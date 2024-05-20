@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ffbf530-17d9-4877-80cf-d757166c3971" name="Changes" comment="" />
+    <list default="true" id="7ffbf530-17d9-4877-80cf-d757166c3971" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Http/Address.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Http/Address.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Pages/OrderPage/OrderPage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Pages/OrderPage/OrderPage.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Pages/OrderPage/OrderPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Pages/OrderPage/OrderPage.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +40,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "Errors",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2023.1.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "ts.external.directory.path": "C:\\Users\\maksi\\WebstormProjects\\diplom-project-sites\\frontend\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -62,7 +67,8 @@
       <option name="presentableId" value="Default" />
       <updated>1716204087936</updated>
       <workItem from="1716204089310" duration="1824000" />
-      <workItem from="1716209507859" duration="13487000" />
+      <workItem from="1716209507859" duration="13708000" />
+      <workItem from="1716224685144" duration="3867000" />
     </task>
     <servers />
   </component>
