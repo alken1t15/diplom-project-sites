@@ -10,6 +10,8 @@ import {ORDER_PAGE_ROUTE} from "../../Utils/Routes";
 const img = require('../../assets/images/cookie4.png');
 const CartPage: React.FC = () => {
 
+
+
     let[items, setItems] = useState([
         {
             id: 1,
@@ -67,12 +69,16 @@ const CartPage: React.FC = () => {
         <div>
            <div className="container" style={{flexWrap: "wrap"}}>
                <p className="cart__title">Корзина</p>
-              <div className="cart-items-box">
-                  {items.map((el, index)=>(
-                      <CartItem onChange={updateCount} id={el.id} count={el.count} name={el.name} img={el.img} price={el.price} key={index}/>
-                  ))}
-                  <Link to={ORDER_PAGE_ROUTE} className="button-total">Оформить заказ на {total} ₸</Link>
-              </div>
+               {items.length > 0 ?  <div className="cart-items-box">
+                   {items.map((el, index)=>(
+                       <CartItem onChange={updateCount} id={el.id} count={el.count} name={el.name} img={el.img} price={el.price} key={index}/>
+                   ))}
+                   <Link to={ORDER_PAGE_ROUTE} className="button-total">Оформить заказ на {total} ₸</Link>
+               </div> :
+               <div>
+
+               </div>
+               }
 
            </div>
 

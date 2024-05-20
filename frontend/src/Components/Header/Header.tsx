@@ -6,7 +6,7 @@ import {
     CONTACTS_PAGE_ROUTE,
     FAVOURITES_PAGE_ROUTE,
     PROFILE_PAGE_ROUTE,
-    SHOP_PAGE_ROUTE
+    SHOP_PAGE_ROUTE, SIGN_IN_ROUTE
 } from "../../Utils/Routes";
 
 import {ReactComponent as shopImg} from "../../assets/images/cookie.svg";
@@ -14,7 +14,7 @@ import {ReactComponent as cartImg} from "../../assets/images/cart.svg";
 import {ReactComponent as contactImg} from "../../assets/images/ping.svg";
 import {ReactComponent as profileImg} from "../../assets/images/profile.svg";
 import {ReactComponent as favImg} from "../../assets/images/fav.svg";
-import {Link, Outlet} from "react-router-dom";
+import {Link, Outlet, useNavigate} from "react-router-dom";
 import item from "../Item/Item";
 import {getShopItems} from "../../Http/Shop";
 
@@ -58,13 +58,17 @@ const Header: React.FC = () => {
     ]);
     let[bonus, setBonus] = useState(0)
     let[cartCount, setCartCount] = useState(0)
+    let navigator = useNavigate();
 
     function getHeaderItems(){
-        getShopItems('', '').then(response=>{
-            setBonus(response.data.bonus)
-            setCartCount(response.data.countOrder)
-
-        })
+        // getShopItems('', '').then(response=>{
+        //     setBonus(response.data.bonus)
+        //     setCartCount(response.data.countOrder)
+        //
+        // })
+        //     .catch((error)=>{
+        //         // navigator(SIGN_IN_ROUTE)
+        //     })
     }
 
     useEffect(()=>{

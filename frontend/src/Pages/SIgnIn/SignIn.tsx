@@ -27,6 +27,7 @@ const SignIn: React.FC = () => {
         setRemember(value)
     }
 
+
     useEffect(()=>{
         if(password != ' ' && emailOrNumber !== ' ' && emailOrNumber.length >= 2 && password.length >= 2 ){
             setIsActive(true)
@@ -62,6 +63,9 @@ const SignIn: React.FC = () => {
                     navigator(SHOP_PAGE_ROUTE)
 
                 })
+                    .catch((error)=>{
+
+                    })
             }} >Войти</button>
 
         </div>
