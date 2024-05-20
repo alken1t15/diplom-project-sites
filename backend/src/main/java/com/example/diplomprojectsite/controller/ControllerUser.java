@@ -75,9 +75,9 @@ public class ControllerUser {
             user = repositoryUser.findByPhone(loginAuth.getPhone()).orElseThrow();
             jwt = jwtUtil.generateTokenPhone(loginAuth.getPhone(), loginAuth.getPassword());
         }
-        if (!StringUtils.isBlank(user.getJwt())){
-            throw new BadCredentialsException("Токен уже был получен ранее");
-        }
+//        if (!StringUtils.isBlank(user.getJwt())){
+//            throw new BadCredentialsException("Токен уже был получен ранее");
+//        }
         logger.info(String.format("Пользователь который хочет получить jwt токен: %s", authenticationResponse));
         user.setJwt(jwt);
         repositoryUser.save(user);
@@ -105,6 +105,11 @@ public class ControllerUser {
     @GetMapping("/remove")
     public ResponseEntity removeUser(){
         return serviceUser.removeUser();
+    }
+
+    @GetMapping("/info")
+    public ResponseEntity getInformationBonusAndCount(){
+        return serviceUser.getInformationBonusAndCount();
     }
 
 }

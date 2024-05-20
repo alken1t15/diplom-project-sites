@@ -19,7 +19,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -107,7 +109,7 @@ public class ServiceProduct {
         if (category == null) {
             return new ResponseEntity("Нету такой категории", HttpStatus.BAD_REQUEST);
         }
-        repositoryProduct.save(new Product(productAddDTO.getName(), productAddDTO.getPrice(), uniqueFileName, productAddDTO.getRating(), productAddDTO.getWeight(), productAddDTO.getDescription(), category));
+        repositoryProduct.save(new Product(productAddDTO.getName(), productAddDTO.getPrice(), uniqueFileName, productAddDTO.getRating(), productAddDTO.getWeight(), productAddDTO.getDescription(), category,productAddDTO.getComposition()));
         return new ResponseEntity(HttpStatus.OK);
     }
 
@@ -160,12 +162,36 @@ public class ServiceProduct {
         Users user = serviceUser.getUser();
         List<CategoryDTO> categories = serviceCategory.getAllCategory();
         List<ProductDTO> products;
+        List<ProductDTO> productsTwo;
         if (idCategory!=null && name !=null){
+            String nameUpp;
+            if (name.length()>1) {
+                nameUpp=name.substring(0,1).toUpperCase();
+            }
+            else {
+                nameUpp=name.toUpperCase();
+            }
             products = getAllProduct(repositoryProduct.findByNameAndIdCategory(name,idCategory));
-
+            productsTwo = getAllProduct(repositoryProduct.findByNameLikeIgnoreCaseAndIdCategory(nameUpp,idCategory));
+            Set<ProductDTO> set = new HashSet<>(products);
+            set.addAll(productsTwo);
+            products.clear();
+            products.addAll(set);
         }
         else if(name != null){
-            products = getAllProduct(repositoryProduct.findByNameLikeIgnoreCase(name));
+            String nameUpp;
+        if (name.length()>1) {
+             nameUpp=name.substring(0,1).toUpperCase();
+        }
+        else {
+            nameUpp=name.toUpperCase();
+        }
+            products = getAllProduct(repositoryProduct.findByNameIsLikeIgnoreCase(name));
+            productsTwo = getAllProduct(repositoryProduct.findByNameLikeIgnoreCase(nameUpp));
+            Set<ProductDTO> set = new HashSet<>(products);
+            set.addAll(productsTwo);
+            products.clear();
+            products.addAll(set);
         }
         else if (idCategory != null){
             products = getProductByCategory(idCategory);

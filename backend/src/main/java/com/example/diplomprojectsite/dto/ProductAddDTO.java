@@ -1,9 +1,6 @@
 package com.example.diplomprojectsite.dto;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -29,4 +26,7 @@ public class ProductAddDTO {
     @NotNull
     @NotBlank
     private String description;
+    @NotNull
+    @NotEmpty
+    private String composition;
 }

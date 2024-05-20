@@ -1,6 +1,7 @@
 package com.example.diplomprojectsite.service;
 
 import com.example.diplomprojectsite.dto.UserDTO;
+import com.example.diplomprojectsite.dto.UserGetInformation;
 import com.example.diplomprojectsite.dto.UsersAddDTO;
 import com.example.diplomprojectsite.entity.Users;
 import com.example.diplomprojectsite.repository.RepositoryUsers;
@@ -71,5 +72,12 @@ public class ServiceUser {
 
     public void saveUser(Users user) {
         repositoryUsers.save(user);
+    }
+
+    public ResponseEntity getInformationBonusAndCount() {
+        Users user = getUser();
+        int count = user.getOrders().size();
+        int bonus = user.getBonus();
+        return new ResponseEntity(new UserGetInformation(count,bonus),HttpStatus.OK);
     }
 }

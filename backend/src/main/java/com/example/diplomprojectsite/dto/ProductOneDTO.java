@@ -18,4 +18,5 @@ public class ProductOneDTO {
     private Boolean isFavorite;
     private List<TagDTO> tag;
     private Integer countOrder;
+    private String composition;
 }

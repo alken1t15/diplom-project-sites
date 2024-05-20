@@ -28,8 +28,9 @@ public class Product {
     private Integer weight;
 
     private String description;
+    private String composition;
 
-    public Product(String name, Integer price, String img, Double rating, Integer weight, String description, Category category) {
+    public Product(String name, Integer price, String img, Double rating, Integer weight, String description, Category category,String composition) {
         this.name = name;
         this.price = price;
         this.img = img;
@@ -37,6 +38,7 @@ public class Product {
         this.weight = weight;
         this.description = description;
         this.category = category;
+        this.composition = composition;
     }
 
     @ManyToOne
