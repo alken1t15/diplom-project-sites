@@ -66,6 +66,7 @@ const OrderPage: React.FC = () => {
     let[total, setTotal] = useState(2000)
 
     let navigator = useNavigate()
+    let[idOrder, setIdOrder] = useState<any[]>([])
 
     function updateBonus(value: boolean){
         setBonus(value)
@@ -144,9 +145,16 @@ const OrderPage: React.FC = () => {
 
         getCartItems().then((response)=>{
             setTotal(response.data.total)
+            let newArr: any[] = [];
+            response.data.orderDTOs.forEach((el: any, index: any)=>{
+                newArr.push(el.id)
+            })
+            setIdOrder(newArr)
         }).catch((error)=>{
 
         })
+
+
 
         getAddresses().then((response)=>{
             let newArr = response.data.map((el: any, index: any)=>{
@@ -203,6 +211,7 @@ const OrderPage: React.FC = () => {
         setSelectedOption(option);
         setIsDropdownOpen(false);
     };
+
     useEffect(()=>{
         activeAddress.forEach((el, index)=>{
             if(el.active){
@@ -569,6 +578,7 @@ const OrderPage: React.FC = () => {
                     <button onClick={(e)=>{
                         let idAddress = 0;
                         let idCard = 0;
+
                         activeAddress.forEach((el, index)=>{
                             if(el.active){
                                 idAddress = el.id
@@ -579,7 +589,8 @@ const OrderPage: React.FC = () => {
                                 idCard = el.id
                             }
                         })
-                        addOrder(idAddress, idCard, comment, String(selectedOption), bonus).then((response)=>{
+
+                        addOrder(idAddress, idCard, comment, String(selectedOption), bonus, idOrder).then((response)=>{
                             navigator(FINISHED_PAGE_ROUTE)
                         }).catch((error)=>{
 
