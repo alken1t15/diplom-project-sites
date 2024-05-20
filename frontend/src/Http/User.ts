@@ -7,13 +7,13 @@ export const login = async (login: string, password: string) => {
     return res;
 };
 
-export const signUp = async (email: string, phone: string, name: string, db: string, password: string) => {
+export const signUp = async (email?: string, phone?: string, name?: string, db?: string, password?: string) => {
     let res;
     if(email){
-        res = await $api.post(`login/add`, {"email": email, name: name, "db": db, "password": password});
+        res = await $api.post(`login/add`, {"email": email, firstName: name, "bornDate": db, "password": password, "role":"user"});
     }
     else if(phone){
-        res = await $api.post(`login/add`, {"phone": phone, name: name, "db": db, "password": password});
+        res = await $api.post(`login/add`, {"phone": phone, firstName: name, "bornDate": db, "password": password, "role":"user"});
     }
 
     return res;

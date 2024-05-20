@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.scss';
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import {
     CART_PAGE_ROUTE, CONTACTS_PAGE_ROUTE, FAVOURITES_PAGE_ROUTE, FINISHED_PAGE_ROUTE,
     MAIN_PAGES_ROUTE, ORDER_PAGE_ROUTE, PROFILE_PAGE_ROUTE, SHOP_PAGE_ROUTE,
@@ -19,6 +19,17 @@ import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import FavPage from "./Pages/FavPage/FavPage";
 
 function App() {
+    let navigator = useNavigate()
+    useEffect(()=>{
+        let localUser = localStorage.getItem('token');
+        let sessionUser = sessionStorage.getItem('token');
+        if(localUser || sessionUser){
+            navigator(SHOP_PAGE_ROUTE)
+        }
+        else{
+            navigator(SIGN_IN_ROUTE)
+        }
+    }, [])
   return (
     <div className="App">
        
