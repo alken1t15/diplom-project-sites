@@ -108,7 +108,6 @@ const FavPage: React.FC = () => {
             } catch (error) {
             }
 
-            // доделать descr
             let newObj = {
                 id: response.data.id,
                 name: response.data.name,

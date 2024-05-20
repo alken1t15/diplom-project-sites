@@ -13,4 +13,11 @@ export const addOrder = async (idAddress: number, cardId: number, comment: strin
     return res;
 };
 
+export const getHistoryOrders = async () => {
+    let res;
+    res = await $api.post(`/history/order/`,{isActive: true });
+    return res;
+};
+
+
 

@@ -16,6 +16,8 @@ create table users
 
 insert into users (email, password, role, first_name, born_date)
 VALUES ('alex', '$2a$12$mmvg.Lv/Xhi4n1R0sEjC0OXkLN.kmWVVzwx5TNamS4fqaMKXTZcTW', 'user', 'alex', '12.04.2004');
+insert into users (email, password, role, first_name, born_date)
+VALUES ('maxim', '$2a$12$mmvg.Lv/Xhi4n1R0sEjC0OXkLN.kmWVVzwx5TNamS4fqaMKXTZcTW', 'user', 'maxim@bk.ru', '12.04.2004');
 
 create table address_user
 (

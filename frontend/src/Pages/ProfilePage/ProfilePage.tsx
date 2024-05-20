@@ -1,7 +1,13 @@
 import React, {useEffect, useState} from 'react';
 
 import './ProfilePage.scss'
-import {logOut} from "../../Http/User";
+import {deleteUser, getPersonalInfo, logOut} from "../../Http/User";
+import {addCards, getCards} from "../../Http/Card";
+import {getCartItems} from "../../Http/Cart";
+import {addNewUserAddress, getAddresses} from "../../Http/Address";
+import {SIGN_IN_ROUTE} from "../../Utils/Routes";
+import {useNavigate} from "react-router-dom";
+import {getHistoryOrders} from "../../Http/Order";
 
 const imgSvg = require('../../assets/images/chevron.backward.svg').default;
 const visaImg = require('../../assets/images/Visa.png');
@@ -9,6 +15,7 @@ const logOutImg = require('../../assets/images/logout-04.png');
 const trashImg = require('../../assets/images/trash-01.png');
 const cookieImg = require('../../assets/images/cookie4.png');
 const ProfilePage: React.FC = () => {
+    let navigator = useNavigate()
     let[user, setUser] = useState({
         name: "Ayana",
         phone: "+7 777 365 8945",
@@ -188,6 +195,40 @@ const ProfilePage: React.FC = () => {
 
     useEffect(()=>{
 
+        getCards().then((response)=>{
+            let newArr = response.data.map((el: any, index: any)=>{
+                let newObj = {
+                    id: el.id,
+                    active: index === 0,
+                    cardNumber: el.number,
+                    expiration: el.date,
+                    cvv: el.cvv,
+                }
+                return newObj;
+            })
+
+            setActiveCard(newArr)
+        })
+            .catch((error)=>{
+
+            })
+
+        getAddresses().then((response)=>{
+            let newArr = response.data.map((el: any, index: any)=>{
+                let newObj = {
+                    id: el.id,
+                    active: index === 0,
+                    addr: el.street,
+                    apart: el.flat,
+                    pod: el.entrance,
+                    floor: el.floor,
+                    number: el.number,
+                }
+                return newObj;
+            })
+            setActiveAddress(newArr)
+        }).catch((error)=>{})
+
         activeAddress.forEach((el, index)=>{
             if(el.active){
                 serAddr(el.addr)
@@ -202,9 +243,66 @@ const ProfilePage: React.FC = () => {
             setAddressActive(true)
         }
 
+        getPersonalInfo().then((response)=>{
+            let newObj = {
+                name: response.data.firstName,
+                mail: response.data.email,
+                db: response.data.bornDate,
+                phone: response.data.phone
 
+            }
+            setUser(newObj)
+        }).catch((error)=>{
+
+        })
+
+        getHistoryOrders().then((response)=>{
+            console.log(response.data)
+            let newArr = response.data.map((el: any, index: any)=>{
+
+
+                let newItemsArr: any[] = [];
+
+                el.historyOrders.map((el1: any, index1: any)=>{
+                    // console.log(el1)
+                })
+
+                let newObj = {
+                    number: el.orderId,
+                    date: '8 марта 2024 г. в 15:43',
+                    address: el.addressUser.street,
+                    total: el.total,
+                    items: newItemsArr
+                }
+
+            })
+
+            //     items: [
+            //     {
+            //         img: cookieImg,
+            //         name: 'Печенье миндаль с начинкой'
+            //     }
+            // ]
+
+
+        }).catch((error)=>{
+
+        })
 
     }, [])
+
+
+    useEffect(()=>{
+        activeAddress.forEach((el, index)=>{
+            if(el.active){
+                serAddr(el.addr)
+                setApart(el.apart)
+                setPod(el.pod)
+                setFloor(el.floor)
+                setNumber(el.number)
+            }
+        })
+    }, [activeAddress])
 
     return (
         <div className={`container`} style={{flexWrap: "wrap"}}>
@@ -219,27 +317,27 @@ const ProfilePage: React.FC = () => {
                        </div>
                        <div className="added-info-item added-info-item-profile" >
                            <p className="added-info-item__label">Номер телефона</p>
-                           <p className="added-info-item__input">{user.phone}</p>
+                           <p className="added-info-item__input">{user.phone ? user.phone : '\u00A0'}</p>
                        </div>
                        <div className="added-info-item added-info-item-profile" >
                            <p className="added-info-item__label">Почта</p>
-                           <p className="added-info-item__input">{user.name}</p>
+                           <p className="added-info-item__input">{user.mail ? user.mail : '\u00A0'}</p>
                        </div>
                        <div className="added-info-item added-info-item-profile">
                            <p className="added-info-item__label">День рождения</p>
-                           <p className="added-info-item__input">{user.mail}</p>
+                           <p className="added-info-item__input">{user.db}</p>
                        </div>
 
                    </div>
                    <div className="profile-block-r" style={{ display: "flex" ,flexWrap: "wrap"}}>
-                       <div className="info-box-r" style={{marginLeft: 0,}}>
+                       <div className="info-box-r" style={{marginLeft: 0}}>
                            <div className="person-info-block-label">Способ оплаты</div>
 
                            <div className="" style={{cursor: "pointer", position: 'relative'}} onClick={(e)=>{
                                setVisBlockWithCard(true)
                            }}>
                                {visBlockWithCard ?
-                                   <div className={`list-box`}>
+                                   <div className={`list-box ${activeCard.length > 1 ? 'list-box-u' : ''}`} style={{bottom: -(activeCard.length * 75)}}>
                                        {activeCard.map((el,index)=>(
                                            <div className={`person-info-block person-info-block-u`} key={index}
                                                 onClick={(e)=>{
@@ -248,6 +346,8 @@ const ProfilePage: React.FC = () => {
                                                         el1.active = el1.id === el.id
                                                         return el1;
                                                     })
+
+
                                                     setActiveCard(newArr)
                                                     setVisBlockWithCard(false)
 
@@ -318,6 +418,27 @@ const ProfilePage: React.FC = () => {
                                                setBtnAddCardActive(false);
                                                setCardActive(false);
                                                setAddNewCard(false);
+                                               addCards(cardNumber, expiration, cvv).then((response)=>{
+                                                   getCards().then((response)=>{
+                                                       let newArr = response.data.map((el: any, index: any)=>{
+                                                           let newObj = {
+                                                               id: el.id,
+                                                               active: index === 0,
+                                                               cardNumber: el.number,
+                                                               expiration: el.date,
+                                                               cvv: el.cvv,
+                                                           }
+                                                           return newObj;
+                                                       })
+
+                                                       setActiveCard(newArr)
+                                                   })
+                                                       .catch((error)=>{
+
+                                                       })
+                                               }).catch((error)=>{
+
+                                               })
                                            }}>
                                                Добавить
                                            </button>
@@ -380,7 +501,8 @@ const ProfilePage: React.FC = () => {
                                    setVisBlockWithAddress(true)
                                }}>
                                    {visBlockWithAddress ?
-                                       <div className={`list-box`}>
+                                       <div className={`list-box ${activeAddress.length > 1 ? 'list-box-u' : ''}`}
+                                       >
                                            {activeAddress.map((el,index)=>(
                                                <div className={`person-info-block person-info-block-u`} key={index}
                                                     onClick={(e)=>{
@@ -390,7 +512,9 @@ const ProfilePage: React.FC = () => {
                                                             return el1;
                                                         })
                                                         setActiveAddress(newArr)
+
                                                         setVisBlockWithAddress(false)
+
 
                                                     }}
                                                >
@@ -415,14 +539,14 @@ const ProfilePage: React.FC = () => {
                                                    {el.apart  + ', ' +  el.pod + ', ' + el.floor + ', Домофон: ' + el.number}
                                                </p>
                                            </div>
-                                           <div className="person-info-block-r">
-                                               {!visBlockWithAddress ? <button className={`person-info-block-r-btn`} onClick={(e)=>{
-                                                   e.stopPropagation();
-                                                   setAddressActive(true)
-                                               }}>
-                                                   <img src={imgSvg}/>
-                                               </button> : ''}
-                                           </div>
+                                           {/*<div className="person-info-block-r">*/}
+                                           {/*    {!visBlockWithAddress ? <button className={`person-info-block-r-btn`} onClick={(e)=>{*/}
+                                           {/*        e.stopPropagation();*/}
+                                           {/*        setAddressActive(true)*/}
+                                           {/*    }}>*/}
+                                           {/*        <img src={imgSvg}/>*/}
+                                           {/*    </button> : ''}*/}
+                                           {/*</div>*/}
                                        </div>
                                    ))}
 
@@ -470,6 +594,26 @@ const ProfilePage: React.FC = () => {
                                                setBtnAddActive(false);
                                                setAddressActive(false);
                                                setAddNewAddress(false)
+                                               addNewUserAddress(addr, apart, pod, floor, number).then((response)=>{
+                                                   getAddresses().then((response)=>{
+                                                       let newArr = response.data.map((el: any, index: any)=>{
+                                                           let newObj = {
+                                                               id: el.id,
+                                                               active: index === 0,
+                                                               addr: el.street,
+                                                               apart: el.flat,
+                                                               pod: el.entrance,
+                                                               floor: el.floor,
+                                                               number: el.number,
+                                                           }
+                                                           return newObj;
+                                                       })
+                                                       setActiveAddress(newArr)
+                                                   }).catch((error)=>{})
+                                               })
+                                                   .catch((error)=>{
+
+                                                   })
                                            }}>
                                                Добавить
                                            </button>
@@ -493,7 +637,11 @@ const ProfilePage: React.FC = () => {
                 </button>
 
                 <button className="profile-btn" style={{marginTop: 10}} onClick={(e)=>{
+                    deleteUser().then((response)=>{
+                        navigator(SIGN_IN_ROUTE)
+                    }).catch((error)=>{
 
+                    })
                 }}>
                     <img src={trashImg} alt=""/><span>Удалить аккаунт</span>
                 </button>
