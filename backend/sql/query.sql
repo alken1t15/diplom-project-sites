@@ -39,7 +39,7 @@ create table cart
 );
 
 insert into cart (user_id, number, date, security)
-VALUES (1, 1111111111111111, '11/11', 111);
+VALUES (1, '1111 1111 1111 1111', '11/11', 111);
 
 insert into address_user(user_id, street, entrance, number, floor, flat)
 VALUES (1, 'Бауржан Момышулы 15', '8', '155', '8', '155');

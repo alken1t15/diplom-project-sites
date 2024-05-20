@@ -6,7 +6,7 @@ export const getAddresses = async () => {
     return res;
 };
 
-export const addAddress = async (street: string, entrance: number, number: string, floor: number, flat: number) => {
+export const addNewAddress = async (street: string, entrance: number, number: string, floor: number, flat: number) => {
     let res;
     res = await $api.post(`cart/add`,{street: street, entrance: entrance, number: number, floor: floor, flat: flat});
     return res;

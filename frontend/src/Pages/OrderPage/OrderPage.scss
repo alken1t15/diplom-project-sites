@@ -123,11 +123,14 @@
 .list-box{
   width: 100%;
   position: absolute;
-  bottom: -150px;
+  bottom: -75px;
   left: 0;
   z-index: 55;
   display: flex;
   flex-direction: column;
+  &-u{
+    bottom: -150px;
+  }
 }
 
 .added-info-box-hidden{

@@ -6,7 +6,8 @@ import Input from "../../Components/UI/Input/Input";
 import {Link} from "react-router-dom";
 import {FINISHED_PAGE_ROUTE} from "../../Utils/Routes";
 import Switch from "../../Components/UI/Switch/Switch";
-import {getCards} from "../../Http/Card";
+import {addCards, getCards} from "../../Http/Card";
+import {addNewAddress, getAddresses} from '../../Http/Address';
 const imgSvg = require('../../assets/images/chevron.backward.svg').default;
 const visaImg = require('../../assets/images/Visa.png');
 
@@ -30,15 +31,6 @@ const OrderPage: React.FC = () => {
             addr: '111',
             apart: '222',
             pod: '333',
-            floor: '444',
-            number: '555',
-        },
-        {
-            id: 2,
-            active: false,
-            addr: '999',
-            apart: '888',
-            pod: '777',
             floor: '444',
             number: '555',
         },
@@ -129,7 +121,6 @@ const OrderPage: React.FC = () => {
     useEffect(()=>{
 
         getCards().then((response)=>{
-            console.log(response.data)
             let newArr = response.data.map((el: any, index: any)=>{
                 let newObj = {
                     id: el.id,
@@ -146,6 +137,25 @@ const OrderPage: React.FC = () => {
             .catch((error)=>{
 
             })
+
+        getAddresses().then((response)=>{
+            let newArr = response.data.map((el: any, index: any)=>{
+                let newObj = {
+                    id: el.id,
+                    active: index === 0,
+                    addr: el.street,
+                    apart: el.flat,
+                    pod: el.entrance,
+                    floor: el.floor,
+                    number: el.number,
+                }
+                return newObj;
+            })
+            setActiveAddress(newArr)
+        }).catch((error)=>{
+
+
+        })
 
         activeAddress.forEach((el, index)=>{
             if(el.active){
@@ -279,7 +289,7 @@ const OrderPage: React.FC = () => {
                                        setVisBlockWithAddress(true)
                                    }}>
                                        {visBlockWithAddress ?
-                                           <div className={`list-box`}>
+                                           <div className={`list-box ${activeAddress.length > 1 ? 'list-box-u' : ''}`}>
                                                {activeAddress.map((el,index)=>(
                                                    <div className={`person-info-block person-info-block-u`} key={index}
                                                         onClick={(e)=>{
@@ -289,7 +299,11 @@ const OrderPage: React.FC = () => {
                                                                 return el1;
                                                             })
                                                             setActiveAddress(newArr)
+                                                            addNewAddress().then((response)=>{
+
+                                                            })
                                                             setVisBlockWithAddress(false)
+
 
                                                         }}
                                                    >
@@ -398,7 +412,7 @@ const OrderPage: React.FC = () => {
                            setVisBlockWithCard(true)
                        }}>
                            {visBlockWithCard ?
-                               <div className={`list-box`}>
+                               <div className={`list-box ${activeCard.length > 1 ? 'list-box-u' : ''}`}>
                                    {activeCard.map((el,index)=>(
                                        <div className={`person-info-block person-info-block-u`} key={index}
                                             onClick={(e)=>{
@@ -477,6 +491,27 @@ const OrderPage: React.FC = () => {
                                            setBtnAddCardActive(false);
                                            setCardActive(false);
                                            setAddNewCard(false);
+                                           addCards(cardNumber, expiration, cvv).then((response)=>{
+                                               getCards().then((response)=>{
+                                                   let newArr = response.data.map((el: any, index: any)=>{
+                                                       let newObj = {
+                                                           id: el.id,
+                                                           active: index === 0,
+                                                           cardNumber: el.number,
+                                                           expiration: el.date,
+                                                           cvv: el.cvv,
+                                                       }
+                                                       return newObj;
+                                                   })
+
+                                                   setActiveCard(newArr)
+                                               })
+                                                   .catch((error)=>{
+
+                                                   })
+                                           }).catch((error)=>{
+
+                                           })
                                        }}>
                                            Добавить
                                        </button>
