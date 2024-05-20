@@ -4,8 +4,9 @@ import './MainPage.scss';
 import Item from "../../Components/Item/Item";
 import {ReactComponent as imgFav} from "../../assets/images/itemFav.svg";
 import Button from "../../Components/UI/Button/Button";
-import {getShopItems} from "../../Http/Shop";
+import {getShopItem, getShopItems} from "../../Http/Shop";
 import {addToFavorite, removeFromFavorite} from "../../Http/Favorite";
+import {addToCart} from "../../Http/Cart";
 const search = require('../../assets/images/magnifyingglass.svg').default;
 const img1 = require('../../assets/images/image 8.png');
 const img8 = require('../../assets/images/image 9.png');
@@ -42,6 +43,7 @@ const MainPage: React.FC = () => {
     let[curItem, setCurItem] = useState<any>( null);
     let[active, setActive] = useState( false);
     let[count, setCount] = useState<number>(1);
+    let[isFavor, setIsFavor] = useState(false);
 
     function setActiveCategory(index: number){
         let newArr = [...category].map((el, ind)=>{
@@ -59,15 +61,10 @@ const MainPage: React.FC = () => {
             }
         })
         getShopItems(String(categoryId !== -1 ? categoryId : ''), searchText).then(response=>{
-            let categoryArr = response.data.categories.map((el: any, index: any)=>{
-                el.active = false
-                return el
-            })
-
             setItems(response.data.products)
         })
             .catch((error)=>{
-                console.log(error)
+                console.log('')
             })
     },[searchText, category])
 
@@ -75,16 +72,22 @@ const MainPage: React.FC = () => {
         let favId = -1;
         let deleteFav = false;
         let newArr = [...items].map((el, ind)=>{
-            if(el.id === id){
+            if(el.id === id && !el.isFavorite){
                 favId = el.id;
-                deleteFav = el.isFavorite;
-                el.isFavorite = !el.isFavorite;
-
+                el.isFavorite = true;
+                return el;
+            }
+            else if(el.id === id && el.isFavorite){
+                favId = el.id;
+                el.isFavorite = false;
+                deleteFav= true;
+                return el;
             }
             return el;
+
         })
 
-        if(deleteFav){
+        if(!deleteFav){
             addToFavorite(favId).then((response)=>{
 
             })
@@ -104,29 +107,108 @@ const MainPage: React.FC = () => {
         setItems(newArr)
     }
 
-    function addToCart(id: number){
+    function addCart(id: number, count? : number){
         setActive(false)
+        if(count){
+            addToCart(id, count).then((response)=>{
+            })
+                .catch((error)=>{
+
+                })
+        }
+        else{
+            addToCart(id, 1).then((response)=>{
+            })
+                .catch((error)=>{
+
+                })
+        }
     }
 
-    function checkMore(index: number){
-        // setCurItem({
-        //     id: 1,
-        //     name: 'Миндаль с начинкой',
-        //     tags: ['Хит', 'Новинка'],
-        //     rating: 4.9,
-        //     gram: 170,
-        //     price: 900,
-        //     text: 'Печенье с миндальными слайсами и начинкой из ванильного крема',
-        //     description: 'Состав: мука, сахар, соль, вода, яйцо куриное, дрожжи, масло сливочное, шоколад молочный, сливки 33%',
-        //     img: img8,
-        //     isFavorite: true,
-        //     count: 1,
-        //
-        // })
+    function checkMore(id: number){
+        getShopItem(id).then((response)=>{
+            let url;
+            try {
+                const base64String = response.data.img.split(',')[1] || response.data.img;
+
+                const byteCharacters = atob(base64String);
+                const byteNumbers = new Array(byteCharacters.length);
+                for (let i = 0; i < byteCharacters.length; i++) {
+                    byteNumbers[i] = byteCharacters.charCodeAt(i);
+                }
+                const byteArray = new Uint8Array(byteNumbers);
+                const blob = new Blob([byteArray], { type: 'image/png' });
+
+                url = URL.createObjectURL(blob);
+
+            } catch (error) {
+            }
+
+            // доделать descr
+            let newObj = {
+                id: response.data.id,
+                name: response.data.name,
+                tags: response.data.tags,
+                rating: response.data.rating,
+                weight: response.data.weight,
+                price: response.data.price,
+                text: response.data.description,
+                description: 'Состав: мука, сахар, соль, вода, яйцо куриное, дрожжи, масло сливочное, шоколад молочный, сливки 33%',
+                img: url,
+                isFavorite: response.data.isFavorite,
+                count: response.data.countOrder
+
+
+            }
+            setIsFavor(response.data.isFavorite)
+            setCurItem(newObj)
+        })
+            .catch((error)=>{
+                console.log('f')
+            })
         setActive(true)
     }
 
-    // function
+
+    function setFavCurItem(id: number, isFav: boolean){
+
+        let newArr = items.map((el, index)=>{
+            if(id === el.id){
+                el.isFavorite = !el.isFavorite;
+            }
+
+           return el;
+        })
+
+        setItems(newArr)
+        console.log(newArr)
+
+        if(!isFav){
+            let newObj = curItem
+            newObj.isFavorite =  true;
+            setCurItem(newObj)
+            setIsFavor(true)
+            addToFavorite(id).then((response)=>{
+
+            })
+                .catch((err)=>{
+
+                })
+        }
+        else{
+            let newObj = curItem
+            newObj.isFavorite =  false;
+            setCurItem(newObj)
+            setIsFavor(false)
+            removeFromFavorite(id).then((response)=>{
+
+            })
+                .catch((err)=>{
+
+                })
+        }
+
+    }
 
     useEffect(()=>{
         getShopItems('', '').then(response=>{
@@ -140,7 +222,6 @@ const MainPage: React.FC = () => {
             setItems(response.data.products)
         })
             .catch((error)=>{
-                console.log(error)
             })
     }, [])
 
@@ -168,9 +249,9 @@ const MainPage: React.FC = () => {
             <div className="main-page-body">
                 {items.map((el, index)=>(
                     <div style={{cursor: "pointer", marginTop: 25}} onClick={(e)=>{
-                        checkMore(index)
+                        checkMore(el.id)
                     }} key={index}>
-                        <Item addToCartF={addToCart}
+                        <Item addToCartF={addCart}
                               onClick={setFavourite}
                               isFav={el.isFavorite}
                               name={el.name}
@@ -190,20 +271,20 @@ const MainPage: React.FC = () => {
                             <img src={curItem.img} alt="" className="modal__img"/>
                             <div className="modal-top">
                                 <div className="modal-top-left">
-                                    {curItem.tags.map((el: any,index: any)=>(
-                                        <div className={'modal-top-left__tags'} key={index}>
-                                            {el}
-                                        </div>
-                                    ))}
+                                    {curItem.tags && curItem.tags.length > 0 ?   curItem.tags.map((el: any,index: any)=>(
+                                            <div className={'modal-top-left__tags'} key={index}>
+                                                {el}
+                                            </div>
+                                        )) : ''}
                                 </div>
                                 <div className="modal-top-right">
                                     <button className="item-bot-fav" onClick={(e)=>{
                                         e.stopPropagation();
-                                        setFavourite(curItem.id)
+                                        setFavCurItem(curItem.id, curItem.isFavorite)
                                     }}>
                                         {React.createElement(imgFav, {
                                             className: `item-bot-fav__img
-                                    ${curItem.isFavorite ? 'item-bot-fav__img-a' : ''}`
+                                    ${isFavor ? 'item-bot-fav__img-a' : ''}`
                                         })}
                                     </button>
                                 </div>
@@ -211,7 +292,7 @@ const MainPage: React.FC = () => {
                             <div className="modal-hero-top">
                                 <div className="modal-hero-top-left">
                                     <p className="modal-hero-top-left__text">{curItem.name}</p>
-                                    <p className="modal-hero-top-left__subtext">{curItem.gram} г</p>
+                                    <p className="modal-hero-top-left__subtext">{curItem.weight} г</p>
                                 </div>
                                 <div className="modal-hero-top-right">
                                     <img src={star} alt="Star img" className={`modal-hero-top-right__img`}/>
@@ -244,7 +325,7 @@ const MainPage: React.FC = () => {
 
                                 <button className={'add-to-cart-btn'} onClick={(e)=>{
                                     e.stopPropagation();
-                                    addToCart(curItem.id)
+                                    addCart(curItem.id, count)
                                 }}>Добавить в корзину</button>
                             </div>
                         </div>

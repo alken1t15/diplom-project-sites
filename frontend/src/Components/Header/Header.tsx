@@ -67,7 +67,7 @@ const Header: React.FC = () => {
         //
         // })
         //     .catch((error)=>{
-        //         navigator(SIGN_IN_ROUTE)
+        //         // navigator(SIGN_IN_ROUTE)
         //     })
     }
 

@@ -69,12 +69,16 @@ const CartPage: React.FC = () => {
         <div>
            <div className="container" style={{flexWrap: "wrap"}}>
                <p className="cart__title">Корзина</p>
-              <div className="cart-items-box">
-                  {items.map((el, index)=>(
-                      <CartItem onChange={updateCount} id={el.id} count={el.count} name={el.name} img={el.img} price={el.price} key={index}/>
-                  ))}
-                  <Link to={ORDER_PAGE_ROUTE} className="button-total">Оформить заказ на {total} ₸</Link>
-              </div>
+               {items.length > 0 ?  <div className="cart-items-box">
+                   {items.map((el, index)=>(
+                       <CartItem onChange={updateCount} id={el.id} count={el.count} name={el.name} img={el.img} price={el.price} key={index}/>
+                   ))}
+                   <Link to={ORDER_PAGE_ROUTE} className="button-total">Оформить заказ на {total} ₸</Link>
+               </div> :
+               <div>
+
+               </div>
+               }
 
            </div>
 
