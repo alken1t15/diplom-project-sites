@@ -6,7 +6,7 @@ export const getCards = async () => {
     return res;
 };
 
-export const addCards = async (number: number, date: string, security: number) => {
+export const addCards = async (number: string, date: string, security: string) => {
     let res;
     res = await $api.post(`cart/add`,{number: number, date: date, security: security});
     return res;
