@@ -19,6 +19,12 @@ export const signUp = async (email: string, phone: string, name: string, db: str
     return res;
 };
 
+export const getInfo = async () => {
+    let res;
+    res = await $api.get(`login/info`);
+    return res;
+};
+
 export const logOut = () => {
     localStorage.setItem('token', '');
     sessionStorage.setItem('token', '');

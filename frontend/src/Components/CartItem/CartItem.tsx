@@ -8,14 +8,14 @@ interface ICartItem{
     name: string;
     img: any;
     price: number;
-    onChange: (count: number, id: number) => void;
+    onChange: (count: number, id: number, status: string) => void;
 }
 const CartItem: React.FC<ICartItem> = (props) => {
     let[count, setCount] = useState(props.count)
 
     useEffect(()=>{
-        props.onChange(count, props.id)
-    }, [count])
+        setCount(props.count)
+    }, [props])
 
     return (
         <div className={`cart-item`}>
@@ -32,6 +32,7 @@ const CartItem: React.FC<ICartItem> = (props) => {
 
                                 onClick={(e)=>{
                                     e.stopPropagation()
+                                    props.onChange(count-1, props.id, '-')
                                     setCount((prevState: number)=>prevState-1)
 
                                 }}
@@ -40,7 +41,9 @@ const CartItem: React.FC<ICartItem> = (props) => {
                         <span className="count-block__text cart-item-count-box-count">{count}</span>
                         <button className="item-bot-add cart-item-count-box-button" onClick={(e)=>{
                             e.stopPropagation();
+                            props.onChange(count+1, props.id, '+')
                             setCount((prevState: number)=>prevState+1)
+
                         }}>+</button>
                     </div>
                     <p className="cart-item-r-bot__price">

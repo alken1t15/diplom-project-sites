@@ -144,7 +144,7 @@ const MainPage: React.FC = () => {
             } catch (error) {
             }
 
-            // доделать descr
+
             let newObj = {
                 id: response.data.id,
                 name: response.data.name,
@@ -153,7 +153,7 @@ const MainPage: React.FC = () => {
                 weight: response.data.weight,
                 price: response.data.price,
                 text: response.data.description,
-                description: 'Состав: мука, сахар, соль, вода, яйцо куриное, дрожжи, масло сливочное, шоколад молочный, сливки 33%',
+                description: response.data.composition,
                 img: url,
                 isFavorite: response.data.isFavorite,
                 count: response.data.countOrder

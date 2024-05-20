@@ -6,6 +6,7 @@ import Input from "../../Components/UI/Input/Input";
 import {Link} from "react-router-dom";
 import {FINISHED_PAGE_ROUTE} from "../../Utils/Routes";
 import Switch from "../../Components/UI/Switch/Switch";
+import {getCards} from "../../Http/Card";
 const imgSvg = require('../../assets/images/chevron.backward.svg').default;
 const visaImg = require('../../assets/images/Visa.png');
 
@@ -50,8 +51,6 @@ const OrderPage: React.FC = () => {
     let[number, setNumber] = useState('')
     let[addNewAddress, setAddNewAddress] = useState(false)
 
-
-
     let[btnAddCardActive, setBtnAddCardActive] = useState(false)
     let[cardActive, setCardActive] = useState(false)
     let[activeCard ,setActiveCard] = useState([
@@ -61,13 +60,6 @@ const OrderPage: React.FC = () => {
             cardNumber: '2222 2222 2222 2222',
             expiration: '02/25',
             cvv: '444',
-        },
-        {
-            id: 2,
-            active: false,
-            cardNumber: '8888 8888 8888 8888',
-            expiration: '06/27',
-            cvv: '888',
         },
     ])
     let[visBlockWithCard, setVisBlockWithCard] =useState(false)
@@ -135,6 +127,25 @@ const OrderPage: React.FC = () => {
     }, [cvv, expiration, cardNumber])
 
     useEffect(()=>{
+
+        getCards().then((response)=>{
+            console.log(response.data)
+            let newArr = response.data.map((el: any, index: any)=>{
+                let newObj = {
+                    id: el.id,
+                    active: index === 0,
+                    cardNumber: el.number,
+                    expiration: el.date,
+                    cvv: el.cvv,
+                }
+                return newObj;
+            })
+
+            setActiveCard(newArr)
+        })
+            .catch((error)=>{
+
+            })
 
         activeAddress.forEach((el, index)=>{
             if(el.active){

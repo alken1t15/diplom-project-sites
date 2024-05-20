@@ -17,6 +17,7 @@ import {ReactComponent as favImg} from "../../assets/images/fav.svg";
 import {Link, Outlet, useNavigate} from "react-router-dom";
 import item from "../Item/Item";
 import {getShopItems} from "../../Http/Shop";
+import {getInfo} from "../../Http/User";
 
 const logoImg = require('../../assets/images/Logo.svg').default;
 const bonusImg = require('../../assets/images/bonus.png');
@@ -61,14 +62,14 @@ const Header: React.FC = () => {
     let navigator = useNavigate();
 
     function getHeaderItems(){
-        // getShopItems('', '').then(response=>{
-        //     setBonus(response.data.bonus)
-        //     setCartCount(response.data.countOrder)
-        //
-        // })
-        //     .catch((error)=>{
-        //         // navigator(SIGN_IN_ROUTE)
-        //     })
+        getInfo().then(response=>{
+            setBonus(response.data.bonus)
+            setCartCount(response.data.count)
+
+        })
+            .catch((error)=>{
+                // navigator(SIGN_IN_ROUTE)
+            })
     }
 
     useEffect(()=>{
