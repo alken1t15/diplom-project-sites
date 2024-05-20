@@ -132,7 +132,7 @@ create table users_history_order
     users_id int8 references users (id),
     cart_id     int references cart (id),
     address_id  int references cart (id),
-    total    int                not null,
+    total    int                ,
     order_id    int                not null,
     active      boolean                     default false not null,
     comment     varchar(255),
