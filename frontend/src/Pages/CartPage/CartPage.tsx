@@ -10,6 +10,8 @@ import {ORDER_PAGE_ROUTE} from "../../Utils/Routes";
 const img = require('../../assets/images/cookie4.png');
 const CartPage: React.FC = () => {
 
+
+
     let[items, setItems] = useState([
         {
             id: 1,

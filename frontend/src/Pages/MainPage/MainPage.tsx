@@ -5,12 +5,14 @@ import Item from "../../Components/Item/Item";
 import {ReactComponent as imgFav} from "../../assets/images/itemFav.svg";
 import Button from "../../Components/UI/Button/Button";
 import {getShopItems} from "../../Http/Shop";
+import {addToFavorite, removeFromFavorite} from "../../Http/Favorite";
 const search = require('../../assets/images/magnifyingglass.svg').default;
 const img1 = require('../../assets/images/image 8.png');
 const img8 = require('../../assets/images/image 9.png');
 const star = require('../../assets/images/star.svg').default;
 const MainPage: React.FC = () => {
     let[searchActive, setSearchActive] = useState(false);
+    let[searchText, setSearchText] = useState('');
     let[category, setCategory] = useState([
         {
           id: 1,
@@ -30,90 +32,116 @@ const MainPage: React.FC = () => {
     ]);
     let[items, setItems] = useState([
         {
+            id: 1,
             isFavorite: true,
             name: 'Шоколадный чизкейк',
-            price: '500',
-            img: img1
-        },
-        {
-            isFavorite: false,
-            name: 'Шоколад и орехи',
-            price: '500',
-            img: img1
-        },
-        {
-            isFavorite: false,
-            name: 'Корица и крем-чиз',
-            price: '500',
-            img: img1
-        },
-        {
-            isFavorite: false,
-            name: 'Красный бархат',
             price: '500',
             img: img1
         },
     ]);
     let[curItem, setCurItem] = useState<any>( null);
     let[active, setActive] = useState( false);
-    let[count, setCount] = useState<number>(1)
+    let[count, setCount] = useState<number>(1);
 
     function setActiveCategory(index: number){
         let newArr = [...category].map((el, ind)=>{
-            el.active = index === ind;
+            el.active = index === ind && !el.active;
             return el;
         })
         setCategory(newArr)
     }
 
-    function setFavourite(index: number){
-        let newArr = [...items].map((el, ind)=>{
-            if(ind === index){
-                el.isFavorite = !el.isFavorite;
-            }
-            return el;
-        })
-
-        setItems(newArr)
-    }
-
-    function addToCart(index: number){
-        console.log(index)
-        setActive(false)
-    }
-
-    function checkMore(index: number){
-        setCurItem({
-            id: 1,
-            name: 'Миндаль с начинкой',
-            tags: ['Хит', 'Новинка'],
-            rating: 4.9,
-            gram: 170,
-            price: 900,
-            text: 'Печенье с миндальными слайсами и начинкой из ванильного крема',
-            description: 'Состав: мука, сахар, соль, вода, яйцо куриное, дрожжи, масло сливочное, шоколад молочный, сливки 33%',
-            img: img8,
-            isFavorite: true,
-            count: 1,
-
-        })
-        setActive(true)
-    }
-
     useEffect(()=>{
-        getShopItems('', '').then(response=>{
-            // console.log(response.data)
-
+        let categoryId = -1;
+        category.forEach((el, index)=>{
+            if(el.active){
+                categoryId = el.id
+            }
+        })
+        getShopItems(String(categoryId !== -1 ? categoryId : ''), searchText).then(response=>{
             let categoryArr = response.data.categories.map((el: any, index: any)=>{
                 el.active = false
                 return el
             })
+
+            setItems(response.data.products)
+        })
+            .catch((error)=>{
+                console.log(error)
+            })
+    },[searchText, category])
+
+    function setFavourite(id: number){
+        let favId = -1;
+        let deleteFav = false;
+        let newArr = [...items].map((el, ind)=>{
+            if(el.id === id){
+                favId = el.id;
+                deleteFav = el.isFavorite;
+                el.isFavorite = !el.isFavorite;
+
+            }
+            return el;
+        })
+
+        if(deleteFav){
+            addToFavorite(favId).then((response)=>{
+
+            })
+                .catch((err)=>{
+
+                })
+        }
+        else{
+            removeFromFavorite(favId).then((response)=>{
+
+            })
+                .catch((err)=>{
+
+                })
+        }
+
+        setItems(newArr)
+    }
+
+    function addToCart(id: number){
+        setActive(false)
+    }
+
+    function checkMore(index: number){
+        // setCurItem({
+        //     id: 1,
+        //     name: 'Миндаль с начинкой',
+        //     tags: ['Хит', 'Новинка'],
+        //     rating: 4.9,
+        //     gram: 170,
+        //     price: 900,
+        //     text: 'Печенье с миндальными слайсами и начинкой из ванильного крема',
+        //     description: 'Состав: мука, сахар, соль, вода, яйцо куриное, дрожжи, масло сливочное, шоколад молочный, сливки 33%',
+        //     img: img8,
+        //     isFavorite: true,
+        //     count: 1,
+        //
+        // })
+        setActive(true)
+    }
+
+    // function
+
+    useEffect(()=>{
+        getShopItems('', '').then(response=>{
+            let categoryArr = response.data.categories.map((el: any, index: any)=>{
+                el.active = false
+                return el
+            })
+
             setCategory(categoryArr);
 
             setItems(response.data.products)
-
-
         })
+            .catch((error)=>{
+                console.log(error)
+            })
     }, [])
 
 
@@ -123,7 +151,9 @@ const MainPage: React.FC = () => {
                <div className={` search-block ${searchActive ? 'search-block-a' : ''}`}
                     onClick={()=>{setSearchActive(true)}}>
                    <img src={search} className={`search-block__img`} alt="search img"/>
-                   <input type={"text"} className={`${searchActive ? 'search-block__input-active' : 'search-block__input'}`}/>
+                   <input type={"text"} onChange={(e)=>{
+                       setSearchText(e.target.value)
+                   }} className={`${searchActive ? 'search-block__input-active' : 'search-block__input'}`}/>
                </div>
                <div style={{marginLeft: 15}} className="category-block">
                    {category.map((el, index)=>(
@@ -137,10 +167,16 @@ const MainPage: React.FC = () => {
            </div>
             <div className="main-page-body">
                 {items.map((el, index)=>(
-                    <div style={{cursor: "pointer"}} onClick={(e)=>{
+                    <div style={{cursor: "pointer", marginTop: 25}} onClick={(e)=>{
                         checkMore(index)
                     }} key={index}>
-                        <Item addToCartF={addToCart} onClick={setFavourite} isFav={el.isFavorite} name={el.name} price={el.price} img={el.img} index={index}/>
+                        <Item addToCartF={addToCart}
+                              onClick={setFavourite}
+                              isFav={el.isFavorite}
+                              name={el.name}
+                              price={el.price}
+                              img={el.img}
+                              id={el.id}/>
                     </div>
                 ))}
 

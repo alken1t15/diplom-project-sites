@@ -14,8 +14,6 @@ export const removeFromFavorite = async (idProduct: number) => {
     return res;
 };
 
-
-//Сделать
 export const getAllFavorite = async (idProduct: number) => {
     let res;
     res = await $api.get(`product/favorite/delete?idProduct=${idProduct}`);
