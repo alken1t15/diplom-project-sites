@@ -76,7 +76,6 @@ const Input: React.FC<InputProps> = ({ placeholder,onChangeF, type , error, leng
 
         }
         else if(type === 'date'){
-            console.log(e.target.value.replace(/\//g, '.'))
             setValue(e.target.value.replace(/\//g, '.'))
             onChangeF(e.target.value)
         }

@@ -30,12 +30,14 @@ const CartItem: React.FC<ICartItem> = (props) => {
                     <div className="cart-item-count-box">
                         <button className={`item-bot-add-in cart-item-count-box-button`}
 
-                                onClick={(e)=>{
+                                onClick={
+                            (e)=>{
                                     e.stopPropagation()
                                     props.onChange(count-1, props.id, '-')
                                     setCount((prevState: number)=>prevState-1)
 
-                                }}
+                                }
+                        }
 
                         >-</button>
                         <span className="count-block__text cart-item-count-box-count">{count}</span>

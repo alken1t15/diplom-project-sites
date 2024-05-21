@@ -143,7 +143,6 @@ const FavPage: React.FC = () => {
         })
 
         setItems(newArr)
-        console.log(newArr)
 
         if(!isFav){
             let newObj = curItem

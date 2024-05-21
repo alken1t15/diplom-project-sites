@@ -41,11 +41,12 @@ const SignIn: React.FC = () => {
 
     return (
         <div className={`signIn-container`}>
-            <p className="signIn-title">Создать профиль</p>
+            <p className="signIn-title">Войти в профиль</p>
             <p className="signIn-top-text">
                 <span className="signIn-top-text-new">Новый пользователь?</span>
                 <Link to={SIGN_UP_ROUTE} className="signIn-top-text-create">Создать аккаунт</Link>
             </p>
+
             <Input length={35} placeholder={'Почта или номер'} styles={{marginTop: 15}} onChangeF={setEmailOrNum} type={'text'}/>
             <Input length={35} placeholder={'Пароль'} styles={{marginTop: 15}} onChangeF={setPass} type={'password'}/>
             <div className="signIn-bot">

@@ -224,7 +224,6 @@ const ProfilePage: React.FC = () => {
         })
 
         getHistoryOrders().then((response)=>{
-            console.log(response.data)
             let newArr = response.data.map((el: any, index: any)=>{
 
 
