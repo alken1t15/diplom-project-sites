@@ -1,9 +1,6 @@
 package com.example.diplomprojectsite.service;
 
-import com.example.diplomprojectsite.dto.HistoryOrderAddDTO;
-import com.example.diplomprojectsite.dto.HistoryOrderDTO;
-import com.example.diplomprojectsite.dto.HistoryOrderIsActiveDTO;
-import com.example.diplomprojectsite.dto.UsersHistoryOrderDTO;
+import com.example.diplomprojectsite.dto.*;
 import com.example.diplomprojectsite.entity.*;
 import com.example.diplomprojectsite.repository.RepositoryHistoryOrder;
 import com.example.diplomprojectsite.repository.RepositoryUsersHistoryOrder;
@@ -16,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -49,6 +47,11 @@ public class ServiceHistoryOrder {
 
             for (UsersHistoryOrder h : usersHistoryOrders) {
                 UsersHistoryOrderDTO historyOrderDTO = modelMapper.map(h,UsersHistoryOrderDTO.class);
+                for (HistoryOrderDTO ho :historyOrderDTO.getHistoryOrders()){
+                    ProductDTO product = ho.getProduct();
+                    Product orig = serviceProduct.productById(product.getId());
+                    product.setImg(serviceProduct.getFile(orig.getImg()));
+                }
                 usersHistoryOrderDTOs.add(historyOrderDTO);
 //                HistoryOrderDTO historyOrderDTO = modelMapper.map(h, HistoryOrderDTO.class);
 //                Product product = serviceProduct.productById(historyOrderDTO.getProduct().getId());
@@ -86,9 +89,9 @@ public class ServiceHistoryOrder {
         UsersHistoryOrder usersHistoryOrder;
         long total=0;
         if (historyOrder.getComment() != null) {
-            usersHistoryOrder = repositoryUsersHistoryOrder.save(new UsersHistoryOrder(user, cart, addressUser, true, historyOrder.getComment(), historyOrder.getTimeOrder(), randomNumber));
+            usersHistoryOrder = repositoryUsersHistoryOrder.save(new UsersHistoryOrder(user, cart, addressUser, true, historyOrder.getComment(), historyOrder.getTimeOrder(), randomNumber, LocalDateTime.now()));
         } else {
-            usersHistoryOrder = repositoryUsersHistoryOrder.save(new UsersHistoryOrder(user, cart, addressUser, true, historyOrder.getTimeOrder(), randomNumber));
+            usersHistoryOrder = repositoryUsersHistoryOrder.save(new UsersHistoryOrder(user, cart, addressUser, true, historyOrder.getTimeOrder(), randomNumber,LocalDateTime.now()));
         }
         for (Long id : historyOrder.getIdOrders()) {
             Orders order = serviceOrder.getById(id);

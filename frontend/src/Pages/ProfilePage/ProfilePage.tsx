@@ -2,18 +2,54 @@ import React, {useEffect, useState} from 'react';
 
 import './ProfilePage.scss'
 import {deleteUser, getPersonalInfo, logOut} from "../../Http/User";
+import { ru } from 'date-fns/locale';
 import {addCards, getCards} from "../../Http/Card";
 import {getCartItems} from "../../Http/Cart";
 import {addNewUserAddress, getAddresses} from "../../Http/Address";
 import {SIGN_IN_ROUTE} from "../../Utils/Routes";
 import {useNavigate} from "react-router-dom";
 import {getHistoryOrders} from "../../Http/Order";
+import {format} from "date-fns";
 
 const imgSvg = require('../../assets/images/chevron.backward.svg').default;
 const visaImg = require('../../assets/images/Visa.png');
 const logOutImg = require('../../assets/images/logout-04.png');
 const trashImg = require('../../assets/images/trash-01.png');
 const cookieImg = require('../../assets/images/cookie4.png');
+
+interface IAddress{
+    id: number;
+    active: boolean;
+    addr: string;
+    apart: string;
+    pod: string;
+    floor: string;
+    number: string;
+}
+
+interface ICard{
+    id: number;
+    active: boolean;
+    cardNumber: string;
+    expiration: string;
+    cvv: string;
+}
+
+
+
+interface IOrdersItems{
+    img: any;
+    name: string;
+}
+
+interface IOrders{
+    number: string;
+    date: string;
+    address: string;
+    total: string;
+    items: IOrdersItems[]
+}
+
 const ProfilePage: React.FC = () => {
     let navigator = useNavigate()
     let[user, setUser] = useState({
@@ -28,21 +64,12 @@ const ProfilePage: React.FC = () => {
     let[activeAddress ,setActiveAddress] = useState([
         {
             id: 1,
-            active: true,
-            addr: '111',
-            apart: '222',
-            pod: '333',
-            floor: '444',
-            number: '555',
-        },
-        {
-            id: 2,
             active: false,
-            addr: '999',
-            apart: '888',
-            pod: '777',
-            floor: '444',
-            number: '555',
+            addr: '',
+            apart: '',
+            pod: '',
+            floor: '',
+            number: '',
         },
     ])
     let[visBlockWithAddress, setVisBlockWithAddress] =useState(false)
@@ -57,21 +84,8 @@ const ProfilePage: React.FC = () => {
 
     let[btnAddCardActive, setBtnAddCardActive] = useState(false)
     let[cardActive, setCardActive] = useState(false)
-    let[activeCard ,setActiveCard] = useState([
-        {
-            id: 1,
-            active: true,
-            cardNumber: '2222 2222 2222 2222',
-            expiration: '02/25',
-            cvv: '444',
-        },
-        {
-            id: 2,
-            active: false,
-            cardNumber: '8888 8888 8888 8888',
-            expiration: '06/27',
-            cvv: '888',
-        },
+    let[activeCard ,setActiveCard] = useState<ICard[]>([
+
     ])
     let[visBlockWithCard, setVisBlockWithCard] =useState(false)
     let[cardNumber, setCardNumber] = useState('')
@@ -81,68 +95,7 @@ const ProfilePage: React.FC = () => {
 
 
 
-    let[history, setHistory] = useState([
-        {
-            number: '№16458',
-            date: '8 марта 2024 г. в 15:43',
-            address: 'Сатпаева 5',
-            total: '500',
-            items: [
-                {
-                    img: cookieImg,
-                    name: 'Печенье миндаль с начинкой'
-                }
-            ]
-        },
-        {
-            number: '№16458',
-            date: '8 марта 2024 г. в 15:43',
-            address: 'Сатпаева 5',
-            total: '500',
-            items: [
-                {
-                    img: cookieImg,
-                    name: 'Печенье миндаль с начинкой'
-                },
-                {
-                    img: cookieImg,
-                    name: 'Печенье миндаль с начинкой'
-                },
-            ]
-        },
-        {
-            number: '№16458',
-            date: '8 марта 2024 г. в 15:43',
-            address: 'Сатпаева 5',
-            total: '500',
-            items: [
-                {
-                    img: cookieImg,
-                    name: 'Печенье миндаль с начинкой'
-                },
-                {
-                    img: cookieImg,
-                    name: 'Печенье миндаль с начинкой'
-                },
-            ]
-        },
-        {
-            number: '№16458',
-            date: '8 марта 2024 г. в 15:43',
-            address: 'Сатпаева 5',
-            total: '500',
-            items: [
-                {
-                    img: cookieImg,
-                    name: 'Печенье миндаль с начинкой'
-                },
-                {
-                    img: cookieImg,
-                    name: 'Печенье миндаль с начинкой'
-                },
-            ]
-        }
-    ])
+    let[history, setHistory] = useState<IOrders[]>([])
 
 
     function handleInputChange(event: any) {
@@ -174,6 +127,10 @@ const ProfilePage: React.FC = () => {
         setCvv(formattedCvv);
     }
 
+    function formatDate (dateString: string) {
+        const date = new Date(dateString);
+        return format(date, "d MMMM yyyy 'г.' в HH:mm", { locale: ru });
+    };
 
     useEffect(()=>{
         if(addr != '' || apart != '' || pod != '' || floor != '' || number != ''){
@@ -261,34 +218,56 @@ const ProfilePage: React.FC = () => {
             let newArr = response.data.map((el: any, index: any)=>{
 
 
+
                 let newItemsArr: any[] = [];
 
                 el.historyOrders.map((el1: any, index1: any)=>{
-                    // console.log(el1)
+                    let url;
+                    try {
+                        const base64String = el1.product.img.split(',')[1] || el1.product.img;
+
+                        const byteCharacters = atob(base64String);
+                        const byteNumbers = new Array(byteCharacters.length);
+                        for (let i = 0; i < byteCharacters.length; i++) {
+                            byteNumbers[i] = byteCharacters.charCodeAt(i);
+                        }
+                        const byteArray = new Uint8Array(byteNumbers);
+                        const blob = new Blob([byteArray], { type: 'image/png' });
+
+                        url = URL.createObjectURL(blob);
+
+                    } catch (error) {
+                    }
+                    let newObj = {
+                        img: url,
+                        name: el1.product.name
+                    }
+                    newItemsArr.push(newObj)
                 })
+
+                let newDate = formatDate(el.dateOrder);
 
                 let newObj = {
                     number: el.orderId,
-                    date: '8 марта 2024 г. в 15:43',
+                    date: newDate,
                     address: el.addressUser.street,
                     total: el.total,
-                    items: newItemsArr
+                    items: newItemsArr,
+
                 }
+                return newObj;
 
             })
 
-            //     items: [
-            //     {
-            //         img: cookieImg,
-            //         name: 'Печенье миндаль с начинкой'
-            //     }
-            // ]
+            setHistory(newArr)
+
 
 
         }).catch((error)=>{
 
         })
 
+        setAddNewAddress(false)
     }, [])
 
 
@@ -389,9 +368,8 @@ const ProfilePage: React.FC = () => {
                            </button>
                            {
                                addNewCard ?    <div>
-                                   {activeCard.map((el, index)=>(
-                                       <div className={`added-info-box added-info-box-card ${el.active ? '' : 'added-info-box-hidden'}`}
-                                            key={index}>
+                                   {/*{activeCard.map((el, index)=>(*/}
+                                       <div className={`added-info-box added-info-box-card`}>
                                            <div className="card-box">
                                                <div className="added-info-item added-info-item-card" style={{marginTop: 0}}>
                                                    <p className="added-info-item-card__text">Номер карты</p>
@@ -443,7 +421,7 @@ const ProfilePage: React.FC = () => {
                                                Добавить
                                            </button>
                                        </div>
-                                   ))}
+                                   {/*// ))}*/}
                                </div> : ''
                            }
 
@@ -558,67 +536,69 @@ const ProfilePage: React.FC = () => {
                            </button>
                            {
                                addNewAddress ?    <div>
-                                   {activeAddress.map((el, index)=>(
-                                       <div className={`added-info-box ${el.active ? '' : 'added-info-box-hidden'}`} key={index}>
-                                           <div className="added-info-item" style={{marginTop: 0}}>
-                                               <p className="added-info-item__label">Улица и дом</p>
-                                               <input value={addr !== '' ? addr : el.addr} onChange={(e)=>{
-                                                   serAddr( e.target.value);
-                                               }} type="text" className="added-info-item__input"/>
-                                           </div>
-                                           <div className="added-info-item">
-                                               <p className="added-info-item__label">Подъезд</p>
-                                               <input value={pod !== '' ? pod : el.pod} onChange={(e)=>{
-                                                   setPod(e.target.value);
-                                               }} type="text" className="added-info-item__input"/>
-                                           </div>
-                                           <div className="added-info-item">
-                                               <p className="added-info-item__label">Код на двери</p>
-                                               <input value={apart !== '' ? apart : el.apart} onChange={(e)=>{
-                                                   setApart(e.target.value);
-                                               }} type="text" className="added-info-item__input"/>
-                                           </div>
-                                           <div className="added-info-item">
-                                               <p className="added-info-item__label">Этаж</p>
-                                               <input value={floor !== '' ? floor : el.floor} onChange={(e)=>{
-                                                   setFloor(e.target.value);
-                                               }} type="text" className="added-info-item__input"/>
-                                           </div>
-                                           <div className="added-info-item">
-                                               <p className="added-info-item__label">Квартира</p>
-                                               <input value={number !== '' ? number : el.number} onChange={(e)=>{
-                                                   setNumber(e.target.value);
-                                               }} type="text" className="added-info-item__input"/>
-                                           </div>
-                                           <button className={`added-info__button ${btnAddActive ? 'added-info__button-a' : ''}`} onClick={(e)=>{
-                                               setBtnAddActive(false);
-                                               setAddressActive(false);
-                                               setAddNewAddress(false)
-                                               addNewUserAddress(addr, apart, pod, floor, number).then((response)=>{
-                                                   getAddresses().then((response)=>{
-                                                       let newArr = response.data.map((el: any, index: any)=>{
-                                                           let newObj = {
-                                                               id: el.id,
-                                                               active: index === 0,
-                                                               addr: el.street,
-                                                               apart: el.flat,
-                                                               pod: el.entrance,
-                                                               floor: el.floor,
-                                                               number: el.number,
-                                                           }
-                                                           return newObj;
-                                                       })
-                                                       setActiveAddress(newArr)
-                                                   }).catch((error)=>{})
-                                               })
-                                                   .catch((error)=>{
 
-                                                   })
-                                           }}>
-                                               Добавить
-                                           </button>
+
+                                   <div className={`added-info-box`}>
+                                       {/*<div className={`added-info-box ${el.active ? '' : 'added-info-box-hidden'}`} key={index}>*/}
+                                       <div className="added-info-item" style={{marginTop: 0}}>
+                                           <p className="added-info-item__label">Улица и дом</p>
+                                           <input value={addr} onChange={(e)=>{
+                                               serAddr( e.target.value);
+                                           }} type="text" className="added-info-item__input"/>
                                        </div>
-                                   ))}
+                                       <div className="added-info-item">
+                                           <p className="added-info-item__label">Подъезд</p>
+                                           <input value={pod} onChange={(e)=>{
+                                               setPod(e.target.value);
+                                           }} type="text" className="added-info-item__input"/>
+                                       </div>
+                                       <div className="added-info-item">
+                                           <p className="added-info-item__label">Код на двери</p>
+                                           <input value={apart} onChange={(e)=>{
+                                               setApart(e.target.value);
+                                           }} type="text" className="added-info-item__input"/>
+                                       </div>
+                                       <div className="added-info-item">
+                                           <p className="added-info-item__label">Этаж</p>
+                                           <input value={floor} onChange={(e)=>{
+                                               setFloor(e.target.value);
+                                           }} type="text" className="added-info-item__input"/>
+                                       </div>
+                                       <div className="added-info-item">
+                                           <p className="added-info-item__label">Квартира</p>
+                                           <input value={number} onChange={(e)=>{
+                                               setNumber(e.target.value);
+                                           }} type="text" className="added-info-item__input"/>
+                                       </div>
+                                       <button className={`added-info__button ${btnAddActive ? 'added-info__button-a' : ''}`} onClick={(e)=>{
+                                           setBtnAddActive(false);
+                                           setAddressActive(false);
+                                           setAddNewAddress(false)
+                                           addNewUserAddress(addr, apart, pod, floor, number).then((response)=>{
+                                               getAddresses().then((response)=>{
+                                                   let newArr = response.data.map((el: any, index: any)=>{
+                                                       let newObj = {
+                                                           id: el.id,
+                                                           active: index === 0,
+                                                           addr: el.street,
+                                                           apart: el.flat,
+                                                           pod: el.entrance,
+                                                           floor: el.floor,
+                                                           number: el.number,
+                                                       }
+                                                       return newObj;
+                                                   })
+                                                   setActiveAddress(newArr)
+                                               }).catch((error)=>{})
+                                           })
+                                               .catch((error)=>{
+
+                                               })
+                                       }}>
+                                           Добавить
+                                       </button>
+                                   </div>
+
                                </div> : ''
                            }
 
@@ -646,13 +626,15 @@ const ProfilePage: React.FC = () => {
                     <img src={trashImg} alt=""/><span>Удалить аккаунт</span>
                 </button>
             </div>
+
+
             <div className="profile-history">
                 <p className="cart__title" style={{width: '100%'}}>История заказов</p>
                 <div className="history-block">
                     {history.map((el, index)=>(
                         <div className="history-item" key={index}>
                             <div className="history-item-top">
-                                <p className="history-item__id">{el.number}</p>
+                                <p className="history-item__id">№{el.number}</p>
                                 <p className="history-item__date">{el.date}</p>
                                 <p className="history-item__address" style={{marginBottom: 20}}>{el.address}</p>
                                 {el.items.map((el1, index1)=>(

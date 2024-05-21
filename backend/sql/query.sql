@@ -90,10 +90,6 @@ VALUES (1, 'Омлет', 250, '1.png', 4.5, 200, 'Сочный омлет с т�
        (4, 'Мохито', 150, '1.png', 4.7, 300, 'Освежающий коктейль с мятой и лаймом.','мука, сахар, соль, вода, яйцо куриное, дрожжи, масло сливочное, шоколад молочный, сливки 33%'),
        (5, 'Тирамису', 200, '1.png', 4.6, 150, 'Классический итальянский десерт на основе маскарпоне и кофе.','мука, сахар, соль, вода, яйцо куриное, дрожжи, масло сливочное, шоколад молочный, сливки 33%');
 
-select * from product where name like lower(CONCAT('ти'));
-select * from product where name like 'Ти%';
-select * from product where name like lower('ти');
-
 create table product_tag
 (
     id         serial primary key          not null,
@@ -138,11 +134,12 @@ create table users_history_order
     order_id    int                not null,
     active      boolean                     default false not null,
     comment     varchar(255),
-    time_order  varchar(255)       not null
+    time_order  varchar(255)       not null,
+    date_order timestamp not null
 );
 
-insert into users_history_order (users_id, cart_id, address_id, total, order_id, active, comment, time_order) VALUES
-                                                                                                                  (1,1,1,500,40000,true,'fsdfsd','fsdfsdfs');
+insert into users_history_order (users_id, cart_id, address_id, total, order_id, active, comment, time_order,date_order) VALUES
+                                                                                                                  (1,1,1,500,40000,true,'fsdfsd','fsdfsdfs',current_timestamp);
 
 create table history_order
 (

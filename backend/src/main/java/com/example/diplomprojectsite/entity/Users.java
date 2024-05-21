@@ -45,19 +45,21 @@ public class Users {
     @Column(name = "born_date")
     private LocalDate bornDate;
 
-    public Users(String email, String password, String role, String firstName,LocalDate bornDate) {
+    public Users(String email, String password, String role, String firstName,LocalDate bornDate,Integer bonus) {
         this.email = email;
         this.password = password;
         this.role = role;
         this.firstName = firstName;
         this.bornDate = bornDate;
+        this.bonus = bonus;
     }
 
-    public Users(String password, String role, String firstName,LocalDate bornDate,String phone) {
+    public Users(String password, String role, String firstName,LocalDate bornDate,String phone,Integer bonus) {
         this.password = password;
         this.role = role;
         this.firstName = firstName;
         this.bornDate = bornDate;
         this.phone = phone;
+        this.bonus = bonus;
     }
 }

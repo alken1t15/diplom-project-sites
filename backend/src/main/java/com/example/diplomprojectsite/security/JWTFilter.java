@@ -63,7 +63,7 @@ public class JWTFilter extends OncePerRequestFilter {
                 LocalDate date = loginAuth.getDate();
                 Authentication authentication;
                 Authentication authenticationUser;
-                if (login!=null){
+                if (login!=null && !login.isEmpty()){
                     logger.info(String.format("Данные полученные из JWT: почта: %s пароль: %s", login, password));
                     authentication = new UsernamePasswordAuthenticationToken(login, password);
                      authenticationUser = authenticationManager.authenticate(authentication);
@@ -75,7 +75,7 @@ public class JWTFilter extends OncePerRequestFilter {
                 }
                 if (authenticationUser.isAuthenticated()) {
                     Users user;
-                    if (login!=null){
+                    if (login!=null && !login.isEmpty()){
                         user = repositoryUser.findByEmail(login).orElseThrow();
                     }
                     else {

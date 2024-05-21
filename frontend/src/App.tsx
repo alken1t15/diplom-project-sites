@@ -24,7 +24,10 @@ function App() {
         let localUser = localStorage.getItem('token');
         let sessionUser = sessionStorage.getItem('token');
         if(localUser || sessionUser){
-            navigator(SHOP_PAGE_ROUTE)
+            if(window.location.href === 'http://localhost:3000/'){
+                navigator(SHOP_PAGE_ROUTE)
+            }
+
         }
         else{
             navigator(SIGN_IN_ROUTE)

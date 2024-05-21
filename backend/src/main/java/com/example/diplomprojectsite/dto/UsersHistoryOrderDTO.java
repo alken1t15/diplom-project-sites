@@ -3,6 +3,7 @@ package com.example.diplomprojectsite.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -16,4 +17,5 @@ public class UsersHistoryOrderDTO {
     private String timeOrder;
     private Long total;
     private List<HistoryOrderDTO> historyOrders;
+    private LocalDateTime dateOrder;
 }

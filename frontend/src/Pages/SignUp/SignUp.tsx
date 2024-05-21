@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import './SignUp.scss'
+import './SignUp.scss';
 import Input from "../../Components/UI/Input/Input";
 import Button from "../../Components/UI/Button/Button";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SIGN_IN_ROUTE } from "../../Utils/Routes";
 import { signUp } from "../../Http/User";
 
@@ -32,18 +32,17 @@ const SignUp: React.FC = () => {
         setRepeatPassword(value);
     }
 
-    function setDB(value: Date) {
-        try{
-            const day = String(value.getDate()).padStart(2, '0');
-            const month = String(value.getMonth() + 1).padStart(2, '0');
-            const year = value.getFullYear();
-            const formattedDate = `${day}.${month}.${year}`;
-            setDate(value);
-            setFormattedDate(formattedDate);
-        }
-        catch (e){
+    function formatDateForAPI(date: Date): string {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${year}-${month}-${day}`;
+    }
 
-        }
+    function setDB(value: Date) {
+        const formattedDate = formatDateForAPI(value);
+        setDate(value);
+        setFormattedDate(formattedDate);
     }
 
     function setUserName(value: string) {
@@ -85,24 +84,22 @@ const SignUp: React.FC = () => {
 
             <Link to={SIGN_IN_ROUTE} className="signIn-top-text-create" style={{ display: "block", textAlign: "right", marginTop: 15 }}>Войти аккаунт</Link>
 
-            <button className={`signUp-btn ${active ? 'signUp-btn-a': ''}`} onClick={(e)=>{
+            <button className={`signUp-btn ${active ? 'signUp-btn-a' : ''}`} onClick={(e) => {
 
-                if(active) {
+                if (active) {
                     if (emailOrNumber.includes('@')) {
                         signUp(emailOrNumber, undefined, name, formattedDate, password).then((response) => {
-                            navigator(SIGN_IN_ROUTE)
+                            navigator(SIGN_IN_ROUTE);
                         }).catch((error) => {
                         });
-                    }
-                    else{
+                    } else {
                         signUp(undefined, emailOrNumber, name, formattedDate, password).then((response) => {
-                            navigator(SIGN_IN_ROUTE)
+                            navigator(SIGN_IN_ROUTE);
                         }).catch((error) => {
                         });
-
                     }
-
-            }}}>Зарегистрироваться</button>
+                }
+            }}>Зарегистрироваться</button>
 
         </div>
     );

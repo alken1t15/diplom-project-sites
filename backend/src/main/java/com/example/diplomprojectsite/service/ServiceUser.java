@@ -28,7 +28,13 @@ public class ServiceUser {
 
     public Users getUser() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        return repositoryUsers.findByEmail(securityContext.getAuthentication().getName()).orElseThrow();
+        String getName = securityContext.getAuthentication().getName();
+        try {
+            Long.parseLong(getName);
+            return repositoryUsers.findByPhone(securityContext.getAuthentication().getName()).orElseThrow();
+        }catch (Exception e) {
+            return repositoryUsers.findByEmail(securityContext.getAuthentication().getName()).orElseThrow();
+        }
     }
 
 
@@ -51,10 +57,10 @@ public class ServiceUser {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
         else if (user.getEmail()==null){
-            repositoryUsers.save(new Users(newPassword,user.getRole(),user.getFirstName(),user.getBornDate(),user.getPhone()));
+            repositoryUsers.save(new Users(newPassword,user.getRole(),user.getFirstName(),user.getBornDate(),user.getPhone(),0));
         }
         else {
-            repositoryUsers.save(new Users(user.getEmail(),newPassword,user.getRole(),user.getFirstName(),user.getBornDate()));
+            repositoryUsers.save(new Users(user.getEmail(),newPassword,user.getRole(),user.getFirstName(),user.getBornDate(),0));
         }
         return ResponseEntity.status(HttpStatus.OK).build();
     }

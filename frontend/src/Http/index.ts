@@ -5,6 +5,11 @@ const $api = axios.create({
     withCredentials: true
 })
 
+const $host = axios.create({
+    baseURL: process.env.REACT_APP_API_URL,
+    withCredentials: true
+})
+
 
 $api.interceptors.request.use(
     (config) => {
@@ -27,5 +32,6 @@ $api.interceptors.request.use(
 );
 
 export {
-    $api
+    $api,
+    $host
 }

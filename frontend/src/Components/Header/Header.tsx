@@ -68,7 +68,7 @@ const Header: React.FC = () => {
 
         })
             .catch((error)=>{
-                navigator(SIGN_IN_ROUTE)
+                // navigator(SIGN_IN_ROUTE)
             })
     }
 
@@ -85,7 +85,7 @@ const Header: React.FC = () => {
 
         let interval = setInterval(()=>{
             getHeaderItems()
-        }, 5000)
+        }, 3000)
 
         return () => {
             clearInterval(interval);

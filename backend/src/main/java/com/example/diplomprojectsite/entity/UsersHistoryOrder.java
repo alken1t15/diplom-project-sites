@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -39,10 +40,13 @@ public class UsersHistoryOrder {
     private Long orderId;
     private Long total;
 
-    @OneToMany(mappedBy = "usersHistoryOrder")
+    @Column(name = "date_order")
+    private LocalDateTime dateOrder;
+
+    @OneToMany(mappedBy = "usersHistoryOrder",cascade = CascadeType.ALL)
     private List<HistoryOrder> historyOrders;
 
-    public UsersHistoryOrder(Users user, Cart cart, AddressUser addressUser, Boolean active, String comment, String timeOrder, Long orderId) {
+    public UsersHistoryOrder(Users user, Cart cart, AddressUser addressUser, Boolean active, String comment, String timeOrder, Long orderId,LocalDateTime dateOrder) {
         this.user = user;
         this.cart = cart;
         this.addressUser = addressUser;
@@ -50,14 +54,16 @@ public class UsersHistoryOrder {
         this.comment = comment;
         this.timeOrder = timeOrder;
         this.orderId = orderId;
+        this.dateOrder = dateOrder;
     }
 
-    public UsersHistoryOrder(Users user, Cart cart, AddressUser addressUser, Boolean active, String timeOrder, Long orderId) {
+    public UsersHistoryOrder(Users user, Cart cart, AddressUser addressUser, Boolean active, String timeOrder, Long orderId,LocalDateTime dateOrder) {
         this.user = user;
         this.cart = cart;
         this.addressUser = addressUser;
         this.active = active;
         this.timeOrder = timeOrder;
         this.orderId = orderId;
+        this.dateOrder = dateOrder;
     }
 }

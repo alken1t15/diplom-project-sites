@@ -17,6 +17,14 @@ enum TimeSlot {
     First = '15:00 - 18:00',
     Second = '18:00 - 21:00',
 }
+
+interface ICard {
+    id: null;
+    active: boolean;
+    cardNumber: string;
+    expiration: string;
+    cvv: string;
+}
 const OrderPage: React.FC = () => {
     let[options, setOptions] = useState([TimeSlot.First, TimeSlot.Second])
     let [selectedOption, setSelectedOption] = useState<TimeSlot | null>(TimeSlot.First);
@@ -29,12 +37,12 @@ const OrderPage: React.FC = () => {
     let[activeAddress ,setActiveAddress] = useState([
         {
             id: 1,
-            active: true,
-            addr: '111',
-            apart: '222',
-            pod: '333',
-            floor: '444',
-            number: '555',
+            active: false,
+            addr: '',
+            apart: '',
+            pod: '',
+            floor: '',
+            number: '',
         },
     ])
     let[visBlockWithAddress, setVisBlockWithAddress] =useState(false)
@@ -47,14 +55,8 @@ const OrderPage: React.FC = () => {
 
     let[btnAddCardActive, setBtnAddCardActive] = useState(false)
     let[cardActive, setCardActive] = useState(false)
-    let[activeCard ,setActiveCard] = useState([
-        {
-            id: 1,
-            active: true,
-            cardNumber: '2222 2222 2222 2222',
-            expiration: '02/25',
-            cvv: '444',
-        },
+    let[activeCard ,setActiveCard] = useState<ICard[]>([
+
     ])
     let[visBlockWithCard, setVisBlockWithCard] =useState(false)
     let[cardNumber, setCardNumber] = useState('')
@@ -362,35 +364,37 @@ const OrderPage: React.FC = () => {
                                </button>
                                {
                                    addNewAddress ?    <div>
-                                       {activeAddress.map((el, index)=>(
-                                           <div className={`added-info-box ${el.active ? '' : 'added-info-box-hidden'}`} key={index}>
+
+
+                                           <div className={`added-info-box`}>
+                                           {/*<div className={`added-info-box ${el.active ? '' : 'added-info-box-hidden'}`} key={index}>*/}
                                                <div className="added-info-item" style={{marginTop: 0}}>
                                                    <p className="added-info-item__label">Улица и дом</p>
-                                                   <input value={addr !== '' ? addr : el.addr} onChange={(e)=>{
+                                                   <input value={addr} onChange={(e)=>{
                                                        serAddr( e.target.value);
                                                    }} type="text" className="added-info-item__input"/>
                                                </div>
                                                <div className="added-info-item">
                                                    <p className="added-info-item__label">Подъезд</p>
-                                                   <input value={pod !== '' ? pod : el.pod} onChange={(e)=>{
+                                                   <input value={pod} onChange={(e)=>{
                                                        setPod(e.target.value);
                                                    }} type="text" className="added-info-item__input"/>
                                                </div>
                                                <div className="added-info-item">
                                                    <p className="added-info-item__label">Код на двери</p>
-                                                   <input value={apart !== '' ? apart : el.apart} onChange={(e)=>{
+                                                   <input value={apart} onChange={(e)=>{
                                                        setApart(e.target.value);
                                                    }} type="text" className="added-info-item__input"/>
                                                </div>
                                                <div className="added-info-item">
                                                    <p className="added-info-item__label">Этаж</p>
-                                                   <input value={floor !== '' ? floor : el.floor} onChange={(e)=>{
+                                                   <input value={floor} onChange={(e)=>{
                                                        setFloor(e.target.value);
                                                    }} type="text" className="added-info-item__input"/>
                                                </div>
                                                <div className="added-info-item">
                                                    <p className="added-info-item__label">Квартира</p>
-                                                   <input value={number !== '' ? number : el.number} onChange={(e)=>{
+                                                   <input value={number} onChange={(e)=>{
                                                        setNumber(e.target.value);
                                                    }} type="text" className="added-info-item__input"/>
                                                </div>
@@ -422,7 +426,7 @@ const OrderPage: React.FC = () => {
                                                    Добавить
                                                </button>
                                            </div>
-                                       ))}
+
                                    </div> : ''
                                }
 
@@ -499,9 +503,9 @@ const OrderPage: React.FC = () => {
                        </button>
                        {
                            addNewCard ?    <div>
-                               {activeCard.map((el, index)=>(
-                                   <div className={`added-info-box added-info-box-card ${el.active ? '' : 'added-info-box-hidden'}`}
-                                        key={index}>
+                               {/*{activeCard.map((el, index)=>(*/}
+                                   <div className={`added-info-box added-info-box-card`}
+                                        >
                                        <div className="card-box">
                                            <div className="added-info-item added-info-item-card" style={{marginTop: 0}}>
                                                <p className="added-info-item-card__text">Номер карты</p>
@@ -553,7 +557,7 @@ const OrderPage: React.FC = () => {
                                            Добавить
                                        </button>
                                    </div>
-                               ))}
+                               {/*))}*/}
                            </div> : ''
                        }
 
@@ -577,7 +581,7 @@ const OrderPage: React.FC = () => {
                     <p className="total-box__text total-box__text-t"><span>Всего</span> <span>{total} ₸</span></p>
                     <button onClick={(e)=>{
                         let idAddress = 0;
-                        let idCard = 0;
+                        let idCard: null | number = 0;
 
                         activeAddress.forEach((el, index)=>{
                             if(el.active){
