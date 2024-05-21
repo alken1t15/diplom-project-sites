@@ -53,10 +53,6 @@ public class ServiceHistoryOrder {
                     product.setImg(serviceProduct.getFile(orig.getImg()));
                 }
                 usersHistoryOrderDTOs.add(historyOrderDTO);
-//                HistoryOrderDTO historyOrderDTO = modelMapper.map(h, HistoryOrderDTO.class);
-//                Product product = serviceProduct.productById(historyOrderDTO.getProduct().getId());
-//                historyOrderDTO.getProduct().setImg(serviceProduct.getFile(product.getImg()));
-//                historyOrderDTOs.add(historyOrderDTO);
             }
             return new ResponseEntity(usersHistoryOrderDTOs, HttpStatus.OK);
         } else {

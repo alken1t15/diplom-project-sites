@@ -70,7 +70,7 @@ create table product
     rating      decimal,
     weight      int,
     description text,
-    composition text not null
+    composition text                         not null
 );
 
 -- INSERT INTO product (category_id, name, price, img, rating, weight, description,composition)
@@ -116,27 +116,27 @@ create table history_bonus
 
 create table users_history_order
 (
-    id       serial primary key not null,
-    users_id int8 references users (id),
-    cart_id     int references cart (id),
-    address_id  int references cart (id),
-    total    int                ,
-    order_id    int                not null,
-    active      boolean                     default false not null,
-    comment     varchar(255),
-    time_order  varchar(255)       not null,
-    date_order timestamp not null
+    id         serial primary key    not null,
+    users_id   int8 references users (id),
+    cart_id    int references cart (id),
+    address_id int references cart (id),
+    total      int,
+    order_id   int                   not null,
+    active     boolean default false not null,
+    comment    varchar(255),
+    time_order varchar(255)          not null,
+    date_order timestamp             not null
 );
 
 
 
 create table history_order
 (
-    id          serial primary key not null,
-    product_id  int references product (id),
-    users_history_order_id    int8 references users_history_order (id),
-    count       int                not null default (1),
-    total_price int                not null
+    id                     serial primary key not null,
+    product_id             int references product (id),
+    users_history_order_id int8 references users_history_order (id),
+    count                  int                not null default (1),
+    total_price            int                not null
 );
 
 
