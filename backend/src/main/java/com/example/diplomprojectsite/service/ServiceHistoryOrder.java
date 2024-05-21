@@ -85,7 +85,13 @@ public class ServiceHistoryOrder {
             }
         }
         Cart cart = serviceCart.getById(historyOrder.getIdCart());
+        if (cart==null){
+            return new ResponseEntity("Вы не выбрали карту для оплаты",HttpStatus.BAD_REQUEST);
+        }
         AddressUser addressUser = serviceAddressUser.getById(historyOrder.getIdAddress());
+        if (addressUser==null){
+            return new ResponseEntity("Вы не выбрали адрес для доставки",HttpStatus.BAD_REQUEST);
+        }
         UsersHistoryOrder usersHistoryOrder;
         long total=0;
         if (historyOrder.getComment() != null) {
@@ -95,6 +101,9 @@ public class ServiceHistoryOrder {
         }
         for (Long id : historyOrder.getIdOrders()) {
             Orders order = serviceOrder.getById(id);
+            if (order==null){
+                return new ResponseEntity("Вы передали не правильный id корзины",HttpStatus.BAD_REQUEST);
+            }
             repositoryHistoryOrder.save(new HistoryOrder(order.getCount(),order.getTotalPrice(),order.getProduct(),usersHistoryOrder));
             total+=order.getTotalPrice();
             serviceOrder.delete(order);

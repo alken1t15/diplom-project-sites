@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './StartPage.scss'
 import {useNavigate} from "react-router-dom";
-import {SHOP_PAGE_ROUTE} from "../../Utils/Routes";
+import {SHOP_PAGE_ROUTE, SIGN_IN_ROUTE} from "../../Utils/Routes";
 const fImage = require('../../assets/images/StartPage1.svg').default
 const sImage = require('../../assets/images/StartPage2.svg').default
 const thImage = require('../../assets/images/StartPage3.svg').default
@@ -35,7 +35,7 @@ const StartPage: React.FC = () => {
     const handleClick = () => {
         const nextIndex = (activeIndex + 1) % slides.length;
         if(nextIndex === 0){
-            navigator(SHOP_PAGE_ROUTE)
+            navigator(SIGN_IN_ROUTE)
         }
         setActiveIndex(nextIndex);
     };

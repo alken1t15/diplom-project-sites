@@ -23,11 +23,15 @@ function App() {
     useEffect(()=>{
         let localUser = localStorage.getItem('token');
         let sessionUser = sessionStorage.getItem('token');
+        let already = localStorage.getItem('already')
         if(localUser || sessionUser){
             if(window.location.href === 'http://localhost:3000/'){
                 navigator(SHOP_PAGE_ROUTE)
             }
 
+        }
+        else if(Number(already) === 0){
+            navigator(START_PAGE_ROUTE)
         }
         else{
             navigator(SIGN_IN_ROUTE)

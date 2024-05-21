@@ -150,6 +150,14 @@ const ProfilePage: React.FC = () => {
         }
     }, [cvv, expiration, cardNumber])
 
+    const formatDateUser = (dateString: string): string => {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}.${month}.${year}`;
+    }
+
     useEffect(()=>{
 
         getCards().then((response)=>{
@@ -200,11 +208,13 @@ const ProfilePage: React.FC = () => {
             setAddressActive(true)
         }
 
+
+
         getPersonalInfo().then((response)=>{
             let newObj = {
                 name: response.data.firstName,
                 mail: response.data.email,
-                db: response.data.bornDate,
+                db: formatDateUser(response.data.bornDate),
                 phone: response.data.phone
 
             }

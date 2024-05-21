@@ -54,6 +54,6 @@ public class ServiceCart {
     }
 
     public Cart getById(Long idCart) {
-        return repositoryCart.findById(idCart).orElseThrow();
+        return repositoryCart.findById(idCart).orElse(null);
     }
 }

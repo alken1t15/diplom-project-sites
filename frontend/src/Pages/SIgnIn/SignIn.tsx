@@ -12,7 +12,7 @@ const SignIn: React.FC = () => {
     let[active, setIsActive] = useState(false);
     let[emailOrNumber, setEmailOrNumber] = useState('');
     let[password, setPassword] = useState('');
-    let[remember, setRemember] = useState(false);
+    let[remember, setRemember] = useState(true);
     let navigator = useNavigate();
 
     function setEmailOrNum(value: string){
@@ -34,6 +34,10 @@ const SignIn: React.FC = () => {
         }
     }, [password, emailOrNumber])
 
+    useEffect(()=>{
+        localStorage.setItem('already', '1')
+    },[])
+
 
     return (
         <div className={`signIn-container`}>
@@ -46,10 +50,10 @@ const SignIn: React.FC = () => {
             <Input length={35} placeholder={'Пароль'} styles={{marginTop: 15}} onChangeF={setPass} type={'password'}/>
             <div className="signIn-bot">
                 <div className="switcher">
-                    <Switch onchange={setRem} active={remember}/>
-                    <button className={`switcher__text ${remember ? 'switcher__text-active' : ''}`}
-                            onClick={(e)=>{setRemember(!remember)}}
-                    >Запомнить меня</button>
+                    {/*<Switch onchange={setRem} active={remember}/>*/}
+                    {/*<button className={`switcher__text ${remember ? 'switcher__text-active' : ''}`}*/}
+                    {/*        onClick={(e)=>{setRemember(!remember)}}*/}
+                    {/*>Запомнить меня</button>*/}
                 </div>
             </div>
             <button className={`standard-btn ${active ? 'standard-btn-active' : ''}`} style={{marginTop: 30}} onClick={(e)=>{

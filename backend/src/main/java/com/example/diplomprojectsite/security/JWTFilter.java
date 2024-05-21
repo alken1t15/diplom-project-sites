@@ -63,6 +63,7 @@ public class JWTFilter extends OncePerRequestFilter {
                 LocalDate date = loginAuth.getDate();
                 Authentication authentication;
                 Authentication authenticationUser;
+                System.out.println(login);
                 if (login!=null && !login.isEmpty()){
                     logger.info(String.format("Данные полученные из JWT: почта: %s пароль: %s", login, password));
                     authentication = new UsernamePasswordAuthenticationToken(login, password);

@@ -124,7 +124,7 @@ public class ServiceOrder {
     }
 
     public Orders getById(Long id) {
-        return repositoryOrders.findById(id).orElseThrow();
+        return repositoryOrders.findById(id).orElse(null);
     }
 
     public void delete(Orders order) {

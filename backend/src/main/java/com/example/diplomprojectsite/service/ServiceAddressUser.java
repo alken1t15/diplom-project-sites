@@ -55,6 +55,6 @@ public class ServiceAddressUser {
     }
 
     public AddressUser getById(Long idAddress) {
-        return repositoryAddressUser.findById(idAddress).orElseThrow();
+        return repositoryAddressUser.findById(idAddress).orElse(null);
     }
 }

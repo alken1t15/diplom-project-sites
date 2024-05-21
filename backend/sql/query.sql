@@ -14,10 +14,6 @@ create table users
     bonus      int default (0)
 );
 
-insert into users (email, password, role, first_name, born_date)
-VALUES ('alex', '$2a$12$mmvg.Lv/Xhi4n1R0sEjC0OXkLN.kmWVVzwx5TNamS4fqaMKXTZcTW', 'user', 'alex', '12.04.2004');
-insert into users (email, password, role, first_name, born_date)
-VALUES ('maxim', '$2a$12$mmvg.Lv/Xhi4n1R0sEjC0OXkLN.kmWVVzwx5TNamS4fqaMKXTZcTW', 'user', 'maxim@bk.ru', '12.04.2004');
 
 create table address_user
 (
@@ -39,12 +35,6 @@ create table cart
     date     varchar(5)         not null,
     security int                not null
 );
-
-insert into cart (user_id, number, date, security)
-VALUES (1, '1111 1111 1111 1111', '11/11', 111);
-
-insert into address_user(user_id, street, entrance, number, floor, flat)
-VALUES (1, 'Бауржан Момышулы 15', '8', '155', '8', '155');
 
 create table category
 (
@@ -138,8 +128,7 @@ create table users_history_order
     date_order timestamp not null
 );
 
-insert into users_history_order (users_id, cart_id, address_id, total, order_id, active, comment, time_order,date_order) VALUES
-                                                                                                                  (1,1,1,500,40000,true,'fsdfsd','fsdfsdfs',current_timestamp);
+
 
 create table history_order
 (
@@ -150,9 +139,6 @@ create table history_order
     total_price int                not null
 );
 
-insert into history_order (product_id, users_history_order_id, count, total_price) VALUES
-                                                                                       (1,1,4,500),
-                                                                                       (2,1,3,1000);
 
 
 create table orders
@@ -164,10 +150,6 @@ create table orders
     total_price int                not null
 );
 
-insert into orders (product_id, users_id, count, total_price)
-VALUES (1, 1, 2, 500);
-insert into orders (product_id, users_id, count, total_price)
-VALUES (2, 1, 3, 1000);
 
 create table favorite_product
 (
@@ -175,8 +157,3 @@ create table favorite_product
     product_id int references product (id),
     users_id   int references users (id)
 );
-
-insert into favorite_product (product_id, users_id)
-values (1, 1),
-       (2, 1),
-       (3, 1);
